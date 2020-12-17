@@ -962,6 +962,15 @@ KamikazeTargeting:
 		Damage: 0
 		ValidTargets: Vehicle, Infantry, Wall, Structure, Cyborg
 
+SeaMineTargeting:
+	ValidTargets: Ship, Submarine
+	Range: 1c768
+	TargetActorCenter: true
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
+		ValidTargets: Ship, Submarine
+
 DropDummy:
 	ValidTargets: Ground
 	InvalidTargets: Infantry, Ship, Tank, Structure, Air
@@ -1370,3 +1379,62 @@ JDAM:
 		Duration: 24
 		Condition: thumpsnare
 		ValidTargets: Vehicle
+
+AirMineTargeting:
+	ValidTargets: AirDetonateAttack
+	Range: 0c768
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		ValidTargets: AirDetonateAttack
+
+MoleMine:
+	ReloadDelay: 120
+	Range: 9c0
+	Report: madchrg2.aud
+	ValidTargets: Ground, Structure
+	InvalidTargets: Mine, Water
+	Projectile: Missile
+		Image: molemine
+		Arm: 3
+		Speed: 85
+		TrailImage: wake-infantry
+		TrailPalette: shadow
+		HorizontalRateOfTurn: 1
+		RangeLimit: 10c819
+		#	how the fuck can i exclude only water from this ?
+		#	BoundToTerrainType: Clear,Road,Rock,Rough,Wall,Tree,Scraps,Ore,Gems
+		#	BoundToTerrainType: Ground
+		Palette: shadow
+		MaximumLaunchAngle: 0
+		CruiseAltitude: 1
+		Blockable: false
+		Jammable: false
+	Warhead@1Dam: SpreadDamage
+		Spread: 426
+		Damage: 18000
+		ValidTargets: Ground, Structure
+		Versus:
+			Wood: 75
+			Light: 75
+			Heavy: 100
+			Concrete: 500
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@3Eff: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: mineblo1.aud
+		ValidTargets: Structure, Ground
+	Warhead@4EffWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water
+		InvalidTargets: Ship, Structure, Underwater, Bridge
+	Warhead@Smu: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Structure, Wall, Trees
+
+MoleMine.decoy:
+	ReloadDelay: 120
+	Range: 9c0
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Damage: 0

@@ -139,6 +139,8 @@
 		ValidStances: Ally, Enemy, Neutral
 		RequiresCondition: rank-elite
 		ZOffset: 256
+	Inherits@EarnedXPBonus: ^AffectedByHolland
+	Inherits@SovietFCOM: ^AffectedByFCOM
 
 ^InfantryExperienceHospitalOverrides:
 	WithDecoration@RANK-1:
@@ -507,6 +509,7 @@
 	Inherits@PoisonMechanic: ^AffectedByChemicals
 	Inherits@PlasmaMechanic: ^AffectedByPlasma
 	Inherits@BOINK: ^BoinkSound
+	Inherits@LeadershipAura: ^AffectedByLeadership
 	Huntable:
 	OwnerLostAction:
 		Action: Kill
@@ -641,6 +644,8 @@
 
 ^Soldier:
 	Inherits: ^Infantry
+	Inherits@TRBonus: ^AffectedByTurkey
+	Inherits@USABonus: ^AffectedByUSA
 	UpdatesPlayerStatistics:
 	MustBeDestroyed:
 	ProximityCaptor:
@@ -767,6 +772,8 @@
 	Inherits@PlasmaMechanic: ^AffectedByPlasma
 	Inherits@IonPainterMechanic: ^IonPainterMechanic
 	Inherits@BOINK: ^BoinkSound
+	Inherits@USABonus: ^AffectedByUSA
+	Inherits@LeadershipAura: ^AffectedByLeadership
 	Huntable:
 	OwnerLostAction:
 		Action: Kill
@@ -782,7 +789,7 @@
 		Bounds: 24, 24
 	Targetable:
 		RequiresCondition: !parachute
-		TargetTypes: Ground, Vehicle
+		TargetTypes: Ground, Vehicle, VehicleDisguise
 	Targetable@EMPTargeting:
 		TargetTypes: EMPTank
 		RequiresCondition: empdisable
@@ -944,6 +951,8 @@
 	Inherits@Slowdown: ^SlowdownWhenDamaged
 	Inherits@PlasmaMechanic: ^AffectedByPlasma
 	Inherits@BOINK: ^BoinkSound
+	Inherits@USABonus: ^AffectedByUSA
+	Inherits@LeadershipAura: ^AffectedByLeadership
 	Huntable:
 	OwnerLostAction:
 		Action: Kill
@@ -1001,6 +1010,7 @@
 		RequiresCondition: ship.sellable
 	ExternalCondition@Sellable:
 		Condition: ship.sellable
+	EdibleByLeap:
 
 ^Submarine:
 	Inherits: ^Ship
@@ -1097,12 +1107,13 @@
 		Bounds: 24,24
 	Aircraft:
 		AirborneCondition: airborne
+		Crushes: airmine
 	Targetable@GROUND:
 		RequiresCondition: !airborne
 		TargetTypes: Ground, Vehicle
 	Targetable@AIRBORNE:
 		RequiresCondition: airborne
-		TargetTypes: Air
+		TargetTypes: Air, AirDetonateAttack
 	Targetable@REPAIR:
 		RequiresCondition: !airborne && damaged
 		TargetTypes: Repair
@@ -1153,9 +1164,10 @@
 	Inherits@SellUnit: ^SellableOnRepairPad
 	Inherits@StealthGen: ^AffectedByStealthGen
 	Inherits@MoraleMalus: ^AffectedByDemoralize
+	Inherits@USABonus: ^AffectedByUSA
 	-EjectOnDeath:
 	Repairable:
-		RepairActors: afld, afld.ukraine, carr.new.deployed
+		RepairActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	DeliversCash:
 		Payload: 0
 		Type: AircraftRefund
@@ -2123,10 +2135,10 @@
 		Bots: normal
 
 ^ProductionAIBoost:
-	ProductionTimeMultiplier@productionboost:
+	ProductionTimeMultiplier@productionaiboost:
 		Multiplier: 120
 		Prerequisites: aitoodumb
-	ProductionCostMultiplier@productionboost:
+	ProductionCostMultiplier@productionaiboost:
 		Multiplier: 80
 		Prerequisites: aitoodumb
 
@@ -2295,3 +2307,171 @@
 		SoundFiles: 
 		Interval: 25
 		RequiresCondition: movingtracks && ondirt
+
+^SummonerDummy:
+	Inherits@1: ^ExistsInWorld
+	Inherits@4: ^SpriteActor
+	OwnerLostAction:
+		Action: Kill
+	Armor:
+		Type: None
+	HiddenUnderFog:
+		Type: GroundPosition
+	ProximityCaptor:
+		Types: Plane
+	Tooltip:
+		GenericName: You shouldnt be seeing this...
+	WithShadow:
+		Offset: 43, 128, 0
+		ZOffset: -129
+	WithFacingSpriteBody:
+	MustBeDestroyed:
+	Voiced:
+		VoiceSet: GenericVoice
+	HitShape:
+	ParaDrop:
+		DropRange: 0c512
+	Health:
+		HP: 1
+	Aircraft:
+		CruiseAltitude: 2
+		TurnSpeed: 255
+		Speed: 999
+		Repulsable: False
+		MaximumPitch: 999
+		InitialFacing: 192
+	Cargo:
+		MaxWeight: 10
+	SelectionDecorations:
+		RenderSelectionBars: False
+	RejectsOrders:
+	Interactable:
+
+^SummonBase:
+	Inherits@1: ^ExistsInWorld
+	Inherits@3: ^SpriteActor
+	Huntable:
+	OwnerLostAction:
+		Action: Kill
+	SelectionDecorations:
+		RenderSelectionBars: False
+	Mobile:
+		PauseOnCondition: !parachute
+		Locomotor: immobilepara
+		Speed: 0
+		TurnSpeed: 0
+	Health:
+		HP: 1
+	Passenger:
+		CargoType: Vehicle
+	HiddenUnderFog:
+	Tooltip:
+		GenericName: Summoned Actor
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	Parachutable:
+		FallRate: 999
+		KilledOnImpassableTerrain: true
+		ParachutingCondition: parachute
+	WithFacingSpriteBody:
+	WithParachute:
+		ShadowImage: dummy
+		ShadowSequence: idle
+		Image: dummy
+		Sequence: idle
+		OpeningSequence: idle
+		Offset: 0,0,0
+		RequiresCondition: parachute
+	HitShape:
+	Interactable:
+	RejectsOrders:
+
+badr.summoner:
+	Inherits@SYSTEM: ^SummonerDummy
+	RenderSprites:
+		Image: dummy.visual
+
+dummy.maintenance:
+	Inherits: CAMERA
+	Buildable:
+		Queue: Dummy
+	EditorOnlyTooltip:
+		Name: (Maintenance sp proxy)
+	-RevealsShroud:
+	ProvidesPrerequisite@maintenance:
+		Prerequisite: maintenance
+	KillsSelf@maintenance:
+		Delay: 2250
+		RemoveInstead: true
+	CashTrickler@maintenance:
+		Amount: 3000
+		InitialDelay: 0
+		Interval: 2251
+
+^AffectedByFCOM:
+	GainsExperienceMultiplier@FCOMBonus:
+		Modifier: 120
+		RequiresCondition: has.fcom
+	GrantConditionOnPrerequisite@FCOMBonus:
+		Condition: fcom.built
+		Prerequisites: fcom.buildable
+	GrantConditionOnFaction@FCOMBonus:
+		Condition: fcom.soviet
+		Factions: soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan
+		ResetOnOwnerChange: True
+	GrantCondition@FCOMBonus:
+		RequiresCondition: fcom.built && fcom.soviet
+		Condition: has.fcom
+
+^AffectedByUSA:
+	ProductionTimeMultiplier@USABonus:
+		Multiplier: 90
+		Prerequisites: player.usa
+
+^AffectedByHolland:
+	GainsExperienceMultiplier@HollandBonus:
+		Modifier: 150
+		RequiresCondition: holland.player
+	GrantConditionOnFaction@HollandBonus:
+		Condition: holland.player
+		Factions: holland
+		ResetOnOwnerChange: True
+
+^AffectedByTurkey:
+	DamageMultiplier@TRBONUS:
+		Modifier: 90
+		RequiresCondition: is.turkish
+	FirepowerMultiplier@TRBONUS:
+		Modifier: 110
+		RequiresCondition: is.turkish
+	SpeedMultiplier@TRBONUS:
+		Modifier: 110
+		RequiresCondition: is.turkish
+	GrantConditionOnPrerequisite@TRBONUS:
+		Condition: is.turkish
+		Prerequisites: player.turkey	
+
+^AffectedByLeadership:
+	FirepowerMultiplier@LEADERSHIP:
+		RequiresCondition: leader_boost
+		Modifier: 110
+	ReloadDelayMultiplier@LEADERSHIP:
+		RequiresCondition: leader_boost
+		Modifier: 90
+	SelfHealing@LEADERSHIP:
+		Step: 0
+		PercentageStep: 1
+		Delay: 40
+		HealIfBelow: 101
+		DamageCooldown: 0
+		RequiresCondition: leader_boost
+	ExternalCondition@LEADERSHIP:
+		Condition: leader_boost
+	WithDecoration@LEADERSHIP:
+		Image: rank-red
+		Sequence: rank-elite
+		Palette: effect
+		ReferencePoint: Bottom, Center
+		RequiresCondition: leader_boost
+		ZOffset: 256
+		ValidStances: Ally, Enemy, Neutral

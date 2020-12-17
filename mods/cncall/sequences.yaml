@@ -133,7 +133,6 @@ jeep:
 		Length: 6
 		Facings: 8
 	icon: jeepicon
-	rank2-icon: jeepr2icon
 
 ftrk:
     Inherits: emp-overlay
@@ -147,13 +146,16 @@ ftrk:
 	turret-mg: apc-tur3
 		Facings: 32
 		UseClassicFacingFudge: True
+	turret-rep: repair-tur
+		Facings: 32
+		UseClassicFacingFudge: True
 	muzzle: gunfire2
 		Length: 2
 	muzzle-mg: minigun
 		Length: 6
 		Facings: 8
 	icon: ftrkicon
-	rank2-icon: ftrkr2icon
+	repicon: rtrkicon
 
 apc:
 	Inherits: emp-overlay
@@ -172,7 +174,6 @@ apc:
 		Facings: 32
 		UseClassicFacingFudge: True
 	icon: apcicon
-	rank2-icon: apcr2icon
 	hapcicon: hapcicon
 
 1tnk:
@@ -187,13 +188,28 @@ apc:
 	nod-tur: ltnk-tur
 		Facings: 32
 		UseClassicFacingFudge: True
+	turret-flak-ag: gapc-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-flak-aa: gapc-tur
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	svyt-tur: ltnk-nopod
+		Facings: 32
+		UseClassicFacingFudge: True
 	muzzle: gunfire2
 		Length: 2
+	muzzle-flak: minigun
+		Length: 6
+		Facings: 8
 	idle-float: 1tnk-float
 		Facings: 32
 		UseClassicFacingFudge: True
 	icon: 1tnkicon
 	fake-icon: 1tnficon
+	flak-icon: atnkicon
+	svyt-icon: 1tnksvyticon
 
 1tnk.destroyed:
 	idle: 1tnk
@@ -202,6 +218,16 @@ apc:
 		ZOffset: -512
 	turret: 1tnk
 		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+		ZOffset: -512
+
+atnk.destroyed:
+	idle: 1tnk
+		Facings: 32
+		UseClassicFacingFudge: True
+		ZOffset: -512
+	turret: gapc-tur
 		Facings: 32
 		UseClassicFacingFudge: True
 		ZOffset: -512
@@ -234,6 +260,30 @@ apc:
 		UseClassicFacingFudge: True
 		ZOffset: -512
 
+2tnks:
+    Inherits: emp-overlay
+	idle:
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret:
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	muzzle: gunfire2
+		Length: *
+	icon: 2tnksicon
+
+2tnks.destroyed:
+	idle: 2tnks
+		Facings: 32
+		UseClassicFacingFudge: True
+		ZOffset: -512
+	turret: 2tnks
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+		ZOffset: -512
+
 3tnk.1b:
 	Inherits: emp-overlay
 	idle: 3tnk-1b
@@ -246,7 +296,6 @@ apc:
 	muzzle: gunfire2
 		Length: 5
 	icon: 3tnkonebarlicon
-	rank2-icon: 3tnkonebarlr2icon
 
 3tnk.1b.destroyed:
 	idle: 3tnk-1b
@@ -271,7 +320,6 @@ apc:
 	muzzle: gunfire2
 		Length: 5
 	icon: 3tnkicon
-	rank2-icon: 3tnkr2icon
 
 3tnk.destroyed:
 	idle: 3tnk
@@ -303,6 +351,30 @@ apc:
 		UseClassicFacingFudge: True
 		ZOffset: -512
 	turret: 4tnk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+		ZOffset: -512
+
+4tnk.flam:
+	Inherits: emp-overlay
+	idle: 4tnk-flam
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret: 4tnk-flam
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	muzzle: gunfire2
+		Length: 5
+	icon: 4tnk-flam-icon
+
+4tnk.flam.destroyed:
+	idle: 4tnk-flam
+		Facings: 32
+		UseClassicFacingFudge: True
+		ZOffset: -512
+	turret: 4tnk-flam
 		Start: 32
 		Facings: 32
 		UseClassicFacingFudge: True
@@ -342,7 +414,6 @@ arty:
 	muzzle: gunfire2
 		Length: 5
 	icon: artyicon
-	rank2-icon: artyr2icon
 	fake-icon: artficon
 
 v2rl:
@@ -355,7 +426,6 @@ v2rl:
 		Facings: 32
 		UseClassicFacingFudge: True
 	icon: v2rlicon
-	rank2-icon: v2rlr2icon
 
 mnly:
     Inherits: emp-overlay
@@ -393,16 +463,17 @@ mrj:
 		Length: 32
 	icon: mrjicon
 	mhqicon: mhqicon
+	mhqsvyticon: mhqsvyticon
 
-stnk:
+papc:
     Inherits: emp-overlay
-	idle: papc
+	idle:
 		Facings: 32
 		UseClassicFacingFudge: True
 	muzzle: minigun
 		Length: 6
 		Facings: 8
-	icon: stnkicon
+	icon: papcicon
 
 tnkd:
 	Inherits: emp-overlay
@@ -412,6 +483,7 @@ tnkd:
 	muzzle: gunfire2
 		Length: 2
 	icon: tnkdicon
+	spgicon: spgicon
 
 tnkd.destroyed:
 	idle: tnkd
@@ -438,6 +510,18 @@ ttnk:
 	spinner-not:
 		Start: 32
 		Length: 1
+	turret2: ssm
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret1: ssm
+		Start: 64
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret0: ssm
+		Start: 96
+		Facings: 32
+		UseClassicFacingFudge: True
 	icon: ttnkicon
 
 qtnk:
@@ -561,7 +645,6 @@ dd:
 		Length: 6
 		Facings: 8
 	icon: ddicon
-	rank2-icon: ddr2icon
 
 ca:
     Inherits: emp-overlay
@@ -725,7 +808,6 @@ yak:
 		Length: 6
 		Facings: 8
 	icon: yakicon
-	rank2-icon: yakr2icon
 
 mig:
     Inherits: emp-overlay
@@ -838,3 +920,569 @@ fsub:
 		Facings: 32
 		UseClassicFacingFudge: True
 	icon: fsubicon
+
+mbun:
+	Inherits: emp-overlay
+	idle: batf
+		Facings: 32
+        UseClassicFacingFudge: True
+    turret: 4tnk-pbox
+	muzzle: minigun
+		Length: 6
+		Facings: 8
+	icon: mbunicon
+
+gcan:
+    Inherits: emp-overlay
+	idle: 
+		Facings: 32
+		UseClassicFacingFudge: True
+	muzzle: gunfire2
+		Length: 5
+	icon: gcanicon
+
+dtnk:
+	Inherits: emp-overlay
+	idle: mnly
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-default: 2tnk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	muzzle: gunfire2
+		Length: 2
+	mcv-body: mcv
+		Facings: 32
+		UseClassicFacingFudge: True
+	harv-body: harv
+		Facings: 32
+		UseClassicFacingFudge: True
+    truk-body: truk
+		Facings: 32
+		UseClassicFacingFudge: True
+	jeep-body: jeep
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-mg: jeep
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	apc-body: apc
+		Facings: 32
+		UseClassicFacingFudge: True
+	1tnk-body: 1tnk
+		Facings: 32
+		UseClassicFacingFudge: True        
+	turret-1tnk: 1tnk-tur
+		Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True
+	2tnk-body: 2tnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-2tnk: 2tnk
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	arty-body: arty
+		Facings: 32
+		UseClassicFacingFudge: True
+	mnly-body: mnly
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-msam: ssam
+        Facings: 32
+        UseClassicFacingFudge: False
+    mgg-body: mgg
+		Facings: 32
+		UseClassicFacingFudge: True
+	spinner-mgg: mgg
+		Start: 32
+		Length: 8
+        Tick: 90
+	spinner-mgg-idle: mgg
+		Start: 32
+		Length: 1
+        Tick: 90
+	mrj-body: mrj
+		Facings: 32
+		UseClassicFacingFudge: True
+	spinner-mrj: mrj
+		Start: 32
+		Length: 32
+    tnkd-body: tnkd
+		Facings: 32
+		UseClassicFacingFudge: True
+	papc-body: papc
+		Facings: 32
+		UseClassicFacingFudge: True
+	ctnk-body: ctnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	prsm-body: prsm
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-prsm: prsm-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-invis: blank32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-btr: btr-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	dtrk-body: dtrk
+		Facings: 32
+		UseClassicFacingFudge: True
+	ftrk-body: ftrk
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-flak: ftrk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-repair: repair-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-apc: apc-tur3
+		Facings: 32
+		UseClassicFacingFudge: True
+	v2rl-body: v2rl
+		Facings: 32
+		UseClassicFacingFudge: True
+	3tnk-body: 3tnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-3tnk1b: 3tnk-1b
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-3tnk: 3tnk
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	4tnk-body: 4tnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-4tnk: 4tnk
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	ttnk-body: ttnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	spinner-tesla: ttnk
+		Start: 32
+		Length: 1
+	qtnk-body: qtnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	5tnk-body: behe
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-5tnk: 5tnk-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	mcvcnc-body: cncmcv
+		Facings: 32
+		UseClassicFacingFudge: True
+	harvcnc-body: gdiharv
+		Facings: 32
+		UseClassicFacingFudge: True
+	trukcnc-body: cnctruk
+		Facings: 32
+		UseClassicFacingFudge: True
+	dtrkcnc-body: cncdtrk
+		Facings: 32
+		UseClassicFacingFudge: True
+	mwf-body: mwf
+		Facings: 32
+		UseClassicFacingFudge: True	
+	hmmv-body: hmmv
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-tow: hmmv-tow
+		Facings: 32
+		UseClassicFacingFudge: True
+	smch-body: smch
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-smch: smch
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-flak-aa: gapc-tur
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-gatt-aa: vulc-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	aav-body: aav
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-aav:  aav-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	mrpg-body: mrpg
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-2tnkgdi: mtnk-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-2tnkrail: mtnk-rtur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-2tnkrpod: mtnk-rpod
+		Facings: 32
+		UseClassicFacingFudge: True
+	mrls-body: mrls
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-mrls: mrls
+		Start: 64
+		Facings: 32
+		UseClassicFacingFudge: True
+	hmrls-body: hvrmrls-hull
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-hmrls: hvrmrls-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	4tnkgdi-body: 4tnk-gdi
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-4tnkgdi: 4tnk-gdi
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-4tnkion: 4tnk-gdi-ion
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-4tnkrail: 4tnk-gdi-rtur
+		Facings: 32
+		UseClassicFacingFudge: True
+	disr-body: disr
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-disr: disr-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	icbm-body: icbm
+		Facings: 32
+		UseClassicFacingFudge: True
+	memp-body: memp
+		Facings: 32
+		UseClassicFacingFudge: True
+	stand-legs: titan-legs
+		Facings: 16
+	run-legs: titan-legs
+		Start: 16
+		Facings: 16
+		Length: 14
+		Tick: 90
+	turret-titan: titan-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-jugg: jugg-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	bggy-body: bggy
+		Facings: 32
+		UseClassicFacingFudge: True
+	attbggy-body: attbggy
+		Facings: 32
+		UseClassicFacingFudge: True
+	bike-body: bike
+		Facings: 32
+		UseClassicFacingFudge: True
+	napc-body: napc
+		Facings: 32
+		UseClassicFacingFudge: True	
+	napc-spinner: mouse
+		Start: 194
+		Length: 1
+	sapc-body: sapc
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-1tnk-nod: ltnk-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	ftnk-body: ftnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	ctnkchem-body: ctnknod
+		Facings: 32
+		UseClassicFacingFudge: True	
+	howi-body: howi
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-howi: howi
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	srty-body: srty
+		Facings: 32
+		UseClassicFacingFudge: True
+	mnlycloak-spinner: sgen-top
+		Length: *
+		Tick: 90
+	mrep-body: mrep
+		Facings: 32
+		UseClassicFacingFudge: True	
+	stnk-body: nodstnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-stnk: nodstnk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True			
+	hvrc-body: hvrc
+		Facings: 32
+		UseClassicFacingFudge: True
+	htnk-body: nodhvr
+		Facings: 32
+		UseClassicFacingFudge: True
+	ssm-body: ssm
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-ssm: ssm
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	ssmhvr-body: hvrssm
+		Facings: 32
+		UseClassicFacingFudge: True
+	mwav-body: mwav
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-mwav: mwav-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-ltnk: laser-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	ptnk-body: ptnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-ptnk: ptnk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	icon: dtnkicon
+
+dtnk.destroyed:
+	idle: mnly
+		Facings: 32
+		UseClassicFacingFudge: True
+		ZOffset: -512
+	turret: 2tnk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+		ZOffset: -512
+
+mina:
+    Inherits: emp-overlay
+	idle:
+		Length: *
+	chute: parach
+		Start: 5
+		Length: 11
+		Tick: 120
+	icon: bminicon
+
+mnly.mole:
+    Inherits: emp-overlay
+	idle: mnly
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret: qtnk-piston32
+		Facings: 16
+	muzzle: qtnk-piston
+		Frames: 1,2,3,2,1
+		Length: 5
+		Tick: 60
+	icon: moleicon
+
+frog:
+	idle:
+		Facings: 16
+
+brdm:
+    Inherits: emp-overlay
+	idle:
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret:
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	icon: brdmicon
+
+mgnm:
+	Inherits: emp-overlay
+	idle:
+		Facings: 16
+	move:
+		Start: 16
+		Facings: 16
+		Length: 8
+	icon: mgnmicon
+
+mrlssvyt:
+	Inherits: emp-overlay
+	idle: 3tnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret: mrls
+		Start: 64
+		Facings: 32
+		UseClassicFacingFudge: True
+	empty-aim: mrls
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	aim: mrls
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	icon: mrlssvyticon
+
+lun:
+	Inherits: emp-overlay
+	idle:
+		Facings: 16
+	move:
+		Start: 16
+		Facings: 16
+		Length: 8
+	muzzle:
+		Combine:
+			lunmuzsmk-n:
+				Length: *
+				Offset: 0,0
+			lunmuzsmk-nw:
+				Length: *
+				Offset: 0,0
+			lunmuzsmk-w:
+				Length: *
+				Offset: 0,0
+			lunmuzsmk-sw:
+				Length: *
+				Offset: 0,0
+			lunmuzsmk-s:
+				Length: *
+				Offset: 0,0
+			lunmuzsmk-se:
+				Length: *
+				Offset: 0,0
+			lunmuzsmk-e:
+				Length: *
+				Offset: 0,0
+			lunmuzsmk-ne:
+				Length: *
+				Offset: 0,0
+		Facings: 8
+		Length: 30
+	icon: lunicon
+
+ifv:
+	Inherits: emp-overlay
+	idle: 0tnk
+		Facings: 32
+	muzzle: minigun
+		Length: 6
+		Facings: 8
+	muzzle2: gunfire2
+		Length: 2
+	spinner: mrj
+		Start: 32
+		Length: 32
+	flag: ctflagx
+		Start: 0
+		Length: 10
+		Tick: 100
+		Offset: 0,-8
+	medic: mouse
+		Start: 194
+		Length: 1
+	turret: apc-tur3
+		Facings: 32
+		UseClassicFacingFudge: True
+		Offset: 0,1
+	turret2: 1tnk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+		Offset: 0,1
+	turret3: ifv-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret4: tbttur
+		Length: 32
+	turret5: ifv-tur-repair
+		Facings: 32
+		UseClassicFacingFudge: True
+		Offset: 0,2
+	turret6: btr-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret7: ifv-tur-flam
+		Facings: 32
+		UseClassicFacingFudge: True	
+		Offset: 0,2
+	turret8: gapc-tur
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret9: ssam
+		Facings: 32
+		Offset: 0,-1
+	turret10: 4tnk-pbox
+	turret11: 2tnk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret12: chemturret
+		Facings: 32
+		UseClassicFacingFudge: True
+		Offset: 0,2
+	turret13: ifv-tur-rail
+		Facings: 32
+		UseClassicFacingFudge: True	
+		Offset: 0,2
+	turret14: ifv-tur-laser
+		Facings: 32
+		UseClassicFacingFudge: True	
+		Offset: 0,2
+	muzzle3:
+		Combine:
+			chem-n:
+				Length: *
+				Offset: 1,2
+			chem-nw:
+				Length: *
+				Offset: 8,2
+			chem-w:
+				Length: *
+				Offset: 8,-3
+			chem-sw:
+				Length: *
+				Offset: 7,-6
+			chem-s:
+				Length: *
+				Offset: 1,-6
+			chem-se:
+				Length: *
+				Offset: -5,-6
+			chem-e:
+				Length: *
+				Offset: -7,-3
+			chem-ne:
+				Length: *
+				Offset: -3,2
+		Facings: 8
+		Length: 13
+	icon: ifvicon

@@ -61,6 +61,11 @@
 	Warhead@1Dam: SpreadDamage
 		Damage: 2250
 
+25mm.spain:
+	Inherits: 25mm
+	ReloadDelay: 24
+	Range: 5c768
+
 25mm.decoy:
 	ReloadDelay: 21
 	Range: 4c768
@@ -76,7 +81,7 @@
 	Projectile: Bullet
 		Speed: 853
 	Warhead@1Dam: SpreadDamage
-		Damage: 2500
+		Damage: 3250
 		Versus:
 			None: 25
 			Wood: 70
@@ -101,12 +106,21 @@
 	Warhead@1Dam: SpreadDamage
 		Damage: 3500
 
+90mm.spain:
+	Inherits: 90mm
+	ReloadDelay: 56
+	Range: 5c768
+
 90mm.decoy:
 	ReloadDelay: 42
 	Range: 4c768
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Damage: 0
+
+90mm.decoy.zero:
+	Inherits: 90mm.decoy
+	ReloadDelay: 1
 
 105mm:
 	Inherits: ^Cannon
@@ -119,6 +133,42 @@
 105mm.Singular:
 	Inherits: 105mm
 	-Burst:
+
+105mm.karelia:
+	Inherits: 105mm
+	Range: 5c768
+
+105mm.singular.karelia:
+	Inherits: 105mm.Singular
+	Range: 5c768
+
+105mm.kazakh:
+	Inherits: 105mm
+	Warhead@1Dam: SpreadDamage
+		Damage: 4500
+
+105mm.singular.kazakh:
+	Inherits: 105mm.Singular
+	Warhead@1Dam: SpreadDamage
+		Damage: 4500
+
+105mm.turkmen:
+	Inherits: 105mm
+	Range: 3c768
+	ReloadDelay: 58
+
+105mm.singular.turkmen:
+	Inherits: 105mm.Singular
+	Range: 3c768
+	ReloadDelay: 58
+
+105mm.afghan:
+	Inherits: 105mm
+	ReloadDelay: 71
+
+105mm.singular.afghan:
+	Inherits: 105mm.Singular
+	ReloadDelay: 71
 
 120mm:
 	Inherits: ^Cannon
@@ -147,7 +197,7 @@ TurretGun:
 			None: 20
 			Wood: 50
 
-TurretGun.Germany:
+TurretGun.Spain:
 	Inherits: TurretGun
 	Range: 8c256
 
@@ -305,6 +355,11 @@ TurretGun.tnkd:
 	ReloadDelay: 65
 	-Burst:
 
+8Inch.gcan:
+	Inherits: 8Inch
+	ReloadDelay: 120
+	-Burst:
+
 2Inch:
 	Inherits: ^Cannon
 	ReloadDelay: 45
@@ -435,6 +490,46 @@ DiscGrenade:
 		Duration: 25
 		Condition: empdisable
 		ValidTargets: Ground, Vehicle
+
+Mortar:
+	ReloadDelay: 60
+	Range: 9c0
+	MinRange: 2c0
+	ValidTargets: Ground, Water
+	InvalidTargets: Air
+	Report: nade.aud
+	Projectile: Bullet
+		Speed: 166
+		Blockable: false
+		LaunchAngle: 92
+		Inaccuracy: 768
+		Image: BOMB
+		ContrailLength: 10
+		ContrailZOffset: 0
+		ContrailDelay: 0
+		ContrailWidth: 0c064
+	Warhead@1Dam: SpreadDamage
+		Spread: 512
+		Damage: 5000
+		Versus:
+			None: 60
+			Wood: 90
+			Light: 60
+			Heavy: 45
+			Concrete: 100
+		DamageTypes: Prone50Percent, TriggerProne, FireDeath
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Tank, Structure, Wall, Husk, Trees
+	Warhead@3Eff: CreateEffect
+		Explosions: small_explosion
+		ImpactSounds: firetrt1.aud
+		ValidTargets: Ground, Ship
+	Warhead@4EffWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 
 MortarChem:
 	ReloadDelay: 60

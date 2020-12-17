@@ -760,3 +760,43 @@ AtomicFake:
 		Duration: 20
 		Intensity: 1
 		Multiplier: 1,1
+
+EmpBomb:
+	ReloadDelay: 10
+	Range: 0c512
+	Report: chute1.aud
+	Projectile: GravityBomb
+		Image: PARABOMB
+		OpenSequence: open
+		Velocity: 0, 0, -86
+		Acceleration: 0, 0, 0
+		Shadow: False
+	Warhead@1Dam: SpreadDamage
+		Spread: 4c512
+		Damage: 3600
+		Versus:
+			None: 100
+			Wood: 70
+			Light: 30
+			Heavy: 65
+			Concrete: 25
+		DamageTypes: Prone50Percent, TriggerProne
+	Warhead@2Eff: CreateEffect
+		Explosions: pulse_explosion
+		ImpactSounds: ion1.aud
+	Warhead@emp: GrantExternalCondition
+		Range: 4c512
+		Duration: 500
+		Condition: empdisable
+		ValidTargets: Vehicle, Ship, Submarine
+		InvalidTargets: EMPInvalid, InvulNoEMP
+	Warhead@empbuilding: GrantExternalCondition
+		Range: 4c512
+		Duration: 500
+		Condition: empdisable
+		ValidTargets: Structure
+		InvalidTargets: EMPInvalid, InvulNoEMP
+	Warhead@3Smu_impact: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall
+		Size: 1

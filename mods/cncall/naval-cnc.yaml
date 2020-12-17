@@ -8,7 +8,7 @@ LST.cnc:
 		Queue: Ship
 		BuildPaletteOrder: 1
 		BuildAtProductionType: Boat
-		Prerequisites: ~!ships.allies, ~!ships.soviet, ~techlevel.low
+		Prerequisites: ~!navy.allies, ~!navy.soviet, ~techlevel.low
 		Description: General-purpose naval transport.\nCan carry up to 8 Infantry and Vehicles.\n  Unarmed
 	Mobile:
 		Locomotor: lcraft
@@ -50,7 +50,7 @@ PBT:
 		Queue: Ship
 		BuildAtProductionType: Boat
 		BuildPaletteOrder: 2
-		Prerequisites: ~ships.gdi, proc, ~techlevel.low
+		Prerequisites: ~navy.gdi, proc, ~techlevel.low
 		Description: Light fire-support ship armed with Rocket battery.\nCan attack Submarines but not Detect them.\n  Strong vs Defenses, Air\n  Weak vs Ships, Infantry
 	Valued:
 		Cost: 500
@@ -103,7 +103,7 @@ GDIPT:
 		Queue: Ship
 		BuildAtProductionType: Boat
 		BuildPaletteOrder: 7
-		Prerequisites: ~syrd, techcenter, eye, ~ships.gdi, ~!player.futurecorps, ~techlevel.high
+		Prerequisites: ~syrd, techcenter, eye, ~navy.gdi, ~!player.futurecorps, ~techlevel.high
 		Description: Ship with Sonic armament.\n  Strong vs Defenses, Air\n  Weak vs Ships, Infantry
 	Valued:
 		Cost: 950
@@ -157,7 +157,7 @@ GDIDD:
 		Queue: Ship
 		BuildAtProductionType: Boat
 		BuildPaletteOrder: 3
-		Prerequisites: dome, ~ships.gdi, ~techlevel.medium
+		Prerequisites: dome, ~navy.gdi, ~techlevel.medium
 		Description: Long-ranged Artillery ship\nwith extra AA capability.\nCan detect Submarines but not Attack them.\n  Strong vs Slow Targets, Buildings\n  Weak vs close Range Attacks, Submarines
 	Valued:
 		Cost: 2000
@@ -217,7 +217,7 @@ GDICA:
 		Queue: Ship
 		BuildAtProductionType: Boat
 		BuildPaletteOrder: 4
-		Prerequisites: techcenter, ~ships.gdi, ~techlevel.high
+		Prerequisites: techcenter, ~navy.gdi, ~techlevel.high
 		Description: Heavy ship armed with a railgun.\nAlso has Chaingun weapon at the rear.\n  Strong vs Ships, Ground Targets\n  Weak vs Aircraft, Submarines
 	Valued:
 		Cost: 2200
@@ -301,8 +301,8 @@ GREP:
 		Queue: Ship
 		BuildAtProductionType: Boat
 		BuildPaletteOrder: 5
-		Prerequisites: ~syrd, fix, ~ships.gdi, ~techlevel.medium
-		Description: Support vessel capable of Repairing other ships.\n  Unarmed
+		Prerequisites: ~syrd, fix, ~navy.gdi, ~techlevel.medium
+		Description: Support vessel capable of Repairing other navy.\n  Unarmed
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -350,7 +350,7 @@ CARR.New:
 		Queue: Ship
 		BuildAtProductionType: Boat
 		BuildPaletteOrder: 6
-		Prerequisites: ~syrd, dome, techcenter, ~ships.gdi, ~techlevel.high
+		Prerequisites: ~syrd, dome, techcenter, ~navy.gdi, ~techlevel.high
 		Description: Nautical Support vessel.\nCan be deployed, becoming immobile\nto produce, repair and rearm Aircrafts.\nDetects Submarines when deployed.\n  Unarmed
 	Valued:
 		Cost: 1500
@@ -514,7 +514,7 @@ SB:
 		Queue: Ship
 		BuildPaletteOrder: 2
 		BuildAtProductionType: Boat
-		Prerequisites: ~spen, proc, ~ships.nod, ~!player.blackhand, ~techlevel.low
+		Prerequisites: ~spen, proc, ~navy.nod, ~!player.blackhand, ~techlevel.low
 		Description: Fast scout boat, armed with rockets.\n Can attack Aircraft.\n Detects Submarines nearby.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry
 	Valued:
 		Cost: 500
@@ -572,7 +572,7 @@ LSRS:
 		Queue: Ship
 		BuildPaletteOrder: 3
 		BuildAtProductionType: Boat
-		Prerequisites: ~spen, tmpl, ~ships.nod, ~!player.blackhand, ~techlevel.high
+		Prerequisites: ~spen, tmpl, ~navy.nod, ~!player.blackhand, ~techlevel.high
 		Description: Anti-Ground ship armed with Laser Gun.\n Strong vs Slow Targets, Buildings\n  Weak vs Aircraft, Submarines
 	Valued:
 		Cost: 1500
@@ -622,7 +622,7 @@ ASUB:
 		Queue: Ship
 		BuildAtProductionType: Submarine
 		BuildPaletteOrder: 4
-		Prerequisites: ~spen, dome, ~ships.nod, ~!player.rebels, ~techlevel.medium
+		Prerequisites: ~spen, dome, ~navy.nod, ~!player.rebels, ~techlevel.medium
 		Description: Submerged anti-ship unit\narmed with Torpedoes and Cluster Missile.\nCan detect other submarines.\n  Strong vs Infantry, Naval units\n  Weak vs Ground units, Aircraft\n  Special Ability: Submerge\nCan dive underwater to become invisible\nmove unseen and avoid damage of most weapons.\nCan be manually ordered to surface for Repairs.\nMovespeed increase by 20% when on surface\nunless the Submarine is heavily damaged.
 	Valued:
 		Cost: 875
@@ -660,7 +660,7 @@ CATA:
 		Queue: Ship
 		BuildPaletteOrder: 5
 		BuildAtProductionType: Boat
-		Prerequisites: fix, ~ships.nod, ~techlevel.medium
+		Prerequisites: fix, ~navy.nod, ~techlevel.medium
 		Description: Light support ship.\nDeflects incoming missiles.\nLays sea mines to destroy\nunwary enemy Ships and Submarines.\nRestocks Sea Mines when near\na Naval yard or an Sub Pen.\n  Unarmed
 	Valued:
 		Cost: 700
@@ -729,7 +729,7 @@ BSUB:
 		Queue: Ship
 		BuildAtProductionType: Submarine
 		BuildPaletteOrder: 6
-		Prerequisites: ~spen, tmpl, ~ships.nod, ~!player.rebels, ~techlevel.high
+		Prerequisites: ~spen, tmpl, ~navy.nod, ~!player.rebels, ~techlevel.high
 		Description: Submersible siege unit armed with\nanti-ground missile battery.\n  Strong vs Ships, Buildings\n  Weak vs attacks at close range.\n  Special Ability: Submerge\nCan dive underwater to become invisible\nmove unseen and avoid damage of most weapons.\nCan be manually ordered to surface for Repairs.\nMovespeed increase by 20% when on surface\nunless the Submarine is heavily damaged.
 	Valued:
 		Cost: 2400
@@ -794,7 +794,7 @@ ESUB:
 		Queue: Ship
 		BuildAtProductionType: Submarine
 		BuildPaletteOrder: 7
-		Prerequisites: ncom, ~ships.nod, ~!player.rebels, ~techlevel.high
+		Prerequisites: ncom, ~navy.nod, ~!player.rebels, ~techlevel.high
 		Description: Submarine that emits an EMP blast.\nCan detect other submarines.\n  Immune to EMP\n  Strong vs Naval units\n  Weak vs everything Else\n  Special Ability: Submerge\nCan dive underwater to become invisible\nmove unseen and avoid damage of most weapons.\nCan be manually ordered to surface for Repairs.\nMovespeed increase by 20% when on surface\nunless the Submarine is heavily damaged.
 	Valued:
 		Cost: 1000

@@ -498,32 +498,56 @@ strategic:
 flags:
 	Inherits: ^Flags
 	Regions:
-		Random: 30, 75, 30, 15
-		RandomAllies: 0, 60, 30, 15
-		RandomSoviet: 30, 60, 30, 15
-		RandomGDI: 0, 180, 30, 15
-		RandomNod: 30, 180, 30, 15
-		spectator: 0, 75, 30, 15
+		Random: 30, 180, 30, 15
+		spectator: 0, 180, 30, 15
 
-		allies: 0, 45, 30, 15
-		england: 0, 0, 30, 15
-		france: 0, 15, 30, 15
-		germany: 0, 30, 30, 15
+		#Allies block
+		usa: 0, 0, 30, 15
+		england: 0, 15, 30, 15
+		holland: 0, 30, 30, 15
+		france: 0, 45, 30, 15
+		sweden: 0, 60, 30, 15
+		germany: 0, 75, 30, 15
+		spain: 0, 90, 30, 15
+		italy: 0, 105, 30, 15
+		greece: 0, 120, 30, 15
+		turkey: 0, 135, 30, 15
+		allies: 0, 150, 30, 15
+		RandomAllies: 0, 165, 30, 15
 
-		soviet: 30, 45, 30, 15
+		#Soviet block
 		russia: 30, 0, 30, 15
 		ukraine: 30, 15, 30, 15
-		belarus: 30, 30, 30, 15
+		moldova: 30, 30, 30, 15
+		belarus: 30, 45, 30, 15
+		karelia: 30, 60, 30, 15
+		kazakh: 30, 75, 30, 15
+		kyrgiz: 30, 90, 30, 15
+		uzbek: 30, 105, 30, 15
+		turkmen: 30, 120, 30, 15
+		afghan: 30, 135, 30, 15
+		soviet: 30, 150, 30, 15
+		RandomSoviet: 30, 165, 30, 15
 
-		gdi: 0, 90, 30, 15
-		ubergdi: 0, 105, 30, 15
-		socom: 0, 135, 30, 15
-		taskforce: 0, 150, 30, 15
-		
-		nod: 30, 120, 30, 15
-		bossnod: 30, 150, 30, 15
-		cabal: 30, 135, 30, 15
-		rebels: 30, 165, 30, 15
+		#GDI block
+		futurecorp: 60, 120, 30, 15
+		socom: 60, 135, 30, 15
+		taskforce: 60, 150, 30, 15
+		gdi: 60, 105, 30, 15
+		RandomGDI: 60, 165, 30, 15
+
+		#Nod block
+		blackhand: 90, 135, 30, 15
+		cabal: 90, 120, 30, 15
+		rebels: 90, 150, 30, 15
+		nod: 90, 105, 30, 15
+		RandomNod: 90, 165, 30, 15
+
+		#Scrin block
+		reaper: 120, 120, 30, 15
+		traveler: 120, 135, 30, 15
+		scrin: 120, 105, 30, 15
+		RandomScrin: 120, 165, 30, 15
 
 music:
 	Inherits: ^Glyphs

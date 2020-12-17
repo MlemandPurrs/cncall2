@@ -1,8 +1,8 @@
 
 
-UnitTypes = { "1tnk.nod", "stnk.nod", "ftnk", "napc.armed" }
+UnitTypes = { "1tnk.nod", "stnk", "ftnk", "napc.armed" }
 BeachUnitTypes = { "e1", "e1", "e3", "e4", "e1", "e1", "e3", "e4", "e1", "e1", "cybr", "cybr", "bggy", "bggy", "1tnk.nod", "bike" }
-ShipUnitTypes = { "gapc", "gapc", "hmmv", "2tnk.gdi", "2tnk.gdi" }
+ShipUnitTypes = { "gapc", "hmmv.tow", "hmmv", "2tnk.gdi", "2tnk.gdi" }
 ProxyType = "powerproxy.paratroopers"
 ProducedUnitTypes =
 {
@@ -12,10 +12,10 @@ ProducedUnitTypes =
 	{ factory = SovietBarracks2, types = { "e1", "e1", "e3", "e3", "e4", "e5" } },
 	{ factory = SovietBarracks3, types = { "e1", "e1", "e3", "e3", "e4", "e5" } },
 	{ factory = AlliedWarFactory1, types = { "hmmv", "gapc", "2tnk.gdi", "mrls", "4tnk.gdi" } },
-	{ factory = SovietWarFactory1, types = { "1tnk.nod", "bggy", "arty.nod", "stnk.nod", "napc.armed" } }
+	{ factory = SovietWarFactory1, types = { "1tnk.nod", "bggy", "howi", "stnk", "napc.armed" } }
 }
 
-HelicopterUnitTypes = { "e1", "e1", "e2", "e2", "e2", "e3" };
+HelicopterUnitTypes = { "e1", "e1", "e2", "e1", "e2", "e3" };
 ParadropWaypoints = { Paradrop1, Paradrop2, Paradrop3, Paradrop4, Paradrop5, Paradrop6, Paradrop7, Paradrop8 }
 Mig1Waypoints = { Mig11, Mig12, Mig13, Mig14 }
 Mig2Waypoints = { Mig21, Mig22, Mig23, Mig24 }

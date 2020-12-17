@@ -1,0 +1,1485 @@
+
+#   Disguise Tank
+DTNK:
+	Inherits: ^TrackedVehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	-WithFacingSpriteBody:
+	-Tooltip:
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: atek, ~vehicles.allies, ~player.italy, ~techlevel.high
+		Description: Experimental vehicle with hi-tech projectors.\n  Special ability: Vehicle Disguise\nCan change apperance to any Vehicle to fool the opponent.\nLoses disguise when attacking.\n  Strong vs Vehicles\n  Weak vs Aircraft
+	Selectable:
+		Class: VehicleDisguise
+	Valued:
+		Cost: 1350
+	Targetable:
+		TargetTypes: Ground, Vehicle, VehicleDisguise
+		RequiresCondition: !parachute
+	Health:
+		HP: 45000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 128
+		PauseOnCondition: !(!empdisable && !being-captured)
+	RevealsShroud:
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	SpawnActorOnDeath:
+		Actor: dtnk.husk
+		OwnerType: InternalName
+		EffectiveOwnerFromOwner: true
+	Passenger:
+		PipType: Red
+	DeliversCash:
+		Payload: 675
+		Type: VehicleRefund
+	WithDecoration@disguise:
+		Image: pips
+		Sequence: pip-disguise
+		Palette: effect
+		ReferencePoint: Top, Right
+		ZOffset: 256
+		RequiresCondition: disguise
+	IgnoresDisguise:
+	WithMuzzleOverlay:
+	#   this will be an long, messy section. it has to look and behave identical to whatever its mimicin als.
+	Disguise:
+		DisguisedCondition: disguise
+		ValidStances: Ally, Neutral, Enemy
+		TargetTypes: VehicleDisguise
+		DisguisedAsConditions:
+			mcv: mcv
+			mcv.ai: mcv
+			mcvf: mcv
+			mcv.cnc: mcvcnc
+			mcv.cnc.ai: mcvcnc
+			harv: harv
+			harv.crate: harv
+			harv.soviet: harvsvyt
+			harv.soviet.crate: harvsvyt
+			harv.cnc: harvcnc
+			harv.cnc.crate: harvcnc
+			harv.cnc.stealth: harvcnc
+			truk: truk
+			truf: truk
+			truk.cnc: trukcnc
+			dtrk: dtrk
+			dtrk.cnc: dtrkcnc
+			mwf: mwf
+			jeep: jeep
+			jeep.england: jeep
+			jeep.england.r2: jeep
+			jeep.scout: jeep
+			ftrk: ftrk
+			ftrk.belarus: ftrk
+			ftrk.belarus.r2: ftrk
+			ftrk.scout: ftrkscout
+			ftrk.repair: ftrkrep
+			hmmv: hmmv
+			hmmv.scout: hmmv
+			hmmv.tow: hmmvrock
+			smch: smch
+			bggy: bggy
+			bggy.scout: bggy
+			bike: bike
+			attbbgy: attbggy
+			apc: apc
+			apc.crate: apc
+			apc.germany: apc
+			apc.germany.r2: apc
+			mbun: mbun
+			apc.soviet: apcsvyt
+			gapc: gapc
+			gapc.gatt: gapcvulc
+			aav: aav
+			napc: napc
+			napc.armed: napcarmd
+			sapc: sapc
+			1tnk: tnk1
+			1tnk.r1: tnk1
+			1tnf: tnk1
+			1tnk.england: tnk1
+			1tnk.france: tnk1
+			1tnk.sweden: tnk1
+			1tnk.germany: tnk1
+			1tnk.spain: tnk1
+			1tnk.italy: tnk1
+			1tnk.nod: tnk1nod
+			1tnk.soviet: tnk1svyt
+			atnk: atnk
+			hvrc: hvrc
+			mrpg: mrpg
+			mtnk: mtnk
+			2tnk: tnk2
+			2tnf: tnk2
+			2tnk.r1: tnk2
+			2tnk.england: tnk2
+			2tnk.holland: tnk2s
+			2tnk.france: tnk2
+			2tnk.germany: tnk2
+			2tnk.spain: tnk2
+			2tnk.italy: tnk2
+			2tnk.gdi: tnk2gdi
+			2tnk.gdi.rail: tnk2rail
+			2tnk.gdi.rpod: tnk2rpod
+			3tnk: tnk3
+			3tnk.russia: tnk3
+			3tnk.russia.r2: tnk3
+			3tnk.ukraine: tnk3
+			3tnk.belarus: tnk3
+			3tnk.r1: tnk3
+			3tnk.1b: tnk31b
+			3tnk.1b.russia: tnk31b
+			3tnk.1b.russia.r2: tnk31b
+			3tnk.1b.ukraine: tnk31b
+			3tnk.1b.belarus: tnk31b
+			ftnk: ftnk
+			ctnk.nod: ctnkchem
+			4tnk: tnk4
+			4tnk.gdi: tnk4gdi
+			4tnk.gdi.rail: tnk4rail
+			4tnk.gdi.ion: tnk4ion
+			mwav: mwav
+			ltnk: ltnk
+			ptnk: ptnk
+			5tnk: tnk5
+			prsm: prsm
+			arty: arty
+			artf: arty
+			arty.france: arty
+			arty.france.r2: arty
+			gcan: gcan
+			howi: howi
+			sarty: sarty
+			v2rl: v2rl
+			v2rl.ukraine: v2rl
+			v2rl.ukraine.r2: v2rl
+			icbm: icbm
+			icbm.soviet: icbm
+			msam.nod: mrlsnod
+			mrls: mrls
+			mrls.crate: mrls
+			mrls.hover: mrlshvr
+			htnk: htnk
+			ssm: ssm
+			ssm.crate: ssm
+			ssm.nuke: ssmnuke
+			ssm.napalm: ssm
+			ssm.hover: ssmhvr
+			mnly: mnly
+			mnly.mole: mnlymole
+			mnly.spider: mnlyspid
+			mnly.support: mnlyrep
+			mnly.support.allies: mnlyrep
+			mnly.stealth: mnlystlh
+			mrep: mrep
+			mgg: mgg
+			mggf: mgg
+			msam: msam
+			mrj: mrj
+			mrj.crate: mrj
+			mhq: mhq
+			mhq.start: mhqciv
+			tnkd: tnkd
+			ctnk: ctnk
+			papc: papc
+			stnk: stnk
+			ttnk: ttnk
+			disr: disr
+			qtnk: qtnk
+			memp: memp
+	# the Nameplates
+	DisguiseTooltip@default:
+		Name: Mirage Tank
+		GenericName: Tank
+		RequiresCondition: !mcv && !mcvcnc && !harv && !harvsvyt && !harvcnc && !truk && !trukcnc && !dtrk && !dtrkcnc && !mwf && !jeep && !ftrk && !ftrkscout && !ftrkrep && !hmmv && !hmmvrock && !bggy && !bike && !attbggy && !apc && !mbun && !apcsvyt && !gapc && !gapcvulc && !napc && !napcarmd && !tnk1 && !tnk1nod && !tnk1svyt && !atnk && !hvrc && !mrpg && !mtnk && !tnk2 && !tnk2s && !tnk2gdi && !tnk2rail && !tnk2rpod && !tnk3 && !tnk31b && !ftnk && !ctnkchem && !tnk4 && !tnk4gdi && !tnk4rail && !tnk4ion && !mwav && !ltnk && !ptnk && !tnk5 && !prsm && !arty && !gcan && !howi && !sarty && !v2rl && !icbm && !mrlsnod && !mrls && !mrlshvr && !htnk && !ssm && !ssmnuke && !ssmhvr && !mnly && !mnlymole && !mnlyspid && !mnlyrep && !mnlystlh && !mrep && !mgg && !msam && !mrj && !mhq && !mhqciv && !tnkd && !ctnk && !papc && !stnk && !ttnk && !disr && !qtnk && !memp
+	DisguiseTooltip@mcv:
+		Name: Mobile Construction Vehicle
+		GenericName: Mobile Construction Vehicle
+		RequiresCondition: mcv || mcvcnc
+	DisguiseTooltip@harv:
+		Name: Harvester
+		GenericName: Harvester
+		RequiresCondition: harv || harvcnc
+	DisguiseTooltip@harvsvyt:
+		Name: Armed Harvester
+		GenericName: Armed Harvester
+		RequiresCondition: harvsvyt
+	DisguiseTooltip@truk:
+		Name: Supply Truck
+		GenericName: Supply Truck
+		RequiresCondition: truk || trukcnc
+	DisguiseTooltip@dtrk:
+		Name: Demolition Truck
+		GenericName: Demolition Truck
+		RequiresCondition: dtrk || dtrkcnc
+	DisguiseTooltip@mwf:
+		Name: Mobile War Factory
+		GenericName: Mobile War Factory
+		RequiresCondition: mwf
+	DisguiseTooltip@jeep:
+		Name: Jeep
+		GenericName: Jeep
+		RequiresCondition: jeep
+	DisguiseTooltip@ftrk:
+		Name: Flak Truck
+		GenericName: Flak Truck
+		RequiresCondition: ftrk
+	DisguiseTooltip@ftrkscout:
+		Name: Scout Car
+		GenericName: Scout Car
+		RequiresCondition: ftrkscout
+	DisguiseTooltip@ftrkrep:
+		Name: Mobile Repair Truck
+		GenericName: Mobile Repair Truck
+		RequiresCondition: ftrkrep
+	DisguiseTooltip@hmmv:
+		Name: Humvee
+		GenericName: Humvee
+		RequiresCondition: hmmv
+	DisguiseTooltip@hmmvrock:
+		Name: TOW Humvee
+		GenericName: TOW Humvee
+		RequiresCondition: hmmvrock
+	DisguiseTooltip@smch:
+		Name: Robot Tank
+		GenericName: Robot Tank
+		RequiresCondition: smch
+	DisguiseTooltip@bggy:
+		Name: Buggy
+		GenericName: Buggy
+		RequiresCondition: bggy
+	DisguiseTooltip@bike:
+		Name: Recon Bike
+		GenericName: Recon Bike
+		RequiresCondition: bike
+	DisguiseTooltip@attbggy:
+		Name: Attack Buggy
+		GenericName: Attack Buggy
+		RequiresCondition: attbggy
+	DisguiseTooltip@apc:
+		Name: APC
+		GenericName: APC
+		RequiresCondition: apc
+	DisguiseTooltip@mbun:
+		Name: Mobile Bunker
+		GenericName: Mobile Bunker
+		RequiresCondition: mbun
+	DisguiseTooltip@apcsvyt:
+		Name: Heavy APC
+		GenericName: Heavy APC
+		RequiresCondition: apcsvyt
+	DisguiseTooltip@gapc:
+		Name: Flak APC
+		GenericName: Flak APC
+		RequiresCondition: gapc
+	DisguiseTooltip@gapcvulc:
+		Name: Gattling APC
+		GenericName: Gattling APC
+		RequiresCondition: gapcvulc
+	DisguiseTooltip@aav:
+		Name: AAV
+		GenericName: AAV
+		RequiresCondition: aav
+	DisguiseTooltip@napc:
+		Name: Light APC
+		GenericName: Light APC
+		RequiresCondition: napc
+	DisguiseTooltip@napcarmd:
+		Name: Armed L. APC
+		GenericName: Armed L. APC
+		RequiresCondition: napcarmd
+	DisguiseTooltip@sapc:
+		Name: Stealth APC
+		GenericName: Stealth APC
+		RequiresCondition: sapc
+	DisguiseTooltip@tnk1:
+		Name: Light Tank
+		GenericName: Light Tank
+		RequiresCondition: tnk1 || tnk1nod || tnk1svyt
+	DisguiseTooltip@atnk:
+		Name: Flak Tank
+		GenericName: Flak Tank
+		RequiresCondition: atnk
+	DisguiseTooltip@hvrc:
+		Name: Hovercraft
+		GenericName: Hovercraft
+		RequiresCondition: hvrc
+	DisguiseTooltip@mrpg:
+		Name: Disc Launcher
+		GenericName: Disc Launcher
+		RequiresCondition: mrpg
+	DisguiseTooltip@mtnk:
+		Name: Mini Tank
+		GenericName: Mini Tank
+		RequiresCondition: mtnk
+	DisguiseTooltip@tnk2:
+		Name: Medium Tank
+		GenericName: Medium Tank
+		RequiresCondition: tnk2 || tnk2gdi
+	DisguiseTooltip@tnk2s:
+		Name: Phase Tank
+		GenericName: Phase Tank
+		RequiresCondition: tnk2s
+	DisguiseTooltip@tnk2rail:
+		Name: Railgun Medium
+		GenericName: Railgun Medium
+		RequiresCondition: tnk2rail
+	DisguiseTooltip@tnk2rpod:
+		Name: Rocketpod Medium
+		GenericName: Rocketpod Medium
+		RequiresCondition: tnk2rpod
+	DisguiseTooltip@tnk31b:
+		Name: Heavy Tank 1-B
+		GenericName: Heavy Tank 1-B
+		RequiresCondition: tnk31b
+	DisguiseTooltip@tnk3:
+		Name: Heavy Tank
+		GenericName: Heavy Tank
+		RequiresCondition: tnk3
+	DisguiseTooltip@ftnk:
+		Name: Flame Tank
+		GenericName: Flame Tank
+		RequiresCondition: ftnk
+	DisguiseTooltip@ctnkchem:
+		Name: Chemical Tank
+		GenericName: Chemical Tank
+		RequiresCondition: ctnkchem
+	DisguiseTooltip@tnk4:
+		Name: Mammoth Tank
+		GenericName: Mammoth Tank
+		RequiresCondition: tnk4
+	DisguiseTooltip@tnk4rail:
+		Name: Railgun Mammoth
+		GenericName: Railgun Mammoth
+		RequiresCondition: tnk4rail
+	DisguiseTooltip@tnk4ion:
+		Name: Ion Mammoth
+		GenericName: Ion Mammoth
+		RequiresCondition: tnk4ion
+	DisguiseTooltip@mwav:
+		Name: Microwave Tank
+		GenericName: Microwave Tank
+		RequiresCondition: mwav
+	DisguiseTooltip@ltnk:
+		Name: Laser Tank
+		GenericName: Laser Tank
+		RequiresCondition: ltnk
+	DisguiseTooltip@ptnk:
+		Name: Plasma Tank
+		GenericName: Plasma Tank
+		RequiresCondition: ptnk
+	DisguiseTooltip@tnk5:
+		Name: Behemoth Tank
+		GenericName: Behemoth Tank
+		RequiresCondition: tnk5
+	DisguiseTooltip@prsm:
+		Name: Prism Tank
+		GenericName: Prism Tank
+		RequiresCondition: prsm
+	DisguiseTooltip@arty:
+		Name: Artillery
+		GenericName: Vehicle
+		RequiresCondition: arty
+	DisguiseTooltip@gcan:
+		Name: Grand Cannon
+		GenericName: Grand Cannon
+		RequiresCondition: gcan
+	DisguiseTooltip@howi:
+		Name: Howitzer
+		GenericName: Howitzer
+		RequiresCondition: howi
+	DisguiseTooltip@sarty:
+		Name: Stealth Artillery
+		GenericName: Stealth Artillery
+		RequiresCondition: sarty
+	DisguiseTooltip@v2rl:
+		Name: V2 Launcher
+		GenericName: V2 Launcher
+		RequiresCondition: v2rl
+	DisguiseTooltip@icbm:
+		Name: ICBM Launcher
+		GenericName: ICBM Launcher
+		RequiresCondition: icbm
+	DisguiseTooltip@mrlsnod:
+		Name: Mobile SAM
+		GenericName: Mobile SAM
+		RequiresCondition: mrlsnod	
+	DisguiseTooltip@mrls:
+		Name: MRLS
+		GenericName: MRLS
+		RequiresCondition: mrls
+	DisguiseTooltip@mrlshvr:
+		Name: Hover MRLS
+		GenericName: Hover MRLS
+		RequiresCondition: mrlshvr
+	DisguiseTooltip@htnk:
+		Name: Hover Tank
+		GenericName: Hover Tank
+		RequiresCondition: ssm
+	DisguiseTooltip@ssm:
+		Name: SSM Launcher
+		GenericName: SSM Launcher
+		RequiresCondition: ssm
+	DisguiseTooltip@ssmnuke:
+		Name: Nuclear SSM
+		GenericName: Nuclear SSM
+		RequiresCondition: ssmnuke
+	DisguiseTooltip@ssmhvr:
+		Name: Hover SSM
+		GenericName: Hover SSM
+		RequiresCondition: ssmhvr
+	DisguiseTooltip@mnly:
+		Name: Minelayer
+		GenericName: Minelayer
+		RequiresCondition: mnly
+	DisguiseTooltip@mnlymole:
+		Name: Mole Minelayer
+		GenericName: Mole Minelayer
+		RequiresCondition: mnlymole
+	DisguiseTooltip@mnlyspid:
+		Name: Spider Minelayer
+		GenericName: Spider Minelayer
+		RequiresCondition: mnlyspid
+	DisguiseTooltip@mnlyrep:
+		Name: Support Minelayer
+		GenericName: Support Minelayer
+		RequiresCondition: mnlyrep
+	DisguiseTooltip@mnlystlh:
+		Name: Stealth Minelayer
+		GenericName: Stealth Minelayer
+		RequiresCondition: mnlystlh
+	DisguiseTooltip@mrep:
+		Name: Mobile Repair Bot
+		GenericName: Mobile Repair Bot
+		RequiresCondition: mrep
+	DisguiseTooltip@mgg:
+		Name: Mobile Gap Generator
+		GenericName: Mobile Gap Generator
+		RequiresCondition: mgg
+	DisguiseTooltip@msam:
+		Name: Mobile SAM
+		GenericName: Mobile SAM
+		RequiresCondition: msam
+	DisguiseTooltip@mrj:
+		Name: Mobile Radar Jammer
+		GenericName: Vehicle
+		RequiresCondition: mrj
+	DisguiseTooltip@mhq:
+		Name: Mobile Detector
+		GenericName: Mobile Detector
+		RequiresCondition: mhq
+	DisguiseTooltip@mhqciv:
+		Name: Mobile HQ
+		GenericName: Mobile HQ
+		RequiresCondition: mhqciv
+	DisguiseTooltip@tnkd:
+		Name: Tank Destroyer
+		GenericName: Tank Destroyer
+		RequiresCondition: tnkd
+	DisguiseTooltip@ctnk:
+		Name: Chrono Tank
+		GenericName: Chrono Tank
+		RequiresCondition: ctnk
+	DisguiseTooltip@papc:
+		Name: Phase Transport
+		GenericName: Phase Transport
+		RequiresCondition: papc
+	DisguiseTooltip@stnk:
+		Name: Stealth Tank
+		GenericName: Stealth Tank
+		RequiresCondition: papc
+	DisguiseTooltip@ttnk:
+		Name: Tesla Tank
+		GenericName: Tesla Tank
+		RequiresCondition: ttnk
+	DisguiseTooltip@disr:
+		Name: Disruptor
+		GenericName: Disruptor
+		RequiresCondition: disr
+	DisguiseTooltip@qtnk:
+		Name: MAD Tank
+		GenericName: MAD Tank
+		RequiresCondition: qtnk
+	DisguiseTooltip@memp:
+		Name: Mobile EMP
+		GenericName: Mobile EMP
+		RequiresCondition: memp
+	#	the Chassis graphics
+	WithFacingSpriteBody@Default:
+		PauseOnCondition: mcv && mcvcnc && harv && harvsvyt && harvcnc && truk && trukcnc && dtrk && dtrkcnc && mwf && jeep && ftrk && ftrkscout && ftrkrep && hmmv && hmmvrock && bggy && bike && attbggy && apc && mbun && apcsvyt && gapc && gapcvulc && aav && napc && napcarmd && sapc && tnk1 && tnk1nod && tnk1svyt && atnk && hvrc && mrpg && mtnk && tnk2 && tnk2s && tnk2gdi && tnk2rail && tnk2rpod && tnk3 && tnk31b && ftnk && ctnkchem && tnk4 && tnk4gdi && tnk4rail && tnk4ion && mwav && ltnk && ptnk && tnk5 && prsm && arty && gcan && howi && sarty && v2rl && icbm && mrlsnod && mrls && mrlshvr && htnk && ssm && ssmnuke && ssmhvr && mnly && mnlymole && mnlyspid && mnlyrep && mnlystlh && mrep && mgg && msam && mrj && mhq && mhqciv && tnkd && ctnk && papc && stnk && ttnk && disr && qtnk && memp
+		RequiresCondition: !mcv && !mcvcnc && !harv && !harvsvyt && !harvcnc && !truk && !trukcnc && !dtrk && !dtrkcnc && !mwf && !jeep && !ftrk && !ftrkscout && !ftrkrep && !hmmv && !hmmvrock && !bggy && !bike && !attbggy && !apc && !mbun && !apcsvyt && !gapc && !gapcvulc && !napc && !napcarmd && !tnk1 && !tnk1nod && !tnk1svyt && !atnk && !hvrc && !mrpg && !mtnk && !tnk2 && !tnk2s && !tnk2gdi && !tnk2rail && !tnk2rpod && !tnk3 && !tnk31b && !ftnk && !ctnkchem && !tnk4 && !tnk4gdi && !tnk4rail && !tnk4ion && !mwav && !ltnk && !ptnk && !tnk5 && !prsm && !arty && !gcan && !howi && !sarty && !v2rl && !icbm && !mrlsnod && !mrls && !mrlshvr && !htnk && !ssm && !ssmnuke && !ssmhvr && !mnly && !mnlymole && !mnlyspid && !mnlyrep && !mnlystlh && !mrep && !mgg && !msam && !mrj && !mhq && !mhqciv && !tnkd && !ctnk && !papc && !stnk && !ttnk && !disr && !qtnk && !memp
+	# keep around incase of error
+	#	PauseOnCondition: jeep && ftrk && ftrkscout && ftrkrep && hmmv && bggy && smch && attbggy && apc && mbun && apcsvyt && gapc && gapcvulc && aav && napc && napcarmd && sapc && tnk1 && atnk && mrpg && tnk1nod && tnk1svyt && tnk2 && tnk2s && tnk2gdi && tnk2rail && tnk2rpod && tnk3 && tnk31b && tnk4 && tnk4gdi && tnk4rail && tnk4ion && arty && gcan && v2rl && icbm && howi && sarty && mrls && mrlsnod && mrlshvr && ssm && ssmhvr && mnly && mnlyrep && mnlys && mnlymole && mnlyspid && tnkd && mrj && papc && ctnk && harv && harvsvyt && harvcnc && mcv && mcvcnc && truk && truckcnc && dtrk && dtrkcnc && mgg && msam
+	#	RequiresCondition: !jeep && !apc && !tnk1 && !tnk2 && !arty && !mnly && !atnk && !tnkd && !mrj && !stnk && !ctnk && !harv && !mcv && !truk && !mgg && !hell && !mbun && !gcan && !ptnk
+	WithFacingSpriteBody@mcv:
+		Name: mcv
+		Sequence: mcv-body
+		RequiresCondition: mcv
+	WithFacingSpriteBody@mcvcnc:
+		Name: mcvcnc
+		Sequence: mcvcnc-body
+		RequiresCondition: mcvcnc
+	WithFacingSpriteBody@harv:
+		Name: harv
+		Sequence: harv-body
+		RequiresCondition: harv || harvsvyt
+	WithFacingSpriteBody@harvcnc:
+		Name: harvcnc
+		Sequence: harvcnc-body
+		RequiresCondition: harvcnc
+	WithFacingSpriteBody@truk:
+		Name: truk
+		Sequence: truk-body
+		RequiresCondition: truk
+	WithFacingSpriteBody@trukcnc:
+		Name: trukcnc
+		Sequence: trukcnc-body
+		RequiresCondition: trukcnc
+	WithFacingSpriteBody@dtrk:
+		Name: dtrk
+		Sequence: dtrk-body
+		RequiresCondition: dtrk
+	WithFacingSpriteBody@dtrkcnc:
+		Name: dtrkcnc
+		Sequence: dtrkcnc-body
+		RequiresCondition: dtrkcnc
+	WithFacingSpriteBody@mwf:
+		Name: mwf
+		Sequence: mwf-body
+		RequiresCondition: mwf
+	WithFacingSpriteBody@jeep:
+		Name: jeep
+		Sequence: jeep-body
+		RequiresCondition: jeep
+	WithFacingSpriteBody@ftrk:
+		Name: ftrk
+		Sequence: ftrk-body
+		RequiresCondition: ftrk || ftrkscout || ftrkrep
+	WithFacingSpriteBody@hmmv:
+		Name: hmmv
+		Sequence: hmmv-body
+		RequiresCondition: hmmv || hmmvrock
+	WithFacingSpriteBody@smch:
+		Name: smch
+		Sequence: smch-body
+		RequiresCondition: smch || mtnk
+	WithFacingSpriteBody@bggy:
+		Name: bggy
+		Sequence: bggy-body
+		RequiresCondition: bggy
+	WithFacingSpriteBody@bike:
+		Name: bike
+		Sequence: bike-body
+		RequiresCondition: bike
+	WithFacingSpriteBody@attbggy:
+		Name: attbggy
+		Sequence: attbggy-body
+		RequiresCondition: attbggy
+	WithFacingSpriteBody@apc:
+		Name: apc
+		Sequence: apc-body
+		RequiresCondition: apc || apcsvyt || gapc || gapcvulc
+	WithFacingSpriteBody@mbun:
+		Name: mbun
+		Sequence: mbun-body
+		RequiresCondition: mbun
+	WithFacingSpriteBody@aav:
+		Name: aav
+		Sequence: aav-body
+		RequiresCondition: aav
+	WithFacingSpriteBody@napc:
+		Name: napc
+		Sequence: napc-body
+		RequiresCondition: napc || napcarmd
+	WithFacingSpriteBody@sapc:
+		Name: sapc
+		Sequence: sapc-body
+		RequiresCondition: sapc
+	WithFacingSpriteBody@tnk1:
+		Name: tnk1
+		Sequence: 1tnk-body
+		RequiresCondition: tnk1 || atnk || tnk1nod || tnk1svyt
+	WithFacingSpriteBody@hvrc:
+		Name: hvrc
+		Sequence: hvrc-body
+		RequiresCondition: hvrc
+	WithFacingSpriteBody@mrpg:
+		Name: mrpg
+		Sequence: mrpg-body
+		RequiresCondition: mrpg
+	WithFacingSpriteBody@tnk2:
+		Name: tnk2
+		Sequence: 2tnk-body
+		RequiresCondition: tnk2 || tnk2gdi || tnk2rail || tnk2rpod
+	WithFacingSpriteBody@tnk2s:
+		Name: tnk2s
+		Sequence: 2tnks-body
+		RequiresCondition: tnk2s
+	WithFacingSpriteBody@tnk3:
+		Name: tnk3
+		Sequence: 3tnk-body
+		RequiresCondition: tnk3 || tnk31b
+	WithFacingSpriteBody@ftnk:
+		Name: ftnk
+		Sequence: ftnk-body
+		RequiresCondition: ftnk
+	WithFacingSpriteBody@ctnknod:
+		Name: ctnknod
+		Sequence: ctnknod-body
+		RequiresCondition: ctnkchem
+	WithFacingSpriteBody@tnk4:
+		Name: tnk4
+		Sequence: 4tnk-body
+		RequiresCondition: tnk4 || tnk4gdi || tnk4rail || tnk4ion
+	WithFacingSpriteBody@mwav:
+		Name: mwav
+		Sequence: mwav-body
+		RequiresCondition: mwav || ltnk
+	WithFacingSpriteBody@ptnk:
+		Name: ptnk
+		Sequence: ptnk-body
+		RequiresCondition: ptnk
+	WithFacingSpriteBody@tnk5:
+		Name: tnk5
+		Sequence: 5tnk-body
+		RequiresCondition: tnk5
+	WithFacingSpriteBody@prsm:
+		Name: prsm
+		Sequence: prsm-body
+		RequiresCondition: prsm
+	WithFacingSpriteBody@arty:
+		Name: arty
+		Sequence: arty-body
+		RequiresCondition: arty
+	WithFacingSpriteBody@gcan:
+		Name: gcan
+		Sequence: gcan-body
+		RequiresCondition: gcan
+	WithFacingSpriteBody@howi:
+		Name: howi
+		Sequence: howi-body
+		RequiresCondition: howi
+	WithFacingSpriteBody@sarty:
+		Name: sarty
+		Sequence: sarty-body
+		RequiresCondition: sarty
+	WithFacingSpriteBody@v2rl:
+		Name: v2rl
+		Sequence: v2rl-body
+		RequiresCondition: v2rl
+	WithFacingSpriteBody@icbm:
+		Name: icbm
+		Sequence: icbm-body
+		RequiresCondition: icbm
+	WithFacingSpriteBody@mrls:
+		Name: mrls
+		Sequence: mrls-body
+		RequiresCondition: mrls || mrlsnod
+	WithFacingSpriteBody@mrlshvr:
+		Name: mrlshvr
+		Sequence: mrlshvr-body
+		RequiresCondition: mrlshvr
+	WithFacingSpriteBody@htnk:
+		Name: htnk
+		Sequence: htnk-body
+		RequiresCondition: htnk
+	WithFacingSpriteBody@ssm:
+		Name: ssm
+		Sequence: ssm-body
+		RequiresCondition: ssm
+	WithFacingSpriteBody@ssmhvr:
+		Name: ssmhvr
+		Sequence: ssmhvr-body
+		RequiresCondition: ssmhvr
+	WithFacingSpriteBody@mnly:
+		Name: mnly
+		Sequence: mnly-body
+		RequiresCondition: mnly || mnlymole || mnlyspid || mnlyrep || mnlystlh
+	WithIdleOverlay@mnlyslth:
+		Sequence: spinner-stlh
+		Offset: -30,0,156
+	WithFacingSpriteBody@mrep:
+		Name: mrep
+		Sequence: mrep-body
+		RequiresCondition: mrep
+	WithFacingSpriteBody@mgg:
+		Name: mgg
+		Sequence: mgg-body
+		RequiresCondition: mgg || msam
+	WithIdleOverlay@mgg:
+		Offset: -299,0,171
+		Sequence: spinner-mgg
+		RequiresCondition: mgg
+	WithFacingSpriteBody@mrj:
+		Name: mrj
+		Sequence: mrj-body
+		RequiresCondition: mrj || mhq || mhqciv
+	WithIdleOverlay@mrj:
+		Sequence: spinner-mrj
+		Offset: -256,0,256
+		RequiresCondition: mrj || mhq || mhqciv
+	WithFacingSpriteBody@tnkd:
+		Name: tnkd
+		Sequence: tnkd-body
+		RequiresCondition: tnkd
+	WithFacingSpriteBody@ctnk:
+		Name: ctnk
+		Sequence: ctnk-body
+		RequiresCondition: ctnk
+	WithFacingSpriteBody@papc:
+		Name: papc
+		Sequence: papc-body
+		RequiresCondition: papc
+	WithFacingSpriteBody@stnk:
+		Name: stnk
+		Sequence: stnk-body
+		RequiresCondition: stnk
+	WithFacingSpriteBody@ttnk:
+		Name: ttnk
+		Sequence: ttnk-body
+		RequiresCondition: ttnk
+	WithIdleOverlay@TTNK:
+		Sequence: spinner-ttnk
+		RequiresCondition:	ttnk
+	WithFacingSpriteBody@disr:
+		Name: disr
+		Sequence: disr-body
+		RequiresCondition: disr
+	WithFacingSpriteBody@qtnk:
+		Name: qtnk
+		Sequence: qtnk-body
+		RequiresCondition: qtnk
+	WithFacingSpriteBody@memp:
+		Name: memp
+		Sequence: memp-body
+		RequiresCondition: memp
+	Hovers@repulsorgrav:
+		BobDistance: -35
+		RequiresCondition: mrlshvr && htnk
+	#	the Turret graphics
+	WithSpriteTurret@Default:
+		Sequence: turret-default
+		Turret: default-turret
+		RequiresCondition: !mcv && !mcvcnc && !harv && !harvsvyt && !harvcnc && !truk && !trukcnc && !dtrk && !dtrkcnc && !mwf && !jeep && !ftrk && !ftrkscout && !ftrkrep && !hmmv && !hmmvrock && !bggy && !bike && !attbggy && !apc && !mbun && !apcsvyt && !gapc && !gapcvulc && !napc && !napcarmd && !tnk1 && !tnk1nod && !tnk1svyt && !atnk && !hvrc && !mrpg && !mtnk && !tnk2 && !tnk2s && !tnk2gdi && !tnk2rail && !tnk2rpod && !tnk3 && !tnk31b && !ftnk && !ctnkchem && !tnk4 && !tnk4gdi && !tnk4rail && !tnk4ion && !mwav && !ltnk && !ptnk && !tnk5 && !prsm && !arty && !gcan && !howi && !sarty && !v2rl && !icbm && !mrlsnod && !mrls && !mrlshvr && !htnk && !ssm && !ssmnuke && !ssmhvr && !mnly && !mnlymole && !mnlyspid && !mnlyrep && !mnlystlh && !mrep && !mgg && !msam && !mrj && !mhq && !mhqciv && !tnkd && !ctnk && !papc && !stnk && !ttnk && !disr && !qtnk && !memp
+	WithSpriteTurret@harvsvyt:
+		Sequence: turret-hmmv
+		Turret: harvsvyt-turret
+		RequiresCondition: harvsvyt
+	WithSpriteTurret@jeep:
+		Sequence: turret-mg
+		Turret: jeep-turret
+		RequiresCondition: jeep || bggy || mrj
+	WithSpriteTurret@ftrk:
+		Sequence: turret-ftrk
+		Turret: ftrk-turret
+		RequiresCondition: ftrk
+	WithSpriteTurret@ftrk:
+		Sequence: turret-apc
+		Turret: ftrkscout-turret
+		RequiresCondition: ftrkscout
+	WithSpriteTurret@ftrkrep:
+		Sequence: turret-rep
+		Turret: ftrkrep-turret
+		RequiresCondition: ftrkrep
+	WithSpriteTurret@repairarm:
+		Sequence: turret-rep
+		Turret: rep-turret
+		RequiresCondition: ftrkrep || mnlyrep
+	WithSpriteTurret@largemg:
+		Sequence: turret-apc
+		Turret: apc-turret
+		RequiresCondition: apcsvyt || napcarmd
+	WithSpriteTurret@smallmg:
+		Sequence: turret-hmmv
+		Turret: hmmv-turret
+		RequiresCondition: hmmv || hmmvrock
+	WithSpriteTurret@towextra:
+		Sequence: turret-tow
+		Turret: tow-turret
+		RequiresCondition: hmmvrock
+	WithSpriteTurret@smallmech:
+		Sequence: turret-smch
+		Turret: smch-turret
+		RequiresCondition: smch
+	WithSpriteTurret@flaktur:
+		Sequence: turret-gapc
+		Turret: gapc-turret
+		RequiresCondition: gapc || atnk
+	WithSpriteTurret@vulctur:
+		Sequence: turret-gatt
+		Turret: gatt-turret
+		RequiresCondition: gapcvulc
+	WithSpriteTurret@aav:
+		Sequence: turret-aav
+		Turret: aav-turret
+		RequiresCondition: aav || mtnk
+	WithSpriteTurret@tnk1:
+		Sequence: turret-1tnk
+		Turret: 1tnk-turret
+		RequiresCondition: tnk1
+	WithSpriteTurret@tnk1nod:
+		Sequence: turret-1tnknod
+		Turret: 1tnknod-turret
+		RequiresCondition: tnk1nod
+	WithSpriteTurret@tnk1svyt:
+		Sequence: turret-1tnksvyt
+		Turret: 1tnksvyt-turret
+		RequiresCondition: tnk1svyt
+	WithSpriteTurret@tnk2:
+		Sequence: turret-2tnk
+		Turret: 2tnk-turret
+		RequiresCondition: tnk2
+	WithSpriteTurret@tnk2s:
+		Sequence: turret-2tnks
+		Turret: 2tnks-turret
+		RequiresCondition: tnk2s
+	WithSpriteTurret@tnk2gdi:
+		Sequence: turret-2tnkgdi
+		Turret: 2tnkgdi-turret
+		RequiresCondition: tnk2gdi
+	WithSpriteTurret@tnk2rail:
+		Sequence: turret-2tnkrail
+		Turret: 2tnkgdi-turret
+		RequiresCondition: tnk2rail
+	WithSpriteTurret@tnk2rpod:
+		Sequence: turret-2tnkrpod
+		Turret: 2tnkgdi-turret
+		RequiresCondition: tnk2rpod
+	WithSpriteTurret@tnk3:
+		Sequence: turret-3tnk
+		Turret: 3tnk-turret
+		RequiresCondition: tnk3
+	WithSpriteTurret@tnk31b:
+		Sequence: turret-3tnk1b
+		Turret: 3tnk-turret
+		RequiresCondition: tnk31b
+	WithSpriteTurret@tnk4:
+		Sequence: turret-4tnk
+		Turret: 4tnk-turret
+		RequiresCondition: tnk4
+	WithSpriteTurret@tnk4gdi:
+		Sequence: turret-4tnkgdi
+		Turret: 4tnk-turret
+		RequiresCondition: tnk4gdi
+	WithSpriteTurret@tnk4rail:
+		Sequence: turret-4tnkrail
+		Turret: 4tnk-turret
+		RequiresCondition: tnk4rail
+	WithSpriteTurret@tnk4ion:
+		Sequence: turret-4tnkion
+		Turret: 4tnk-turret
+		RequiresCondition: tnk4ion
+	WithSpriteTurret@mwav:
+		Sequence: turret-mwav
+		Turret: mwav-turret
+		RequiresCondition: mwav
+	WithSpriteTurret@ltnk:
+		Sequence: turret-ltnk
+		Turret: ltnk-turret
+		RequiresCondition: ltnk
+	WithSpriteTurret@ptnk:
+		Sequence: turret-ptnk
+		Turret: ptnk-turret
+		RequiresCondition: ptnk
+	WithSpriteTurret@tnk5:
+		Sequence: turret-5tnk
+		Turret: 5tnk-turret
+		RequiresCondition: tnk5
+	WithSpriteTurret@prsm:
+		Sequence: turret-prsm
+		Turret: prsm-turret
+		RequiresCondition: prsm
+	WithSpriteTurret@howi:
+		Sequence: turret-howi
+		Turret: howi-turret
+		RequiresCondition: howi
+	WithSpriteTurret@mrlsnod:
+		Sequence: turret-mrlsnod
+		Turret: mrls-turret
+		RequiresCondition: mrls
+	WithSpriteTurret@mrls:
+		Sequence: turret-mrls
+		Turret: mrls-turret
+		RequiresCondition: mrls
+	WithSpriteTurret@mrlshover:
+		Sequence: turret-mrlshvr
+		Turret: mrlshvr-turret
+		RequiresCondition: mrlshvr
+	WithSpriteTurret@ssm:
+		Sequence: turret-ssm
+		Turret: ssm-turret
+		RequiresCondition: ssm
+	WithSpriteTurret@mnlymole:
+		Sequence: turret-mnlymole
+		Turret: mnlymole-turret
+		RequiresCondition: mnlymole
+	WithSpriteTurret@mnlyspid:
+		Sequence: turret-mnlyspid
+		Turret: mnlyspid-turret
+		RequiresCondition: mnlyspid
+	WithSpriteTurret@msam:
+		Sequence: turret-msam
+		Turret: msam-turret
+		RequiresCondition: msam
+	WithSpriteTurret@stnk:
+		Sequence: turret-stnk
+		Turret: stnk-turret
+		RequiresCondition: stnk
+	WithSpriteTurret@disr:
+		Sequence: turret-disr
+		Turret: disr-turret
+		RequiresCondition: disr
+	#	this is to prevent crashing when
+	#	disguised as an turretless or 
+	#	AttacksFrontal or utility Vehicle
+	WithSpriteTurret@other:
+		Sequence: turret-invis
+		Turret: invis-turret
+		RequiresCondition: mcv && mcvcnc && harv && harvcnc && truk && trukcnc && dtrk && dtrkcnc && mwf && bike && attbggy && apc && napc && sapc && hvrc && mrpg && ftnk && ctnkchem && arty && gcan && sarty && v2rl && icbm && htnk && ssmhvr && mnly && mrep && mgg && mhqciv && tnkd && ctnk && papc && ttnk && qtnk && memp
+		#	keep old one for check
+		#	RequiresCondition: apc && arty && mnly && tnkd && mrj && ctnk && mcv && harv && truk && mgg
+	#	Position of Turret for each
+	Turreted@Default:
+		Turret: default-turret
+		TurnSpeed: 5
+		Offset: 0,0,128
+	Turreted@harvsvyt:
+		Turret: harvsvyt-turret
+		TurnSpeed: 5
+		Offset: 508,0,128
+	Turreted@jeep:
+		Turret: jeep-turret
+		TurnSpeed: 10
+		Offset: 0,0,128
+	Turreted@ftrk:
+		Turret: ftrk-turret
+		TurnSpeed: 7
+		Offset: -298,0,298
+	Turreted@ftrkscout:
+		Turret: ftrkscout-turret
+		TurnSpeed: 5
+		Offset: -178,0,178
+	Turreted@ftrkrep:
+		Turret: ftrkrep-turret
+		TurnSpeed: 255
+		Offset: 0,0,120
+	Turreted@hmmv:
+		Turret: hmmv-turret
+		TurnSpeed: 10
+		Offset: -85,0,94
+	Turreted@hmmvrock-turret:
+		Turret: tow-turret
+	Turreted@smch:
+		Turret: smch-turret
+		TurnSpeed: 10
+		Offset: 0,0,128
+	Turreted@bggy:
+		Turret: bggy-turret
+		Offset: -43,0,128
+	Turreted@mbun:
+		Turret: mbun-turret
+		TurnSpeed: 255
+		Offset: 0,0,210
+	Turreted@apcsvyt:
+		Turret: apcsvyt-turret
+		TurnSpeed: 5
+	Turreted@gapc:
+		Turret: gapc-turret
+		TurnSpeed: 7
+	Turreted@gapcvulc:
+		Turret: gapcvulc-turret
+		TurnSpeed: 7
+		Offset: 0,0,150
+	Turreted@aav:
+		Turret: aav-turret
+		TurnSpeed: 7
+		Offset: 90,90,90
+	Turreted@napcarmd:
+		Turret: napcarmd-turret
+		TurnSpeed: 5
+		Offset: 176,0,16
+	Turreted@tnk1:
+		Turret: 1tnk-turret
+		TurnSpeed: 7
+	Turreted@atnk:
+		Turret: atnk-turret
+		TurnSpeed: 5
+		Offset: -45,0,10
+	Turreted@mtnk:
+		Turret: mtnk-turret
+		TurnSpeed: 7
+		Offset: 0,0,128
+	Turreted@tnk2:
+		Turret: 2tnk-turret
+		TurnSpeed: 5
+	Turreted@tnk2s:
+		Turret: 2tnks-turret
+		TurnSpeed: 5
+	Turreted@tnk2gdi:
+		Turret: 2tnkgdi-turret
+		TurnSpeed: 5
+		Offset: 0,0,20
+	Turreted@tnk2rail:
+		Turret: 2tnkrail-turret
+		TurnSpeed: 5
+		Offset: 0,0,20
+	Turreted@tnk2rpod:
+		Turret: 2tnkrpod-turret
+		TurnSpeed: 5
+		Offset: 0,0,20
+	Turreted@tnk31b:
+		Turret: 3tnk1b-turret
+		TurnSpeed: 5		
+	Turreted@tnk3:
+		Turret: 3tnk-turret
+		TurnSpeed: 5
+	Turreted@tnk4:
+		Turret: 4tnk-turret
+		TurnSpeed: 3
+	Turreted@tnk4gdi:
+		Turret: 4tnkgdi-turret
+		TurnSpeed: 3
+	Turreted@tnk4rail:
+		Turret: 4tnkrail-turret
+		TurnSpeed: 3
+	Turreted@tnk4ion:
+		Turret: 4tnkion-turret
+		TurnSpeed: 4
+	Turreted@mwav:
+		Turret: mwav-turret
+		TurnSpeed: 4
+	Turreted@ltnk:
+		Turret: ltnk-turret
+		TurnSpeed: 5
+		Offset: 20,0,86
+	Turreted@ptnk:
+		Turret: ptnk-turret
+		TurnSpeed: 4
+		Offset: 0,0,0
+	Turreted@howi:
+		Turret: howi-turret
+		TurnSpeed: 4
+		Offset: -100,0,0
+	Turreted@mrlsnod:
+		Turret: mrlsnod-turret
+		TurnSpeed: 7
+		Offset: -256,0,128
+	Turreted@mrls:
+		Turret: mrls-turret
+		TurnSpeed: 3
+		Offset: -256,0,128
+	Turreted@mrlshvr:
+		Turret: mrlshvr-turret
+		TurnSpeed: 10
+		Offset: -200,0,0		
+	Turreted@ssm:
+		Turret: ssm-turret
+		TurnSpeed: 3
+		Offset: -128,0,128
+		RealignDelay: 0
+	Turreted@msam:
+		Turret: msam-turret
+		TurnSpeed: 7	
+	Turreted@mrj:
+		Turret: mrj-turret
+		TurnSpeed: 5
+		Offset: 246,-60,118
+	Turreted@mnlyrep:
+		Turret: mnlyrep-turret
+		TurnSpeed: 5
+	Turreted@stnk:
+		Turret: stnk-turret
+		TurnSpeed: 5
+	Turreted@disr:
+		Turret: disr-turret
+		TurnSpeed: 4
+		Offset: -256,0,0
+	Turreted@other:
+		Turret: invis-turret
+		TurnSpeed: 5
+	#	The weaponry itself, while disguised
+	#	it must keep an dummy weaponry on
+	#	to prevent getting stuck in disguise
+	AttackTurreted:
+		Armaments: defaultarm, disguisearm
+		# the turrets from above
+		Turrets: default-turret, harvsvyt-turret, jeep-turret, ftrk-turret, ftrkscout-turret, ftrkrep-turret, hmmv-turret, hmmvrock-turret, smch-turret, bggy-turret, mbun-turret, apcsvyt-turret, gapc-turret, gapcvulc-turret, aav-turret, napcarmd-turret, 1tnk-turret, atnk-turret, mtnk-turret, 2tnk-turret, 2tnks-turret, 2tnkgdi-turret, 2tnkrail-turret, 2tnkrpod-turret, 3tnk-turret, 3tnk1b-turret, 4tnk-turret, 4tnkgdi-turret, 4tnkrail-turret, 4tnkion-turret, mwav-turret, ltnk-turret, ptnk-turret, howi-turret, mrlsnod-turret, mrls-turret, mrlshvr-turret, ssm-turret, msam-turret, mrj-turret, mnlyrep-turret, stnk-turret, disr-turret, invis-turret
+		PauseOnCondition: empdisable
+	Armament@default:
+		Name: defaultarm
+		Weapon: 90mm
+		Recoil: 85
+		RecoilRecovery: 25
+		Turret: default-turret
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+		RequiresCondition: !mcv && !mcvcnc && !harv && !harvsvyt && !harvcnc && !truk && !trukcnc && !dtrk && !dtrkcnc && !mwf && !jeep && !ftrk && !ftrkscout && !ftrkrep && !hmmv && !hmmvrock && !bggy && !bike && !attbggy && !apc && !mbun && !apcsvyt && !gapc && !gapcvulc && !napc && !napcarmd && !tnk1 && !tnk1nod && !tnk1svyt && !atnk && !hvrc && !mrpg && !mtnk && !tnk2 && !tnk2s && !tnk2gdi && !tnk2rail && !tnk2rpod && !tnk3 && !tnk31b && !ftnk && !ctnkchem && !tnk4 && !tnk4gdi && !tnk4rail && !tnk4ion && !mwav && !ltnk && !ptnk && !tnk5 && !prsm && !arty && !gcan && !howi && !sarty && !v2rl && !icbm && !mrlsnod && !mrls && !mrlshvr && !htnk && !ssm && !ssmnuke && !ssmhvr && !mnly && !mnlymole && !mnlyspid && !mnlyrep && !mnlystlh && !mrep && !mgg && !msam && !mrj && !mhq && !mhqciv && !tnkd && !ctnk && !papc && !stnk && !ttnk && !disr && !qtnk && !memp
+	Armament@disguised0:
+		Name: disguisearm
+		Weapon: 90mm.decoy.zero
+		Recoil: 0
+		LocalOffset: 768,0,90
+		PauseOnCondition: empdisable
+		RequiresCondition: mcv && mcvcnc && harv && harvsvyt && harvcnc && truk && trukcnc && dtrk && dtrkcnc && mwf && jeep && ftrk && ftrkscout && ftrkrep && hmmv && hmmvrock && bggy && bike && attbggy && apc && mbun && apcsvyt && gapc && gapcvulc && aav && napc && napcarmd && sapc && tnk1 && tnk1nod && tnk1svyt && atnk && hvrc && mrpg && mtnk && tnk2 && tnk2s && tnk2gdi && tnk2rail && tnk2rpod && tnk3 && tnk31b && ftnk && ctnkchem && tnk4 && tnk4gdi && tnk4rail && tnk4ion && mwav && ltnk && ptnk && tnk5 && prsm && arty && gcan && howi && sarty && v2rl && icbm && mrlsnod && mrls && mrlshvr && htnk && ssm && ssmnuke && ssmhvr && mnly && mnlymole && mnlyspid && mnlyrep && mnlystlh && mrep && mgg && msam && mrj && mhq && mhqciv && tnkd && ctnk && papc && stnk && ttnk && disr && qtnk && memp
+
+dtnk:
+	Inherits: emp-overlay
+	muzzle: gunfire2
+		Length: 2
+	idle: mnly
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-default: 2tnk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-mg: jeep
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-ftrk: ftrk
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-rep: repair-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-apc: apc-tur3
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-mbun:  4tnk-pbox
+	turret-hmmv: btr-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-tow: hmmv-tow
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-smch: smch
+		Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-gapc: gapc-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-gatt: vulc-tur
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-aav: aav-tur
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-1tnk: 1tnk-tur
+		Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-1tnknod: ltnk-tur
+		Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-1tnksvyt: 1tnk-nopod
+		Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-2tnk: 2tnk
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-2tnks: 2tnks
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-2tnkgdi: mtnk-tur
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-2tnkrail: mtnk-rail
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-2tnkrpod: mtnk-rpod
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-3tnk1b: 3tnk1b
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-3tnk: 3tnk
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True		
+	turret-4tnk: 4tnk
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-4tnkgdi: 4tnk-gdi
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True			
+	turret-4tnkrtur: 4tnk-gdi-rtur
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-4tnkion: 4tnk-gdi-ion
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-mwav: mwav
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-ltnk: ltnk-tur
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-ptnk: ptnk
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-5tnk: 5tnk-tur
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-prsm: prsm-tur
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-howi: howi
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-mrlsnod: mrls
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-mrls: mrls
+        Start: 64
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-mrlshvr: hvrmrls-tur
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-ssm: ssm
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-mnlymole: qtnk-piston
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-mnlyspid: qtnk-piston
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-msam: stnk
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-stnk: nodstnk
+        Start: 32
+		Facings: 32
+		UseClassicFacingFudge: True	
+	turret-disr: disr-tur
+        Start: 0
+		Facings: 32
+		UseClassicFacingFudge: True
+	turret-invis: blank32
+		Facings: 32
+		UseClassicFacingFudge: True
+	mcv-body: mcv
+		Facings: 32
+		UseClassicFacingFudge: True
+	mcvcnc-body: cncmcv
+		Facings: 32
+		UseClassicFacingFudge: True
+	harv-body: harv
+		Facings: 32
+		UseClassicFacingFudge: True
+	harvcnc-body: gdiharv
+		Facings: 32
+		UseClassicFacingFudge: True
+	truk-body: truk
+		Facings: 32
+		UseClassicFacingFudge: True
+	trukcnc-body: cnctruk
+		Facings: 32
+		UseClassicFacingFudge: True
+	dtrk-body: dtrk
+		Facings: 32
+		UseClassicFacingFudge: True
+	dtrkcnc-body: cncdtrk
+		Facings: 32
+		UseClassicFacingFudge: True
+	mwf-body: mwf
+		Facings: 32
+		UseClassicFacingFudge: True
+	jeep-body: jeep
+		Facings: 32
+		UseClassicFacingFudge: True
+	ftrk-body: ftrk
+		Facings: 32
+		UseClassicFacingFudge: True
+	hmmv-body: hmmv
+		Facings: 32
+		UseClassicFacingFudge: True
+	smch-body: smch
+		Facings: 32
+		UseClassicFacingFudge: True
+	bggy-body: bggy
+		Facings: 32
+		UseClassicFacingFudge: True
+	bike-body: bike
+		Facings: 32
+		UseClassicFacingFudge: True
+	attbggy-body: attbggy
+		Facings: 32
+		UseClassicFacingFudge: True
+	apc-body: apc
+		Facings: 32
+		UseClassicFacingFudge: True
+	mbun-body: batf
+		Facings: 32
+		UseClassicFacingFudge: True
+	aav-body: aav
+		Facings: 32
+		UseClassicFacingFudge: True
+	napc-body: napc
+		Facings: 32
+		UseClassicFacingFudge: True
+	sapc-body: sapc
+		Facings: 32
+		UseClassicFacingFudge: True
+	1tnk-body: 1tnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	hvrc-body: hvrc
+		Facings: 32
+		UseClassicFacingFudge: True
+	mrpg-body: mrpg
+		Facings: 32
+		UseClassicFacingFudge: True
+	2tnk-body: 2tnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	2tnks-body: 2tnks
+		Facings: 32
+		UseClassicFacingFudge: True
+	3tnk-body: 3tnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	ftnk-body: ftnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	ctnknod-body: ctnknod
+		Facings: 32
+		UseClassicFacingFudge: True
+	4tnk-body: 4tnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	mwav-body: mwav
+		Facings: 32
+		UseClassicFacingFudge: True
+	ptnk-body: ptnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	5tnk-body: behe
+		Facings: 32
+		UseClassicFacingFudge: True
+	prsm-body: prsm
+		Facings: 32
+		UseClassicFacingFudge: True
+	arty-body: arty
+		Facings: 32
+		UseClassicFacingFudge: True
+	gcan-body: gcan
+		Facings: 32
+		UseClassicFacingFudge: True
+	v2rl-body: v2rl
+		Facings: 32
+		UseClassicFacingFudge: True
+	icbm-body: icbm
+		Facings: 32
+		UseClassicFacingFudge: True
+	mrls-body: mrls
+		Facings: 32
+		UseClassicFacingFudge: True
+	mrlshvr-body: hvrmrls-hull
+		Facings: 32
+		UseClassicFacingFudge: True
+	htnk-body: nodhvr
+		Facings: 32
+		UseClassicFacingFudge: True
+	ssm-body: ssm
+		Facings: 32
+		UseClassicFacingFudge: True
+	ssmhvr-body: hvrssm
+		Facings: 32
+		UseClassicFacingFudge: True
+	howi-body: howi
+		Facings: 32
+		UseClassicFacingFudge: True
+	mrep-body: mrep
+		Facings: 32
+		UseClassicFacingFudge: True
+	sarty-body: srty
+		Facings: 32
+		UseClassicFacingFudge: True
+	mnly-body: mnly
+		Facings: 32
+		UseClassicFacingFudge: True
+	spinner-stlh: sgen-top
+		Length: *
+		Tick: 90
+	mrj-body: mrj
+		Facings: 32
+		UseClassicFacingFudge: True
+	spinner-mrj: mrj
+		Start: 32
+		Length: 32
+    mgg-body: mgg
+		Facings: 32
+		UseClassicFacingFudge: True
+	spinner-mgg: mgg
+		Start: 32
+		Length: 8
+        Tick: 90
+	spinner-mgg-idle: mgg
+		Start: 32
+		Length: 1
+        Tick: 90
+    tnkd-body: tnkd
+		Facings: 32
+		UseClassicFacingFudge: True
+	ctnk-body: ctnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	papc-body: papc
+		Facings: 32
+		UseClassicFacingFudge: True
+	stnk-body: nodstnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	ttnk-body: ttnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	spinner-ttnk: ttnk
+		Start: 32
+		Length: 1
+	disr-body: disr
+		Facings: 32
+		UseClassicFacingFudge: True
+	qtnk-body: qtnk
+		Facings: 32
+		UseClassicFacingFudge: True
+	memp-body: memp
+		Facings: 32
+		UseClassicFacingFudge: True
+	icon: dtnkicon

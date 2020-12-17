@@ -1,19 +1,33 @@
 GenericVoice:
 	Variants:
 		allies: .v01,.v03
+		usa: .v01,.v03
 		england: .v01,.v03
+		holland: .v01,.v03
 		france: .v01,.v03
+		sweden: .v01,.v03
 		germany: .v01,.v03
+		spain: .v01,.v03
+		italy: .v01,.v03
+		greece: .v01,.v03
+		turkey: .v01,.v03
 		soviet: .r01,.r03
 		russia: .r01,.r03
 		ukraine: .r01,.r03
 		belarus: .r01,.r03
+		moldova: .r01,.r03
+		karelia: .r01,.r03
+		kazakh: .r01,.r03
+		kyrgiz: .r01,.r03
+		uzbek: .r01,.r03
+		turkmen: .r01,.r03
+		afghan: .r01,.r03
 		gdi: .c01,.c03
-		ubergdi: .c01,.c03
+		futurecorp: .c01,.c03
 		socom: .c01,.c03
 		taskforce: .c01,.c03
 		nod: .c01,.c03
-		bossnod: .c01,.c03
+		blackhand: .c01,.c03
 		cabal: .c01,.c03
 		rebels: .c01,.c03
 	Voices:
@@ -28,19 +42,34 @@ GenericVoice:
 VehicleVoice:
 	Variants:
 		allies: .v00,.v02
+		usa: .v00,.v02
 		england: .v00,.v02
+		holland: .v00,.v02
 		france: .v00,.v02
+		sweden: .v00,.v02
 		germany: .v00,.v02
+		spain: .v00,.v02
+		italy: .v00,.v02
+		greece: .v00,.v02
+		turkey: .v00,.v02
 		soviet: .r00,.r02
 		russia: .r00,.r02
 		ukraine: .r00,.r02
 		belarus: .r00,.r02
+		moldova: .r00,.r02
+		karelia: .r00,.r02		
+		kazakh: .r00,.r02
+		kyrgiz: .r00,.r02
+		uzbek: .r00,.r02
+		turkmen: .r00,.r02
+		afghan: .r00,.r02
+		sibiria: .r00,.r02
 		gdi: .c00,.c02
-		ubergdi: .c00,.c02		
+		futurecorp: .c00,.c02		
 		socom: .c00,.c02
 		taskforce: .c00,.c02		
 		nod: .c00,.c02
-		bossnod: .c00,.c02
+		blackhand: .c00,.c02
 		cabal: .c00,.c02
 		rebels: .c00,.c02
 	Voices:
@@ -56,6 +85,7 @@ EngineerVoice:
 		Die: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 		Burned: dedman10
 		Zapped: dedman6
+		Build: emovout1
 		Boink: boink
 	DisableVariants: Boink
 
@@ -66,8 +96,8 @@ MedicVoice:
 		Die: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 		Burned: dedman10
 		Zapped: dedman6
+		Build: mrespon1
 		Boink: boink
-	DisableVariants: Boink
 
 MechanicVoice:
 	Voices:
@@ -77,8 +107,8 @@ MechanicVoice:
 		Die: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 		Burned: dedman10
 		Zapped: dedman6
+		Build: mhowdy1
 		Boink: boink
-	DisableVariants: Boink
 
 ThiefVoice:
 	Voices:
@@ -88,6 +118,7 @@ ThiefVoice:
 		Burned: dedman10
 		Zapped: dedman6
 		Attack: candy,pickclean,fivefinger
+		Build: smout1
 		Boink: boink
 	DisableVariants: Boink
 
@@ -141,6 +172,7 @@ SpyVoice:
 		Burned: dedman10
 		Zapped: dedman6
 		Boink: boink
+		Build: sking1
 	DisableVariants: Boink
 
 CivilianMaleVoice:
@@ -182,6 +214,7 @@ ShokVoice:
 		Burned: dedman10
 		Zapped: dedman6
 		Boink: boink
+		Build: jdance1
 	DisableVariants: Boink
 
 AntVoice:
@@ -231,6 +264,7 @@ CyborgVoice:
 		Burned: cyp-n108
 		Zapped: cyp-n106
 		Poisoned: cyp-n104
+		Build: cyp-i000
 		Boink: boink
 	DisableVariants: Die, Burned, Zapped, Poisoned, Boink
 

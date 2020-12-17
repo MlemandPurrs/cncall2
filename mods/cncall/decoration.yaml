@@ -382,3 +382,97 @@ TANKTRAP2:
 		Name: Tank Trap
 	MapEditorData:
 		RequireTilesets: TEMPERAT, SNOW, DESERT, INTERIOR
+
+^DisguiseableTree:
+	Targetable:
+		TargetTypes: Trees, TreeDisguise
+
+T01:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T01.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T02:
+	Inherits@SPYMAST: ^DisguiseableTree
+	
+T02.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+	
+T03:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T03.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T05:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T05.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T06:
+	Inherits@SPYMAST: ^DisguiseableTree
+	
+T06.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T07:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T07.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T08:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T08.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T10:
+	Inherits@SPYMAST: ^DisguiseableTree
+	
+T10.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T11:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T11.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T12:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T12.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T13:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T13.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T14:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T14.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T15:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T15.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T16:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T16.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T17:
+	Inherits@SPYMAST: ^DisguiseableTree
+
+T17.Husk:
+	Inherits@SPYMAST: ^DisguiseableTree

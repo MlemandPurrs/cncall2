@@ -89,6 +89,7 @@ Rules:
 	cncall|fakes.yaml
     cncall|husks.yaml
     cncall|infantry.yaml
+    cncall|map-compatibility.yaml
     cncall|naval.yaml
 	cncall|naval-cnc.yaml
     cncall|structures.yaml
@@ -98,7 +99,7 @@ Rules:
 	cncall|structures-cnc.yaml
 	cncall|vehicles-cnc.yaml  
 	cncall|husks-cnc.yaml
-	cncall|country-duplicates.yaml
+	cncall|subfaction-duplicates.yaml
 	cncall|subfaction-units.yaml
 
 Sequences:

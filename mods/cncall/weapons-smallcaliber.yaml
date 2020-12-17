@@ -39,6 +39,10 @@ ZSU-23:
 			Heavy: 100
 			Concrete: 50
 
+ZSU-23.Spain:
+	Inherits: ZSU-23
+	Range: 11c0
+
 FLAK-23-AA:
 	Inherits: ^AACannon
 	Warhead@1Dam: SpreadDamage
@@ -577,3 +581,28 @@ Gatt.3:
 			Light: 15
 			Heavy: 50
 			Concrete: 50
+
+Shotgun:
+	ReloadDelay: 32
+	Range: 2c0
+	InvalidTargets: Wall
+	Report: shotgunfire.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 256
+		Damage: 1500
+		InvalidTargets: Wall
+		Versus:
+			None: 150
+			Wood: 30
+			Light: 40
+			Heavy: 10
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piff
+		ValidTargets: Ground, Air
+	Warhead@3EffWater: CreateEffect
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge

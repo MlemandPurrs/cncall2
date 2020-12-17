@@ -43,13 +43,13 @@ Player:
 					CheckRadius: 7c0
 			UseChemicalStrike:
 				OrderName: ChemicalStrike
-				MinimumAttractiveness: 1500
+				MinimumAttractiveness: 800
 				Consideration@1:
 					Against: Enemy
 					Types: Vehicle
 					Attractiveness: 1
 					TargetMetric: Value
-					CheckRadius: 1c0
+					CheckRadius: 2c512
 				Consideration@2:
 					Against: Ally
 					Types: Air, Ground, Water
@@ -202,7 +202,7 @@ Player:
 		RushInterval: 400
 		AttackScanRadius: 16
 		# everything except bike
-		ExcludeFromSquadsTypes: harv.cnc, harv.cnc.crate, mcv.cnc, mcv.cnc.ai, dog, e1.cnc, terr, e3.cnc, e4.nod, e5, e6, nodrmbo, mort, cybr, lcg, bggy, bggy.scout, attbggy, napc, 1tnk.nod, ftnk, ctnk.nod, arty.nod, srty, stnk.nod, mwav, ltnk, mtnk, htnk, ptnk, ssm, ssm.crate, ssm.hover, msam.nod, heli.nod.ai, rh66, f22, sfig, scrn, sb, lsrs, asub, bsub, cata, scrb, lcrv
+		ExcludeFromSquadsTypes: harv.cnc, harv.cnc.crate, mcv.cnc, mcv.cnc.ai, dog, e1.cnc, terr, e3.cnc, e4.nod, e5, e6, nodrmbo, mort, cybr, lcg, bggy, bggy.scout, attbggy, napc, 1tnk.nod, ftnk, ctnk.nod, howi, srty, stnk, mwav, ltnk, mtnk, htnk, ptnk, ssm, ssm.crate, ssm.hover, msam.nod, heli.nod.ai, rh66, f22, sfig, scrn, sb, lsrs, asub, bsub, cata, scrb, lcrv
 		ConstructionYardTypes: fact
 	SquadManagerBotModule@nod.sea:
 		RequiresCondition: enable-ai-player && player.nod || player.blackhand || player.cabal || player.rebels && !global-disablenavy
@@ -210,7 +210,7 @@ Player:
 		SquadSizeRandomBonus: 4
 		RushInterval: 400
 		AttackScanRadius: 24
-		ExcludeFromSquadsTypes: harv.cnc, harv.cnc.crate, mcv.cnc, mcv.cnc.ai, dog, e1.cnc, terr, e3.cnc, e4.nod, e5, e6, nodrmbo, mort, cybr, lcg, bggy, bggy.scout, attbggy, bike, napc, 1tnk.nod, ftnk, ctnk.nod, arty.nod, srty, stnk.nod, mwav, ltnk, mtnk, htnk, ptnk, ssm, ssm.crate, ssm.hover, msam.nod, heli.nod.ai, rh66, f22, sfig, scrn
+		ExcludeFromSquadsTypes: harv.cnc, harv.cnc.crate, mcv.cnc, mcv.cnc.ai, dog, e1.cnc, terr, e3.cnc, e4.nod, e5, e6, nodrmbo, mort, cybr, lcg, bggy, bggy.scout, attbggy, bike, napc, 1tnk.nod, ftnk, ctnk.nod, howi, srty, stnk, mwav, ltnk, mtnk, htnk, ptnk, ssm, ssm.crate, ssm.hover, msam.nod, heli.nod.ai, rh66, f22, sfig, scrn
 		NavalUnitsTypes: sb,lsrs,asub,bsub,cata,scrb,lcrv
 		ConstructionYardTypes: fact.cnc
 		NavalProductionTypes: spen.nod
@@ -220,7 +220,7 @@ Player:
 		SquadSizeRandomBonus: 1
 		RushInterval: 400
 		AttackScanRadius: 48
-		ExcludeFromSquadsTypes: harv.cnc, harv.cnc.crate, mcv.cnc, mcv.cnc.ai, dog, e1.cnc, terr, e3.cnc, e4.nod, e5, e6, nodrmbo, mort, cybr, lcg, bggy, bggy.scout, attbggy, bike, napc, 1tnk.nod, ftnk, ctnk.nod, arty.nod, srty, stnk.nod, mwav, ltnk, mtnk, htnk, ptnk, ssm, ssm.crate, ssm.hover, msam.nod
+		ExcludeFromSquadsTypes: harv.cnc, harv.cnc.crate, mcv.cnc, mcv.cnc.ai, dog, e1.cnc, terr, e3.cnc, e4.nod, e5, e6, nodrmbo, mort, cybr, lcg, bggy, bggy.scout, attbggy, bike, napc, 1tnk.nod, ftnk, ctnk.nod, howi, srty, stnk, mwav, ltnk, mtnk, htnk, ptnk, ssm, ssm.crate, ssm.hover, msam.nod
 		ConstructionYardTypes: fact.cnc
 	UnitBuilderBotModule@nod.land:
 		RequiresCondition: enable-ai-player && player.nod || player.blackhand || player.cabal || player.rebels
@@ -249,9 +249,9 @@ Player:
 			mtnk: 50
 			ftnk: 20
 			ctnk.nod: 20
-			arty.nod: 30
+			howi: 30
 			srty: 20
-			stnk.nod: 30
+			stnk: 30
 			mwav: 10
 			ltnk: 10
 			ssm: 10
@@ -277,7 +277,7 @@ Player:
 			napc: 1
 			ftnk: 4
 			ctnk.nod: 2
-			stnk.nod: 4
+			stnk: 4
 			mwav: 1
 			ltnk: 2
 			ssm: 2

@@ -436,6 +436,14 @@ C17:
 	GpsDot:
 		String: BigPlane
 
+C17.Crate:
+	Inherits: C17
+	ParaDrop:
+		DropRange: 0c512
+	RenderSprites:
+		Image: c17
+	-MapEditorData:
+
 C17.Delivery:
 	Inherits: C17
 	Aircraft:
@@ -525,7 +533,7 @@ C17TRANSPORT:
 	RenderSprites:
 		Image: c17
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	SpawnActorOnDeath:
 		Actor: C17.Husk
 		RequiresCondition: airborne && !empdisable
@@ -639,7 +647,7 @@ A10:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	SpawnActorOnDeath:
 		Actor: A10.Husk
 		RequiresCondition: airborne && !empdisable
@@ -747,7 +755,7 @@ SFIG:
 		OpportunityFire: False
 		Voice: Attack
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	Aircraft:
 		CruiseAltitude: 2560
 		InitialFacing: 192
@@ -895,7 +903,7 @@ F18:
 		PipType: Yellow
 		AmmoCondition: ammobomb
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	SpawnActorOnDeath:
 		Actor: F18.Husk
 		RequiresCondition: airborne && !empdisable
@@ -959,7 +967,7 @@ F22:
 		PipType: Yellow
 		AmmoCondition: ammobomb
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	SpawnActorOnDeath:
 		Actor: F22.Husk
 		RequiresCondition: airborne && !empdisable
@@ -969,7 +977,7 @@ F22:
 	Voiced:
 		VoiceSet: RaptorVoice
 
-B2.Bomber:
+B2.Bomber.Nod:
 	Inherits: B52.Bomber
 	-RenderSprites:
 	Tooltip:
@@ -1001,12 +1009,12 @@ B2.Bomber:
 		Offset: -432,-560,0
 		Interval: 2
 	RenderSprites:
-		Image: b2
+		Image: b2nod
 	SpawnActorOnDeath:
-		Actor: B2.Husk
+		Actor: B2.Nod.Husk
 		RequiresCondition: airborne && !empdisable
 	SpawnActorOnDeath@EMP:
-		Actor: B2.Husk.EMP
+		Actor: B2.Nod.Husk.EMP
 		RequiresCondition: airborne && empdisable
 
 HUNT:

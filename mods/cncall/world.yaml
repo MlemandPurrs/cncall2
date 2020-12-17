@@ -202,6 +202,12 @@
 			Shallow: 90
 			Water: 90
 			Jumpjet: 100
+	Locomotor@IMMOBILE_SUMMON:
+		Name: immobilepara
+		TerrainSpeeds:
+			Clear: 1
+			Road: 1
+			Beach: 1
 	TerrainRenderer:
 	ShroudRenderer:
 		FogVariants: shroud
@@ -228,55 +234,139 @@
 	Faction@randomgdi:
 		Name: R. GDI
 		InternalName: RandomGDI
-		RandomFactionMembers: ubergdi,socom,taskforce
+		RandomFactionMembers: futurecorp,socom,taskforce
 		Side: Random
 		Description: Random GDI subfaction\nA random GDI subfaction will be chosen when the game starts.
 	Faction@randomnod:
 		Name: R. Nod
 		InternalName: RandomNod
-		RandomFactionMembers: bossnod,cabal,rebels
+		RandomFactionMembers: blackhand,cabal,rebels
 		Side: Random
 		Description: Random Nod subfaction\nA random Nod subfaction will be chosen when the game starts.
-	Faction@0:
+	Faction@Allies0:
 		Name: Allies
 		InternalName: allies
 		Side: Allies
 		Description: Allies\nThe Allies is an military alliance of European nations, that hastily united against the imminent Soviet threat.\nUnder the leadership of the prominent nations of Europe, such as Britain, Germany, France, Italy, Spain and Greece\nthe Alliance finds support worldwide, chiefly being backed by the USA and regional allies such as Turkey.\nThey have divergent tactical options, possess a strong Navy and have access to many powerful technologies\nsuch as time travel, invisibility or prismatic laser weaponry, most are products of Prof. Einstein's genius.
-	Faction@1:
+	Faction@Allies1:
+		Name: USA
+		InternalName: usa
+		Side: Allies
+		Description: USA\nSpecialization: Economy\nThe forces of USA are backed by an well-oiled economical machine.\nFaction Variations:\n    - Overall increased production speed of units, at the cost of increased power usage.\nAll units are produced 10% faster, +50% energy usage of Production structures.\n    - Paratroopers power delivers double the amount of Troops.\nParatroopers power has increased recharging time by +1.5 minute.\nVeterancy Bonus:\n    - Tanya and Apache as Veteran.\nUnique Support Powers:\n    - Stealth Parabombs (Tech Center)\nA cloaked B-2 drops parachuted bombs on your target.\nSpecial Units:\n    - Marine (Infantry)\nWell trained Infantry capable of swimming through open waters.\n    - IFV (Vehicle)\nThis vehicle is capable of transforming its armament based on Infantry passenger inside.\n    - B-52 Gunship (Aircraft)\nFlying fortress variant of the B-52.
+		Selectable: false
+	Faction@Allies2:
 		Name: Britain
 		InternalName: england
 		Side: Allies
 		Description: Britain\nSpecialization: Intelligence\nThe forces of Britain uphold their long tradition in Espionage.\nFaction Variations:\n    - Tanks* deal more damage but are costlier to build.\n*Those Tanks being the Light and Medium Tanks.\n+10% damage dealt at the cost of being +50$ more expensive.\nThis bonus does not affect secondary weaponry.\n    - Sight and Detection +50% bonus for Radar Domes, at increased cost.\nVeterancy Bonus:\n    - Rifle Infantry and Jeep as Veteran.\nUnique Support Power:\n    - Intel Drop (Tech Center)\nA B-52 drops one Veteran Spy anywhere on the map.\nSpecial Units:\n    - Spy (Infantry)\nCapable agent that opens up wonderful possibilities.\n    - Radar Jammer (Vehicle)\nThis vehicle is capable of jamming enemy missiles and radar.\n    - Tank Destroyer (Vehicle)\nSelf-propelled anti-tank Gun platform.
-	Faction@2:
+	Faction@Allies3:
+		Name: Netherl.
+		InternalName: holland
+		Side: Allies
+		Description: Netherlands\nSpecialization: NYI\nThe forces of Netherlands TODO.\nFaction Variations:\n    - Tanks* are built cheaper but not any faster.\n*Those Tanks being the Light and Medium Tanks.\n    - Ore Silos generate Income 33% frequenter.\nVeterancy Bonus:\n    - None. All units earn Veterancy twice as fast instead.\nUnique Support Power:\n    - Tech Inhibitor (Tech Center)\nTarget your enemy's Tech Center to shut it down for 3 minutes duration.\nThe opponent will not able to create most advanced arsenal while it lasts.\nSpecial Units:\n    - Shotgunner (Infantry)\nFast recon Infantry that can oneshot most Infantry at close-range.\n    - Thief (Infantry)\nCan steal money out of Refineries, nothing else.\n    - Phase Tank (Vehicle)\nMedium Tank variant that is cloaked while out of combat.
+		Selectable: false
+	Faction@Allies4:
 		Name: France
 		InternalName: france
 		Side: Allies
 		Description: France\nSpecialization: Deception\nThe forces of France are capable of deceiving their enemies in many ways.\nFaction Variations:\n    - Tanks* fire faster but deal less damage.\n*Those Tanks being the Light and Medium Tanks.\n+10% faster rate of fire, deals -250/-500 damage per shot on affected Tanks.\nThis bonus does not affect secondary weaponry.\n    - Can build Fake structures.\nThis selection of fake structures look precisely\n as an real building to the enemy.\nVeterancy Bonus:\n    - Artillery gets built as Veteran.\nUnique Support Powers:\n    - Decoy Army (Tech Center)\nDelivers an group of Fake units at your primary War Factory.\nThose remote-controlled units armed with dummy weaponry\nwill look identical to the opponent.\nSpecial Units:\n    - Medic (Infantry)\nInfantry capable of healing others during combat.\n    - Phase Transport (Vehicle)\nTransport that is cloaked when out of combat.\n    - Fake Vehicles\nCapable of producing fake doubles of MCV, Supply Truck and MGG.
-	Faction@3:
+	Faction@Allies5:
+		Name: Sweden
+		InternalName: sweden
+		Side: Allies
+		Description: Sweden\nSpecialization: NYI\nThe forces of Sweden TODO.\nFaction Variations:\n    - Tanks* are amphibian, capable of crossing open Sea and Rivers.\n*Those Tanks being the Light and Flak Tanks.\n    - GAP technology is available earlier and cheaper.\nVeterancy Bonus:\n    - Medium Tank gets built as Veteran.\nUnique Support Power:\n    - Listening Post (Tech Center)\nDeploys a Spy Mast anywhere on the map, that provides Vision,\ndetects Stealth, and can be disguised as an Tree.\nSpecial Units:\n    - Anti-air Soldier (Infantry)\nInfantry armed with portable SAM missile.\n    - Flak Tank (Vehicle)\nReplaces Mobile SAM. Amphibian Light tank with dual Flak cannons.\n    - Hydrofoil (Naval)\nFast small boat with allpurpose rocket launcher.
+		Selectable: false
+	Faction@Allies6:
 		Name: Germany
 		InternalName: germany
 		Side: Allies
-		Description: Germany\nSpecialization: Technology\nThe forces of Germany take pride in displaying their scientific progress on the battlefield.\nFaction Variations:\n    - Tanks* are more durable but move slower.\n*Those Tanks being the Light and Medium Tanks.\nTanks have their Health increased by 10%, they move marginally slower in return.\n    - Gun Turrets have +1 Range and consume -10 less power.\nVeterancy Bonus:\n    - APC and Destroyer gets built as Veteran.\nUnique Support Powers:\n    - Paratanks (Tech Center)\nA B-52 paradrops an Veteran squad of two Light and a Medium Tank.\nSpecial Units:\n    - Machine Gunner (Infantry)\nInfantry armed with an modified version of the M60 Machinegun.\n    - Chrono Tank (Vehicle)\nThis tank armed with rocket pods is capable of Teleportation.\n    - Support Minelayer & Repair Ship (Vehicle & Naval)\nUnarmed units capable of laying ground/sea mines and Repairing units.
-	Faction@4:
+		Description: Germany\nSpecialization: Technology\nThe forces of Germany take pride in displaying their scientific progress on the battlefield.\nFaction Variations:\n    - Tanks* are more durable but move slower.\n*Those Tanks being the Light and Medium Tanks.\nTanks have their Health increased by 10%, they move marginally slower in return.\n    - Chronosphere uses -100 less power and more durable.\nVeterancy Bonus:\n    - APC and Destroyer gets built as Veteran.\nUnique Support Power:\n    - Paratanks (Tech Center)\nA B-52 paradrops an Veteran squad of two Light and a Medium Tank.\nSpecial Units:\n    - Machine Gunner (Infantry)\nInfantry armed with an modified version of the M60 Machinegun.\n    - Chrono Tank (Vehicle)\nThis tank armed with rocket pods is capable of Teleportation.\n    - Support Minelayer & Repair Ship (Vehicle & Naval)\nUnarmed units capable of laying ground/sea mines and Repairing units.
+	Faction@Allies7:
+		Name: Spain
+		InternalName: spain
+		Side: Allies
+		Description: Spain\nSpecialization: \nThe forces of Spain.\nFaction Variations:\n    - Tanks* have +1 Range but less rate of fire.\n*Those Tanks being the Light and Medium Tanks.\nThis bonus does not affect secondary weaponry.\n    - Gun Turret/AA Gun have +1 Range and uses -10/+10 Power.\nVeterancy Bonus:\n    - Rocket Soldier gets trained as Veteran.\nUnique Support Power:\n    - Parascouts (Radar Dome with Airfield)\nA B-52 drops 2 Jeeps anywhere on the map.\nSpecial Units:\n    - Mechanic (Infantry)\nInfantry capable of conducting field repairs.\n    - Mole Minelayer (Vehicle)\nExperimental minelayer firing tunneling mines.\n V2 Launcher (Vehicle)\nCan build V2 Launcher despite being Allied country.
+		Selectable: false
+	Faction@Allies8:
+		Name: Italy
+		InternalName: italy
+		Side: Allies
+		Description: Italy\nSpecialization: Mobility\nThe forces of Italy prefer an mobile force.\nFaction Variations:\n    - Tanks* move faster but have less Health.\n*Those Tanks being Light and Medium Tanks.\nVeterancy Bonus:\n    - Light Tank gets built as Veteran.\nUnique Support Power:\n    - Chrono Bomb (Tech Center)\nChronoshifts a Bomb Crate to desired position.\nThe bomb detonates after 30 seconds or when picked up.\nSpecial Units:\n    - Flamethrower (Infantry)\nCan build Flamers despite being Allied country.\n    - Mirage Tank (Vehicle)\nTank that is capable of Diguising as most Vehicles.\n    - Baloon Mine (Aircraft)\nAn remote controlled, dirigible, parachuted mine in the sky.
+		Selectable: false
+	Faction@Allies9:
+		Name: Greece
+		InternalName: greece
+		Side: Allies
+		Description: Greece\nSpecialization: Fortifications\nThe forces of Greece are unyielding defenders.\nFaction Variations:\n    - All* Defenses including Walls and Gates have +50% Hitpoints.\n*All except Grand Turret.\n    - Grand Turret available earlier and cheaper.\nVeterancy Bonus:\n    - Iroqouis and Gunboat gets built as Veteran.\nUnique Support Powers:\n    - Instant Bunker (Service Depot with Construction Yard)\nAn unmanned Pillbox gets instantly built on the spot.\nSpecial Units:\n    - ATGM Soldier (Infantry)\nInfantry armed with anti-tank rockets.\n    - Mobile Bunker (Vehicle)\nThis slow moving armored platform houses an Pillbox atop it.\n    - Battleship (Naval)\nAn early design, single-barrel turreted cruiser.
+		Selectable: false
+	Faction@Allies10:
+		Name: Turkey
+		InternalName: turkey
+		Side: Allies
+		Description: Turkey\nSpecialization: Ballistics\nThe forces of Turkey contribute their expertise in Firepower.\nFaction Variations:\n    - Infantry is well-trained, considerably performing better.\nAll combat infantry take 10% less damage, deal out 10% more and move 10% faster.\n    - Power Plants generate more Power at increased cost.\nPower Plant generates +25, Advanced Power Plant +50 Power.\nCost of PP increased by 50 and 100 of Adv. PP\nBuild time of Power Plants remains the same as regular ones.\nVeterancy Bonus:\n    - Grenadier and Spitfire Bomber gets trained as Veteran.\nUnique Support Powers:\n    - Paranuke (Tech Center)\nA fast plane drops an parachuted nuclear bomb on your target.\nThe bomb is more effective against units rather than structures.\nSpecial Units:\n    - Mortar Soldier (Infantry)\nInfantry armed with an Mortar, functioning as micro artillery.\n    - Grand Cannon (Vehicle)\nHeavy artillery with extreme range.\n    - Demolition Truck (Vehicle)\nCan have one Demolition Truck despite being Allied country.
+		Selectable: false
+	Faction@Soviet0:
 		Name: Soviet
 		InternalName: soviet
 		Side: Soviet
 		Description: Soviet\nThe Soviet empire consist of the combined forces of the USSR. Under the leadership of Stalin they march forth to conquer Europe,\ntheir intention: to realize the comrade premier's dream of uniting the continent under communist Socialism at any cost.\nThey use strong armoured divisions, napalm weaponry, tesla technology and strength in numbers to overwhelm opposition.
-	Faction@5:
+	Faction@Soviet1:
 		Name: Russia
 		InternalName: russia
 		Side: Soviet
 		Description: Russia\nSpecialization: Tesla Weaponry\nThe forces of Russia utilize the power of Tesla technology.\nFaction Variations:\n    - Buildings* are cheaper to build but explode sooner.\n*Defenses are not included.\n10% cheaper to build at the expanse of collapsing sooner\nat threshold of 10% Hitpoints remaining.\n    - A-Bomb gets prepared faster.\nNuke recharges in 7:30 instead 9:00.\nThe timers given are for 'Normal' speed.\nVeterancy Bonus:\n    - Both variants of Heavy Tank gets built as Veteran.\nUnique Support Power:\n    - Storm Troopers (Tech Center)\nA Badger paradrops three Veteran Shock Troopers anywhere on the map.\nSpecial Units:\n    - Shock Trooper & Tesla Tank (Infantry & Vehicle)\nUnits armed with fearsome portable tesla weaponry.\n    - Demolition Truck (Vehicle)\nAn truck with a desperate driver, loaded with Nuclear explosives\n    - Nuclear Submarine (Naval)\nAn submarine capable of launching nuclear warheads.
-	Faction@6:
+	Faction@Soviet2:
 		Name: Ukraine
 		InternalName: ukraine
 		Side: Soviet
-		Description: Ukraine\nSpecialization: Demolitions\nThe forces of Ukraine specialize in blowing their opponents to smithereens.\nFaction Variations:\n    - Tanks* move faster but are built slower.\n*Those Tanks being both types of Heavy Tanks.\nBuildDurationModifier is 70, speed marginally faster.\n    - All Aircraft move faster, Airfields cost more.\nMovespeed increased by 20%, Airfields cost 550.\nThe bonus affects Badger Planes too.\nVeterancy Bonus:\n    - V2 Launcher and Submarine gets built as Veteran.\nUnique Support Power:\n    - Paragrenadiers (Tech Center)\nA Badger paradrops four Veteran Grenadiers anywhere on the map.\nSpecial Units:\n    - Flamethrower & Flame Sub (Infantry & Naval)\nThose units are capable of using Flame weaponry.\n    - Mammoth Tank (Vehicle)\nLarge heavy tank with superior firepower.\n    - Badger Bomber (Aircraft)\nBadger variant modified to carry triple amount of Parabombs.
-	Faction@7:
+		Description: Ukraine\nSpecialization: Demolitions\nThe forces of Ukraine specialize in blowing their opponents to smithereens.\nFaction Variations:\n    - Tanks* move faster but are built slower.\n*Those Tanks being both types of Heavy Tanks.\nBuildDurationModifier is 70, speed marginally faster.\n    - All Aircraft move faster, Airfields cost more.\nMovespeed increased by 20%, Airfields cost 550.\nThe bonus affects Badger Planes too.\nVeterancy Bonus:\n    -  Heavy APC and Submarine gets built as Veteran.\nUnique Support Power:\n    - Paragrenadiers (Tech Center)\nA Badger paradrops four Veteran Grenadiers anywhere on the map.\nSpecial Units:\n    - Flamethrower & Flame Sub (Infantry & Naval)\nThose units are capable of using Flame weaponry.\n    - Mammoth Tank (Vehicle)\nLarge heavy tank with superior firepower.\n    - Badger Bomber (Aircraft)\nBadger variant modified to carry triple amount of Parabombs.
+	Faction@Soviet3:
 		Name: Belarus
 		InternalName: belarus
 		Side: Soviet
-		Description: Belarus\nSpecialization: Secret Weapons\nThe forces of Belarus have ingenious inventions at their disposal.\nFaction Variations:\n    - Tanks* are cheaper to build but have less health.\n*Those Tanks being both types of Heavy Tanks.\n10% cheaper to build at the cost of having 10% less Hitpoints.\n    - Paratroopers available twice as frequent.\nVeterancy Bonus:\n    - Yak Plane and Flak Truck gets built as Veteran.\nUnique Support Power:\n    - Paramines (Tech Center)\nA Badger paradrops one Minelayer anywhere on the map.\nSpecial Units:\n    - Sniper (Infantry)\nSharpshooter infantry that can kill most Infantry in one shot.\n    - MAD Tank (Vehicle)\nDevice capable of emitting seismic waves when deployed that damage structures.\n    - Nuclear Bomber (Aircraft)\nUnits capable of delivering tactical Nuclear warheads.
+		Description: Belarus\nSpecialization: Secret Weapons\nThe forces of Belarus have ingenious inventions at their disposal.\nFaction Variations:\n    - Tanks* are cheaper to build but have less health.\n*Those Tanks being both types of Heavy Tanks.\n10% cheaper to build at the cost of having 10% less Hitpoints.\n    - Paratroopers available twice as frequent.\nVeterancy Bonus:\n    - Yak Plane gets built as Veteran.\nUnique Support Power:\n  Special Ability: EMP Bomb\nA fast plane drops an EMP Bomb on your target,\nthat disables Vehicles, Buildings and Ships\nDisabled units cannot move or shoot for a while\nUncloaks hidden units, Submarines will resurface.\nSpecial Units:\n    - Sniper (Infantry)\nSharpshooter infantry that can kill most Infantry in one shot.\n    - Flame Mammoth (Vehicle)\nUnique modification of Mammoth chassis sporting dual flamers.\n    - Nuclear Bomber (Aircraft)\nUnits capable of delivering tactical Nuclear warheads.
+	Faction@Soviet4:
+		Name: Transnist.
+		InternalName: moldova
+		Side: Soviet
+		Description: Transnistria\nSpecialization:  NYI\nThe forces of Transnistria TODO.\nFaction Variations:\n    - NYI\n    - Iron Curtain uses -100 less power is -300$ cheaper.\nVeterancy Bonus:\n    - Rocket Soldier gets built as Veteran.\nUnique Support Power: Paramines\nA Badger drops one Minelayer anywhere on the map.\nSpecial Units:\n    - Saboteur (Infantry)\nCapable agent that opens up wonderful possibilities.\n    - MRLS (Vehicle)\nRocket artillery that can be toggled to fire in pairs or volleys.\n    - Fist of Stalin (Vehicle)\nMobile war factory that deploys into a seperate queue.
+		Selectable: false
+	Faction@Soviet5:
+		Name: Karelia
+		InternalName: karelia
+		Side: Soviet
+		Description: Karelia\nSpecialization: Naval Power\nThe forces of Karelia maintain and utilize the Soviet navy.\nFaction Variations:\n    - Tanks* have +1 Range but are more expensive.\n*Those Tanks being both types of Heavy Tanks.\n    - Extra Spyplane\nOne more Spy Plane becomes available with a Tech Center.\nVeterancy Bonus:\n    - V2 Launcher and Missile Submarine gets built as Veteran.\nUnique Support Power:\n    - V2 Missile Strike\nA Badger fires three V2 rockets on your target.\nSpecial Units:\n    - RPG Trooper (Infantry)\nInfantry firing Thermobaric rocket that explodes like Flame Tower's projectile.\n    - SAM Launcher (Vehicle)\nHalf-track with pair of AA missiles.\n    - Magnetic Mine (Naval)\nThis dirigible Sea mine can be detonated against ships.
+		Selectable: false
+	Faction@Soviet6:
+		Name: Kazakhst.
+		InternalName: kazakh
+		Side: Soviet
+		Description: Kazakhstan\nSpecialization: NYI\nThe forces of Kazakhstan TODO.\nFaction Variations:\n    - Tanks* deal more damage move slower.\n*Those Tanks being both types of Heavy Tanks.\n    - GPS Sattelite is prepared faster.\nGPS becomes available in 9:00 instead 12:00.\nThe timers given are for 'Normal' speed.\nVeterancy Bonus:\n    - MiG Plane gets built as Veteran.\nUnique Support Powers:\n    - Jammer Plane (Tech Center)\nAn plane traveling in a line across the map, jams enemy radar within radius.\nSpecial Units:\n    - Tank Hunter (Vehicle)\nThis fast armored car is armed with armor-piercing rockets.\n    - ICBM Launcher (Vehicle)\nNuclear rocket artillery with extreme range.
+		Selectable: false
+	Faction@Soviet7:
+		Name: Kyrgizist.
+		InternalName: kyrgiz
+		Side: Soviet
+		Description: Kyrgizistan\nSpecialization: NYI\nThe forces of Kyrgizistan TODO.\nFaction Variations:\n    - NYI\n    - Heavy APC and Minelayer carry +3 more.\nVeterancy Bonus:\n    - Rifle Infantry and Flak Truck as Veteran.\nUnique Support Powers:\n    - Reserves (Service Depot)\nDelivers an group of two Scout Tanks and\none BRDM Scout at primary War Factory.\nSpecial Units:\n    - Mortar Soldier (Infantry)\nInfantry armed with an Mortar, functioning as micro artillery.\n    - Scout Tank (Vehicle)\nAmphibian Light Tank.\n    - NYI
+		Selectable: false
+	Faction@Soviet8:
+		Name: Uzbekist.
+		InternalName: uzbek
+		Side: Soviet
+		Description: Uzbekistan\nSpecialization: Engineering\nThe forces of Uzbekistan facilitate the Soviet expansion.\nFaction Variations:\n    - Defenses* are cheaper to build but have reduced Hitpoints.\n*Superweapons are not included.\n10% cheaper to build at the cost of having 10000 less Hitpoints.\n    - Engineer and MCV are 25% cheaper, but dont build any faster.\nThe MCV/Conyard at game begin remains unchanged for balance reasons.\nVeterancy Bonus:\n    - Volkov gets trained as Veteran.\nUnique Support Powers:\n    - Lone Tower (Service Depot)\nA Flame Turret gets instantly built, checking Terrain of build spot.\nSpecial Units:\n    - Chem Trooper (Infantry)\nInfantry spraying deadly Chemicals.\n    - MAD Tank (Vehicle)\nDevice capable of emitting seismic waves when deployed that damage structures.\n    - Mobile Repair Truck (Vehicle)\nMechanized engineers that can repair and capture.
+		Selectable: false
+	Faction@Soviet9:
+		Name: Turkmen.
+		InternalName: turkmen
+		Side: Soviet
+		Description: Turkmenistan\nSpecialization: Oil Barons\nThe forces of Turkmenistan employ many a different mercenaries with their wealth.\nFaction Variations:\n    - Tanks* fire faster but have -1 less range.\n*Those Tanks being both types of Heavy Tanks.\n    - Obtains 25% more income from Oil derricks.\nVeterancy Bonus:\n    - Grenadier trained as Veteran.\nUnique Support Powers:\n    - Eco Sabotage (Tech Center)\nTargeted Ore or Gem mine, or Oil Well halts production for 1 minute.\nDoes not affect Refineries or Silos.\nSpecial Units:\n    - Dushka Infantry (Infantry)\nThis Infantry is capable of deploying into an MG Nest.\n    - Self-Propelled Gun (Vehicle)\nVehicle that functions like an mobile turret.\n    - Ekranoplan (Naval)\nA plane/ship hybrid that can carry troops as well as bombarding. 
+		Selectable: false
+	Faction@Soviet10:
+		Name: Afghanst.
+		InternalName: afghan
+		Side: Soviet
+		Description: Afghanistan\nSpecialization: Counter-Intelligence\nThe forces of Afghanistan are acting with unknown motives.\nFaction Variations:\n    - Tanks* have more Health and less rate of fire.\n*Those Tanks being both types of Heavy Tanks.\nVeterancy Bonus:\n    - Hind gets built as Veteran.\nUnique Support Powers:\n    - Airstrike (Tech Center)\nDeploy an aerial napalm strike that burns everything along a line.\nSpecial Units:\n    - Mobile HQ (Vehicle)\nUnit that detects Stealth and boosts those in vicinity.\n    - NYI\n    - NYI
+		Selectable: false
 	Faction@GDI:
 		Name: GDI
 		InternalName: gdi
@@ -284,7 +374,7 @@
 		Description: Global Defense Initiative\nThe GDI is an international military branch of the United Nations that are tasked\nwith keeping the world peace. Commanding the combined forces of the world's\nmost powerful nations, the GDI posseses an unmatched arsenal of weaponry.
 	Faction@FutureCorps:
 		Name: Future C.
-		InternalName: ubergdi
+		InternalName: futurecorp
 		Side: GDI
 		Description: Future Corps\nThe Future Corps are the hi-tech branch of the GDI tasked with developing, researching\nand field-testing new technologies based on the knowledge obtained through Tiberium.\nThey field the expensive yet durable arsenal of the Future, featuring mechanical walkers,\nHover repulsor technology, advanced Avionics and Power armored Infantry.
 	Faction@SOCOM:
@@ -304,7 +394,7 @@
 		Description: Brotherhood of Nod\nThe Brotherhood is a fanatical religious cult centered around their leader Kane\nand the alien substance Tiberium. They utilize stealth technology, propaganda\nand guerilla tactics to defeat those who oppose their goal of world domination.
 	Faction@Blackhand:
 		Name: Black H.
-		InternalName: bossnod
+		InternalName: blackhand
 		Side: Nod
 		Description: Black Hand\nThe fanatically loyal Black Hand consists of hand-picked members, whose Commanders form the Inner Circle around Kane himself.\nThough mostly an enigma to those outside of the Broterhood, as they get rarely deployed to the field in force to carry out Kane's will,\ntheir battlefield presence marks dire news to all combatants involved, as they will ruthlessly exterminate the enemies of Nod,\neven if that means depopulating whole regions, utilizing terrifying WMDs, or having to turn on their own Brothers.\nThe Black Hand utilize many mysterious, barely understood technologies that are rumoured to have not originated on Earth,\ndubbed the "Technology of Peace" those designs are coveted as sacred and most advanced are utilized only by the Black Hand.
 	Faction@Cabal:
@@ -404,34 +494,34 @@ World:
 	MPStartUnits@cratehunters:
 		Class: mhq
 		ClassName: Crate Hunters
-		Factions: allies, england, france, germany, soviet, russia, ukraine, belarus, gdi, ubergdi, socom, taskforce, nod, bossnod, cabal, rebels
+		Factions: allies, usa, england, holland, france, sweden, germany, spain, italy, greece, turkey, soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan, gdi, futurecorp, socom, taskforce, nod, blackhand, cabal, rebels
 		BaseActor: MHQ.Start
 	MPStartUnits@mcvonly:
 		Class: mcv
 		ClassName: MCV Only
-		Factions: allies, england, france, germany, soviet, russia, ukraine, belarus
+		Factions: allies, usa, england, holland, france, sweden, germany, spain, italy, greece, turkey, soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan
 		BaseActor: mcv
 	MPStartUnits@mcvonly2:
 		Class: mcv
 		ClassName: MCV Only
-		Factions: gdi, ubergdi, socom, taskforce, nod, bossnod, cabal, rebels
+		Factions: gdi, futurecorp, socom, taskforce, nod, blackhand, cabal, rebels
 		BaseActor: mcv.cnc
 	MPStartUnits@doublemcv:
 		Class: doublemcv
 		ClassName: Double MCV
-		Factions: allies, england, france, germany, soviet, russia, ukraine, belarus
+		Factions: allies, usa, england, holland, france, sweden, germany, spain, italy, greece, turkey, soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan
 		BaseActor: mcv
 		SupportActors: mcv
 	MPStartUnits@doublemcv2:
 		Class: doublemcv
 		ClassName: Double MCV
-		Factions: gdi, ubergdi, socom, taskforce, nod, bossnod, cabal, rebels
+		Factions: gdi, futurecorp, socom, taskforce, nod, blackhand, cabal, rebels
 		BaseActor: mcv.cnc
 		SupportActors: mcv.cnc
 	MPStartUnits@lightalliesa:
 		Class: light
 		ClassName: Light Support
-		Factions: allies, england, france, germany
+		Factions: allies, usa, england, holland, france, sweden, germany, spain, italy, greece, turkey
 		BaseActor: mcv
 		SupportActors: e1,e1,e1,e3,e3,jeep,1tnk
 		InnerSupportRadius: 3
@@ -439,7 +529,7 @@ World:
 	MPStartUnits@lightalliesb:
 		Class: light
 		ClassName: Light Support
-		Factions: allies, england, france, germany
+		Factions: allies, usa, england, holland, france, sweden, germany, spain, italy, greece, turkey
 		BaseActor: mcv
 		SupportActors: e1,e1,e1,e3,e3,apc,jeep
 		InnerSupportRadius: 3
@@ -447,7 +537,7 @@ World:
 	MPStartUnits@lightsovieta:
 		Class: light
 		ClassName: Light Support
-		Factions: soviet, russia, ukraine, belarus
+		Factions: soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan
 		BaseActor: mcv
 		SupportActors: e1,e1,e1,e3,e3,apc.soviet,ftrk
 		InnerSupportRadius: 3
@@ -455,7 +545,7 @@ World:
 	MPStartUnits@lightsovietb:
 		Class: light
 		ClassName: Light Support
-		Factions: soviet, russia, ukraine, belarus
+		Factions: soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan
 		BaseActor: mcv
 		SupportActors: e1,e1,e1,e3,e3,ftrk,3tnk.1b
 		InnerSupportRadius: 3
@@ -463,7 +553,7 @@ World:
 	MPStartUnits@lightgdia:
 		Class: light
 		ClassName: Light Support
-		Factions: gdi,ubergdi,socom,taskforce
+		Factions: gdi,futurecorp,socom,taskforce
 		BaseActor: mcv.cnc
 		SupportActors: e1,e1,e1,e3,e3,gapc,hmmv
 		InnerSupportRadius: 3
@@ -471,7 +561,7 @@ World:
 	MPStartUnits@lightgdib:
 		Class: light
 		ClassName: Light Support
-		Factions: gdi,ubergdi,socom,taskforce
+		Factions: gdi,futurecorp,socom,taskforce
 		BaseActor: mcv.cnc
 		SupportActors: e1,e1,e1,e3,e3,hmmv,2tnk.gdi
 		InnerSupportRadius: 3
@@ -479,7 +569,7 @@ World:
 	MPStartUnits@lightnoda:
 		Class: light
 		ClassName: Light Support
-		Factions: nod,bossnod,cabal,rebels
+		Factions: nod,blackhand,cabal,rebels
 		BaseActor: mcv.cnc
 		SupportActors: e1,e1,e1,e3,e3,bggy,1tnk.nod
 		InnerSupportRadius: 3
@@ -487,7 +577,7 @@ World:
 	MPStartUnits@lightnodb:
 		Class: light
 		ClassName: Light Support
-		Factions: nod,bossnod,cabal,rebels
+		Factions: nod,blackhand,cabal,rebels
 		BaseActor: mcv.cnc
 		SupportActors: e1,e1,e1,e3,e3,napc,bggy
 		InnerSupportRadius: 3
@@ -495,7 +585,7 @@ World:
 	MPStartUnits@heavyalliesa:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: allies, england, france, germany
+		Factions: allies, usa, england, holland, france, sweden, germany, spain, italy, greece, turkey
 		BaseActor: mcv
 		SupportActors: e1,e1,e1,e3,e3,jeep,1tnk,2tnk,1tnk,2tnk
 		InnerSupportRadius: 3
@@ -503,7 +593,7 @@ World:
 	MPStartUnits@heavyalliesb:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: allies, england, france, germany
+		Factions: allies, usa, england, holland, france, sweden, germany, spain, italy, greece, turkey
 		BaseActor: mcv
 		SupportActors: e1,e1,e1,e3,e3,apc,jeep,2tnk,2tnk,1tnk
 		InnerSupportRadius: 3
@@ -511,7 +601,7 @@ World:
 	MPStartUnits@heavysovieta:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: soviet, russia, ukraine, belarus
+		Factions: soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan
 		BaseActor: mcv
 		SupportActors: e1,e1,e1,e3,e3,ftrk,ftrk,3tnk.1b,3tnk.1b
 		InnerSupportRadius: 3
@@ -519,7 +609,7 @@ World:
 	MPStartUnits@heavysovietb:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: soviet, russia, ukraine, belarus
+		Factions: soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan
 		BaseActor: mcv
 		SupportActors: e1,e1,e1,e3,e3,apc.soviet,ftrk,3tnk,3tnk
 		InnerSupportRadius: 3
@@ -527,7 +617,7 @@ World:
 	MPStartUnits@heavygdia:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: gdi,ubergdi,socom,taskforce
+		Factions: gdi,futurecorp,socom,taskforce
 		BaseActor: mcv.cnc
 		SupportActors: e1,e1,e1,e3,e3,hmmv,hmmv,2tnk.gdi,2tnk.gdi
 		InnerSupportRadius: 3
@@ -535,7 +625,7 @@ World:
 	MPStartUnits@heavygdib:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: gdi,ubergdi,socom,taskforce
+		Factions: gdi,futurecorp,socom,taskforce
 		BaseActor: mcv.cnc
 		SupportActors: e1,e1,e1,e3,e3,gapc,hmmv,2tnk.gdi,2tnk.gdi
 		InnerSupportRadius: 3
@@ -543,7 +633,7 @@ World:
 	MPStartUnits@heavynoda:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: nod,bossnod,cabal,rebels
+		Factions: nod,blackhand,cabal,rebels
 		BaseActor: mcv.cnc
 		SupportActors: e1,e1,e1,e3,e3,bggy,1tnk.nod,1tnk.nod,ftnk,1tnk.nod
 		InnerSupportRadius: 3
@@ -551,7 +641,7 @@ World:
 	MPStartUnits@heavynodb:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: nod,bossnod,cabal,rebels
+		Factions: nod,blackhand,cabal,rebels
 		BaseActor: mcv.cnc
 		SupportActors: e1,e1,e1,e3,e3,napc,bggy,1tnk.nod,1tnk.nod,1tnk.nod
 		InnerSupportRadius: 3
@@ -559,7 +649,7 @@ World:
 	MPStartUnits@deployedallies:
 		Class: none
 		ClassName: Conyard + Scout
-		Factions: allies, england, france, germany
+		Factions: allies, usa, england, holland, france, sweden, germany, spain, italy, greece, turkey
 		BaseActor: fact
 		SupportActors: jeep.scout
 		InnerSupportRadius: 3
@@ -567,7 +657,7 @@ World:
 	MPStartUnits@deployedsoviet:
 		Class: none
 		ClassName: Conyard + Scout
-		Factions: soviet, russia, ukraine, belarus
+		Factions: soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan
 		BaseActor: fact
 		SupportActors: ftrk.scout
 		InnerSupportRadius: 3
@@ -575,7 +665,7 @@ World:
 	MPStartUnits@deployedgdi:
 		Class: none
 		ClassName: Conyard + Scout
-		Factions: gdi,ubergdi,socom,taskforce
+		Factions: gdi,futurecorp,socom,taskforce
 		BaseActor: fact.cnc
 		SupportActors: hmmv.scout
 		InnerSupportRadius: 3
@@ -583,85 +673,11 @@ World:
 	MPStartUnits@deployednod:
 		Class: none
 		ClassName: Conyard + Scout
-		Factions: nod,bossnod,cabal,rebels
+		Factions: nod,blackhand,cabal,rebels
 		BaseActor: fact.cnc
 		SupportActors: bggy.scout
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
-	#	throws some nonsense about IPositionableInfo 
-	#	when is about placing the building right at begin
-	#	MPStartUnits@smallbaseallies:
-	#	Class: smallbase
-	#	ClassName: Small Base
-	#	Factions: allies, england, france, germany
-	#	BaseActor: fact
-	#	SupportActors: jeep, powr, tent, proc, pbox, pbox
-	#	InnerSupportRadius: 3
-	#	OuterSupportRadius: 5
-	#	MPStartUnits@smallbasesoviet:
-	#	Class: smallbase
-	#	ClassName: Small Base
-	#	Factions: soviet, russia, ukraine, belarus
-	#	BaseActor: fact
-	#	SupportActors: ftrk, powr, barr, proc, pbox, pbox
-	#	InnerSupportRadius: 3
-	#	OuterSupportRadius: 5
-	#	MPStartUnits@smallbasegdi:
-	#	Class: smallbase
-	#	ClassName: Small Base
-	#	Factions: gdi,ubergdi,socom,taskforce
-	#	BaseActor: fact.cnc
-	#	SupportActors: hmmv, powr.cnc, pyle, proc.cnc, gtwr, gtwr
-	#	InnerSupportRadius: 3
-	#	OuterSupportRadius: 5
-	#	MPStartUnits@smallbasenod:
-	#	Class: smallbase
-	#	ClassName: Small Base
-	#	Factions: nod,bossnod,cabal,rebels
-	#	BaseActor: fact.cnc
-	#	SupportActors: bggy, powr.cnc, hand, proc.cnc, gtwr, gtwr
-	#	InnerSupportRadius: 3
-	#	OuterSupportRadius: 5
-	#	MPStartUnits@largebaseallies:
-	#	Class: largebase
-	#	ClassName: Large Base
-	#	Factions: allies, england, france, germany
-	#	BaseActor: fact
-	#	SupportActors: jeep, 2tnk, powr, powr, tent, proc, weap, dome, gun, gun, hbox
-	#	InnerSupportRadius: 3
-	#	OuterSupportRadius: 5
-	#	MPStartUnits@largebasesoviet:
-	#	Class: largebase
-	#	ClassName: Large Base
-	#	Factions: soviet, russia, ukraine, belarus
-	#	BaseActor: fact
-	#	SupportActors: ftrk, 3tnk, powr, powr, barr, proc, weap, dome, ftur, ftur, tsla
-	#	InnerSupportRadius: 3
-	#	OuterSupportRadius: 5
-	#	MPStartUnits@largebasegdi:
-	#	Class: largebase
-	#	ClassName: Large Base
-	#	Factions: gdi,ubergdi,socom,taskforce
-	#	BaseActor: fact.cnc
-	#	SupportActors: hmmv, 2tnk.gdi, powr.cnc, powr.cnc, pyle, proc.cnc, weap.gdi, hq.gdi, gtwr, gtwr, atwr
-	#	InnerSupportRadius: 3
-	#	OuterSupportRadius: 5
-	#	MPStartUnits@largebasenod:
-	#	Class: largebase
-	#	ClassName: Large Base
-	#	Factions: nod,bossnod,cabal
-	#	BaseActor: fact.cnc
-	#	SupportActors: bggy, e3, e3, powr.cnc, powr.cnc, hand, proc.cnc, weap.nod, hq.nod, gun.nod, gun.nod, obel
-	#	InnerSupportRadius: 3
-	#	OuterSupportRadius: 5
-	#	MPStartUnits@largebasenodrebel:
-	#	Class: largebase
-	#	ClassName: Large Base
-	#	Factions: rebels
-	#	BaseActor: fact.cnc
-	#	SupportActors: bggy, e3, e3, powr.cnc, powr.cnc, hand, proc.cnc, strp.rebels, hq.nod, gun.nod, gun.nod, obel
-	#	InnerSupportRadius: 3
-	#	OuterSupportRadius: 5
 	MPStartLocations:
 		SeparateTeamSpawnsCheckboxDisplayOrder: 6
 		SeparateTeamSpawnsCheckboxVisible: False

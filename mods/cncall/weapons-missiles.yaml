@@ -106,6 +106,14 @@ Dragon.Ltnk:
 	Range: 4c768
 	ReloadDelay: 300
 
+Dragon.dual:
+	Inherits: Dragon
+	Burst: 2
+
+Dragon.quad:
+	Inherits: Dragon
+	Burst: 4
+
 HellfireAG:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 30
@@ -221,6 +229,14 @@ RedEye:
 		Versus:
 			Light: 60
 
+RedEye.dual:
+	Inherits: RedEye
+	Burst: 2
+
+RedEye.quad:
+	Inherits: RedEye
+	Burst: 4
+
 Stinger:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 60
@@ -253,6 +269,16 @@ StingerAA:
 	Warhead@3Eff: CreateEffect
 		Explosions: med_explosion_air
 		ImpactSounds: kaboom25.aud
+
+Stinger.continous:
+	Inherits: Stinger
+	BurstDelays: 33
+
+StingerAA.singular:
+	Inherits: StingerAA
+	MinRange: 0c512
+	-Burst:
+	-BurstDelays:
 
 APTusk:
 	Inherits: ^AntiGroundMissile
@@ -455,6 +481,15 @@ SCUD:
 		ValidTargets: Ground
 		InvalidTargets: Water
 
+SCUD.Badger:
+	Inherits: SCUD
+	Burst: 3
+	BurstDelays: 12
+	ReloadDelay: 120
+	Projectile: Bullet
+		Inaccuracy: 1c512
+		LaunchAngle: 0
+
 HonestJohn:
 	ReloadDelay: 240
 	InvalidTargets: Air
@@ -506,12 +541,22 @@ HonestJohn.Napalm:
 		ExplosionPalette: effect
 
 HonestJohn.Nuclear:
-	Inherits: HonestJohn
-	#	Range: 15c0
-	-Warhead@1Dam: SpreadDamage
-	-Warhead@2Smu: LeaveSmudge
-	-Warhead@3Eff: CreateEffect
-	-Warhead@4EffWater: CreateEffect
+	ReloadDelay: 240
+	InvalidTargets: Air
+	Burst: 2
+	BurstDelays: 80
+	Range: 12c0
+	MinRange: 6c0
+	Report: missile1.aud
+	Projectile: Bullet
+		Blockable: false
+		Shadow: true
+		Inaccuracy: 313
+		Image: hjm
+		TrailImage: smokey
+		TrailDelay: 3
+		Speed: 200
+		LaunchAngle: 90
 	Warhead@1Dam_Impact: SpreadDamage
 		Spread: 0c768
 		Damage: 10000
@@ -753,7 +798,7 @@ Patriot:
 	MinRange: 2c0
 	Report: missile1.aud
 	ValidTargets: Air
-	-Projectile:
+	#	-Projectile:
 	Projectile: Missile
 		Image: PATRIOT
 		HorizontalRateOfTurn: 20
@@ -776,6 +821,30 @@ Patriot.ship:
 	Projectile: Missile
 		MinimumLaunchAngle: 165
 		MaximumLaunchAngle: 165
+
+Patriot.hjm:
+	Inherits: ^AntiAirMissile
+	ReloadDelay: 60
+	Range: 12c512
+	MinRange: 2c0
+	Report: missile1.aud
+	ValidTargets: Air
+	-Projectile:
+	Projectile: Missile
+		Image: hjm
+		HorizontalRateOfTurn: 20
+		Speed: 300
+		RangeLimit: 13c819
+		Inaccuracy: 0
+	Warhead@1Dam: SpreadDamage
+		Spread: 682
+		Damage: 5000
+		ValidTargets: Air
+		Versus:
+			None: 20
+			Wood: 85
+			Light: 100
+			Heavy: 75
 
 Stinger.A10.Right:
 	Inherits: Stinger
@@ -844,3 +913,37 @@ ClusterRocket:
 		Dimensions: 3,3
 		Footprint: _X_ XXX _X_
 		ValidTargets: Ground, Water
+
+LunMissile:
+	Inherits: ^AntiGroundMissile
+	ReloadDelay: 800
+	Range: 12c0
+	MinRange: 4c0
+	Burst: 6
+	BurstDelays: 3, 11, 3, 11, 3
+	Report: missile6.aud
+	Projectile: Missile
+		Speed: 158
+		Inaccuracy: 3c614
+		HorizontalRateOfTurn: 15
+		RangeLimit: 16c0
+		Image: moskito
+		TrailImage: smokey
+		ContrailLength: 30
+	Warhead@1Dam: SpreadDamage
+		Spread: 426
+		Damage: 4000
+		Falloff: 1000, 368, 135, 50, 18, 7, 0
+		Versus:
+			None: 90
+			Wood: 75
+			Light: 60
+			Heavy: 25
+			Concrete: 55
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath, Incendiary
+	Warhead@3Eff: CreateEffect
+		Explosions: napalm
+		ImpactSounds: firebl3.aud
+	Warhead@4EffWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: splash9.aud

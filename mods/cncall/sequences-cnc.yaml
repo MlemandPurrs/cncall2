@@ -51,6 +51,16 @@ cnctruk:
 		UseClassicFacingFudge: True
 	icon: cnctrukicon
 
+cncdtrk:
+    Inherits: emp-overlay
+	idle:
+		Facings: 32
+		UseClassicFacingFudge: True
+    truk-body: cnctruk
+		Facings: 32
+		UseClassicFacingFudge: True
+	icon: dtrkicon
+
 hmmv:
 	Inherits: emp-overlay
 	idle:
@@ -661,6 +671,7 @@ mwf:
 		Facings: 32
 		UseClassicFacingFudge: True
 	icon: mwficon
+	svyticon: mwfsvyticon
 
 mwf.husk:
 	idle: mwf
@@ -784,6 +795,8 @@ cata:
 	spinner: mrj
 		Start: 32
 		Length: 32	
+	sam-turret: ssam
+		Facings: 32
 	icon: cataicon
 
 bsub:
@@ -990,6 +1003,11 @@ b2:
 	Inherits: emp-overlay
 	idle:
 		Facings: 32
+
+b2nod:
+	Inherits: emp-overlay
+	idle:
+		Facings: 16
 
 huntseek:
 	idle: blank32

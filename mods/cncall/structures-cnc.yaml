@@ -30,10 +30,10 @@ FACT.CNC:
 		Offset: 1,1
 		Facing: 96
 	ProvidesPrerequisite@gdi:
-		Factions: gdi, ubergdi, socom, taskforce
+		Factions: gdi, futurecorp, socom, taskforce
 		Prerequisite: structures.gdi
 	ProvidesPrerequisite@nod:
-		Factions: nod, bossnod, cabal, rebels
+		Factions: nod, blackhand, cabal, rebels
 		Prerequisite: structures.nod
 	Production:
 		Produces: Building,Defense
@@ -42,11 +42,11 @@ FACT.CNC:
 		Image: cncfact
 		FactionImages:
 			gdi: gdifact
-			ubergdi: gdifact
+			futurecorp: gdifact
 			socom: gdifact
 			taskforce: gdifact
 			nod: nodfact
-			bossnod: nodfact
+			blackhand: nodfact
 			cabal: nodfact
 			rebels: nodfact
 	SpawnActorOnDeath:
@@ -73,7 +73,7 @@ POWR.CNC:
 		Image: gdipowr
 		FactionImages:
 			nod: nodpowr
-			bossnod: nodpowr
+			blackhand: nodpowr
 			cabal: nodpowr
 			rebels: nodpowr
 	SpawnActorOnDeath:
@@ -103,7 +103,7 @@ APWR.CNC:
 		Image: gdiapwr
 		FactionImages:
 			nod: nodapwr
-			bossnod: nodapwr
+			blackhand: nodapwr
 			cabal: nodapwr
 			rebels: nodapwr
 	SpawnActorOnDeath:
@@ -170,7 +170,7 @@ PROC.CNC:
 		RequiresCondition: !build-incomplete && td.player
 	GrantConditionOnFaction@TD:
 		Condition: td.player
-		Factions: gdi,ubergdi,socom,taskforce,nod,bossnod,cabal,rebels
+		Factions: gdi,futurecorp,socom,taskforce,nod,blackhand,cabal,rebels
 		ResetOnOwnerChange: True
 	WithResourceLevelOverlay:
 		RequiresCondition: !build-incomplete
@@ -178,7 +178,7 @@ PROC.CNC:
 		Image: gdiproc
 		FactionImages:
 			nod: nodproc
-			bossnod: nodproc
+			blackhand: nodproc
 			cabal: nodproc
 			rebels: nodproc
 	WithIdleOverlay@CAULDRON:
@@ -224,7 +224,7 @@ SILO.CNC:
 		Image: gdisilo
 		FactionImages:
 			nod: nodsilo
-			bossnod: nodsilo
+			blackhand: nodsilo
 			cabal: nodsilo
 			rebels: nodsilo
 	-SpawnActorOnDeath:
@@ -246,7 +246,7 @@ PYLE:
 	-ProvidesPrerequisite@belarus:
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@gdi:
-		Factions: gdi, ubergdi, socom, taskforce
+		Factions: gdi, futurecorp, socom, taskforce
 		Prerequisite: infantry.gdi
 	ProvidesPrerequisite@gdistructure:
 		RequiresPrerequisites: structures.gdi
@@ -296,7 +296,7 @@ HAND:
 	-Exit@2:
 	-Selectable:
 	ProvidesPrerequisite@nod:
-		Factions: nod, bossnod, cabal, rebels
+		Factions: nod, blackhand, cabal, rebels
 		Prerequisite: infantry.nod
 	ProvidesPrerequisite@nodstructure:
 		RequiresPrerequisites: structures.nod
@@ -373,13 +373,13 @@ WEAP.GDI:
 		PauseOnCondition: disabled
 	RallyPoint:
 	ProvidesPrerequisite@gdi:
-		Factions: gdi, ubergdi, socom, taskforce
+		Factions: gdi, futurecorp, socom, taskforce
 		Prerequisite: vehicles.gdi
 	ProvidesPrerequisite@gdistructure:
 		RequiresPrerequisites: structures.gdi
 		Prerequisite: vehicles.gdi
 	ProvidesPrerequisite@nod:
-		Factions: nod, bossnod, cabal, rebels
+		Factions: nod, blackhand, cabal, rebels
 		Prerequisite: vehicles.nod
 	ProvidesPrerequisite@nodstructure:
 		RequiresPrerequisites: structures.nod
@@ -488,19 +488,19 @@ WEAP.MINI:
 		CancelledAudio: Cancelled
 		LowPowerModifier: 300
 	ProvidesPrerequisite@allies:
-		Factions: allies, england, france, germany
+		Factions: allies, usa, england, holland, france, sweden, germany, italy, spain, greece, turkey
 		Prerequisite: vehicles.allies
 		ResetOnOwnerChange: True
 	ProvidesPrerequisite@soviet:
-		Factions: soviet, russia, ukraine, belarus
+		Factions: soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen, afghan
 		Prerequisite: vehicles.soviet
 		ResetOnOwnerChange: True
 	ProvidesPrerequisite@gdi:
-		Factions: gdi, ubergdi, socom, taskforce
+		Factions: gdi, futurecorp, socom, taskforce
 		Prerequisite: vehicles.gdi
 		ResetOnOwnerChange: True
 	ProvidesPrerequisite@nod:
-		Factions: nod, bossnod, cabal, rebels
+		Factions: nod, blackhand, cabal, rebels
 		Prerequisite: vehicles.nod
 		ResetOnOwnerChange: True
 	ProductionBar:
@@ -540,7 +540,7 @@ FIX.CNC:
 		Image: cncfix
 		FactionImages:
 			nod: nodfix
-			bossnod: nodfix
+			blackhand: nodfix
 			cabal: nodfix
 			rebels: nodfix
 	SpawnActorOnDeath:
@@ -625,11 +625,11 @@ SYRD.GDI:
 	ProvidesPrerequisite@COPY:
 		Prerequisite: syrd
 	ProvidesPrerequisite@gdi:
-		Factions: gdi, ubergdi, socom, taskforce
-		Prerequisite: ships.gdi	
+		Factions: gdi, futurecorp, socom, taskforce
+		Prerequisite: navy.gdi	
 	ProvidesPrerequisite@gdistructure:
 		RequiresPrerequisites: structures.gdi
-		Prerequisite: ships.gdi
+		Prerequisite: navy.gdi
 	RenderSprites:
 		Image: gdisyrd
 
@@ -644,11 +644,11 @@ SPEN.NOD:
 	ProvidesPrerequisite@COPY:
 		Prerequisite: spen
 	ProvidesPrerequisite@nod:
-		Factions: nod, bossnod, cabal, rebels
-		Prerequisite: ships.nod	
+		Factions: nod, blackhand, cabal, rebels
+		Prerequisite: navy.nod	
 	ProvidesPrerequisite@nodstructure:
 		RequiresPrerequisites: structures.nod
-		Prerequisite: ships.nod
+		Prerequisite: navy.nod
 	Production:
 		Produces: Ship, Boat, Submarine
 	WithProductionDoorOverlay:
@@ -1026,6 +1026,14 @@ TECH:
 		Image: miss
 	SpawnActorOnDeath:
 		Actor: tech.husk
+	WithColoredOverlay@IDISABLE:
+		RequiresCondition: disabled
+		Palette: disabled
+	GrantCondition@IDISABLE:
+		RequiresCondition: techdisable
+		Condition: disabled
+	ExternalCondition@TECHDISABLE:
+		Condition: techdisable
 
 TMPL:
 	Inherits: STEK
@@ -1135,6 +1143,11 @@ TMPL:
 		RequiresCondition: cloning.on
 	GrantExternalConditionToProduced:
 		Condition: produced
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower && techdisable
+		Condition: disabled
+	ExternalCondition@TECHDISABLE:
+		Condition: techdisable
 
 TMPF:
 	Inherits: ^FakeBuilding
@@ -1215,6 +1228,11 @@ TMPF:
 		Sequence: tag-fake
 		ReferencePoint: Top
 		ZOffset: 256
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower && techdisable
+		Condition: disabled
+	ExternalCondition@TECHDISABLE:
+		Condition: techdisable
 
 NODBIO:
 	Inherits: ^ScienceBuilding
@@ -1428,6 +1446,8 @@ EMPB:
 	Inherits@shape: ^2x1Shape
 	-ActorPreviewPlaceBuildingPreview:
 	-WithSpriteBody:
+	-ProductionTimeMultiplier@productionaiboost:
+	-ProductionCostMultiplier@productionaiboost:
 	Buildable:
 		Queue: Defense
 		BuildPaletteOrder: 9
@@ -1742,6 +1762,28 @@ GDIHOSP:
 		Image: hosp
 	SpawnActorOnDeath:
 		Actor: gdihosp.Husk
+	ParatroopersPower@FieldAid:
+		PauseOnCondition: disabled
+		OrderName: FieldAid
+		Prerequisites: ~structures.gdi, ~techlevel.unrestricted
+		Icon: healcrate
+		ChargeInterval: 7500
+		Description: Field Aid
+		LongDesc: A C-17 drops an Heal-up crate anywhere on the map.\nInfantry can pick it up to gain self-Healing for 30sec.\nAn Vehicle or Ship can pick it up to get Repaired instantly.
+		DropItems: HEALUPCRATE
+		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
+		SelectTargetSpeechNotification: SelectTarget
+		AllowImpassableCells: false
+		QuantizedFacings: 8
+		CameraActor: camera.paradrop
+		UnitType: c17.crate
+		DisplayBeacon: true
+		BeaconPoster: healcrate
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		Cursor: airdrop
+		SupportPowerPaletteOrder: 9
 
 CYCL:
 	Inherits: ^Wall

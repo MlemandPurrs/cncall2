@@ -101,7 +101,7 @@ MISS:
 
 NAPC.Armed:
 	Cargo:
-		InitialUnits: E1,E1,E4,E3,E4
+		InitialUnits: E1,E1,E5,E3,E5
 
 Ant:
 	Buildable:
@@ -124,10 +124,14 @@ HSAM:
 	RenderSprites:
 		PlayerPalette: player-buildings	
 
+HSAM.nod:
+	RenderSprites:
+		PlayerPalette: player-buildings	
+
 powerproxy.paratroopers:
 	ParatroopersPower:
 		DisplayBeacon: false
-		DropItems: e1,e1,e5,e3,e5
+		DropItems: e1,e1,e4,e3,e4
 
 F22:
 	RenderSprites:

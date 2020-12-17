@@ -1,17 +1,2687 @@
 
 #	TODO
-#	get Composite Towers for Future Corps
-#	get Mammoth MK II as Mastadon 
-#	to replace ICBM Launcher on Future Corps
-#	find Infantry to replace Grenadier on FutureC.
-#	Jetpack Commando for Future Corps
-#	ideas to further differentiate Navy of the two
-#	convert Inq's Microwave into Plasma Tank
-#	replace weird blue ion laser with proper Microwave
-#	try sonic based Microwave
-#	tow humvee, Ion Cannon painter Mammoth for socom, transfer Aurora for socom
-#	rocketpod medium for taskforce
+#	Tweak IFV turrets
+#	add missing types to Disguise Tank
 
+# Allied subfaction units
+
+# USA Infantry
+E1.Grenadier.Swim:
+	Inherits: E1
+	-Cloneable:
+	-DeliversCash:
+	Buildable:
+		BuildPaletteOrder: 7
+		BuildAtProductionType: Soldier
+		Prerequisites: atek, ~player.usa, ~techlevel.high
+		Description: Well-trained General-purpose infantry.\nUses Machinegun and throws Grenades.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+		Icon: swimicon
+	Tooltip:
+		Name: Marine Infantry
+	Valued:
+		Cost: 350
+	Health:
+		HP: 5000
+	Mobile:
+		Locomotor: foot-amphibious
+		Speed: 64
+		Voice: Move
+	Guard:
+		Voice: Move
+	AmmoPool:
+		Ammo: 2
+		PipCount: 0
+		AmmoCondition: ammo
+	Armament@PRIMARY:
+		PauseOnCondition: !ammo
+	Armament@Secondary:
+		Name: secondary
+		Weapon: Grenade
+		LocalOffset: 0,0,555
+		FireDelay: 15
+		PauseOnCondition: !ammo || swimming
+	ReloadAmmoPool:
+		PauseOnCondition: ammo
+		Delay: 4
+		Count: 1
+		ResetOnFire: False
+	AttackFrontal:
+		Voice: Attack
+	AttackMove:
+		Voice: Attack
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		AttackSequences:
+			primary: shoot
+			secondary: throw
+		StandSequences: stand
+	DeliversCash:
+		Payload: 62
+		Type: InfantryRefund
+	RenderSprites:
+		Image: e1gren
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+		ValidStances: Ally
+	AnnounceOnKill:
+	Voiced:
+		VoiceSet: gdisoldier
+	GrantConditionOnTerrain:
+		TerrainTypes: Water, River
+		Condition: swimming
+	Targetable:
+		RequiresCondition: !parachute && !swimming
+	Targetable@SEA:
+		TargetTypes: Ground, Water, Infantry
+		RequiresCondition: !parachute && swimming
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		AttackSequences:
+			primary: shoot
+			secondary: throw
+		StandSequences: stand
+		RequiresCondition: !swimming
+	WithInfantryBody@SEA:
+		RequiresCondition: !parachute && swimming
+		MoveSequence: swim
+		DefaultAttackSequence: swim_shoot
+		IdleSequences: swim_idle
+		StandSequences: swim_stand
+	WithDeathAnimation:
+		RequiresCondition: !swimming
+	WithIdleOverlay@WAVES:
+		Offset: 0,0,0
+		Sequence: wake
+		RequiresCondition: !parachute && swimming
+	WithDeathAnimation@ROT:
+		RequiresCondition: !swimming
+
+IFV:
+	Inherits: ^Vehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 9
+		Prerequisites: fix, ~vehicles.allies, ~player.usa, ~techlevel.medium
+		Description: Adaptable infantry transport.\n Special Ability: Transformer\nAdapts a different purpose based on Passenger inside.\nArmament varies with Passenger inside.\nAt default:\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
+	Valued:
+		Cost: 650
+	Tooltip:
+		Name: Infantry Fighting Vehicle
+	-Tooltip:
+	Tooltip@sidebar:
+		Name: Infantry Fighting Vehicle
+		RequiresCondition: !produced
+	Tooltip@ingame:
+		Name: IFV
+		RequiresCondition: produced
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 28000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 113
+		Locomotor: heavywheeled
+		PauseOnCondition: notmobile || being-captured || empdisable
+	RevealsShroud:
+		Range: 5c0
+		RequiresCondition: !spyturr
+	RevealsShroud@SPY:
+		Range: 10c0
+		RequiresCondition: spyturr
+	Turreted:
+		TurnSpeed: 10
+		Offset: 20,0,60
+	Armament@TECN:
+		Weapon: M1Carbine
+		MuzzleSequence: muzzle
+		LocalOffset: 150,0,100
+		PauseOnCondition: empdisable
+		RequiresCondition: tecnturr
+	Armament@E1:
+		Weapon: M60mg
+		MuzzleSequence: muzzle
+		LocalOffset: 150,0,100
+		PauseOnCondition: empdisable
+		RequiresCondition: gunturr
+	Armament@E2:
+		Weapon: GrenadeLauncher
+		MuzzleSequence: muzzle
+		LocalOffset: 150,0,100
+		PauseOnCondition: empdisable
+		RequiresCondition: fragturr
+	Armament@DefaultAG:
+		Weapon: Dragon.dual
+		LocalOffset: 192,90,376, 192,-90,376
+		PauseOnCondition: empdisable
+		RequiresCondition: !(gunturr || commturr || flamturr || chemturr || spyturr || testurr || engturr || tecnturr || fragturr || snipturr || flakturr || medturr || volkturr || prockturr || psamturr || railturr || lasturr)
+	Armament@DefaultAA:
+		Name: secondary
+		Weapon: RedEye.dual
+		LocalOffset: 192,90,376, 192,-90,376
+		PauseOnCondition: empdisable
+		RequiresCondition: !(gunturr || commturr || flamturr || chemturr || spyturr || testurr || engturr || tecnturr || fragturr || snipturr || flakturr || medturr || volkturr || prockturr || psamturr || railturr || lasturr)
+	Armament@SuperAG:
+		Weapon: Dragon.quad
+		LocalOffset: 192,90,376, 192,-90,376
+		PauseOnCondition: empdisable
+		RequiresCondition: prockturr
+	Armament@SuperAA:
+		Weapon: RedEye.quad
+		LocalOffset: 192,90,376, 192,-90,376
+		PauseOnCondition: empdisable
+		RequiresCondition: psamturr
+	ReloadDelayMultiplier@E3:
+		RequiresCondition: boostrocket
+		Modifier: 90
+	Armament@E4:
+		Weapon: FireballLauncher.single
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle2
+		PauseOnCondition: empdisable
+		RequiresCondition: flamturr
+	Armament@E5:
+		Weapon: Chemspray
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle3
+		MuzzlePalette: desert
+		PauseOnCondition: empdisable
+		RequiresCondition: chemturr
+	Armament@E7:
+		Weapon: Chaingun
+		MuzzleSequence: muzzle
+		LocalOffset: 150,0,100
+		PauseOnCondition: empdisable
+		RequiresCondition: commturr
+	Armament@Shok:
+		Weapon: TTankZap
+		LocalOffset: 0,0,213
+		PauseOnCondition: empdisable
+		RequiresCondition: testurr
+	Armament@Sniper:
+		Weapon: Sniper
+		MuzzleSequence: muzzle
+		LocalOffset: 150,0,100
+		PauseOnCondition: empdisable
+		RequiresCondition: snipturr
+	Armament@FlakAA:
+		Weapon: FLAK-23-AA
+		LocalOffset: 262,160,160, 262,-160,160
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+		RequiresCondition: flakturr
+	Armament@FlakAG:
+		Weapon: FLAK-23-AG
+		LocalOffset: 262,160,160, 262,-160,160
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+		RequiresCondition: flakturr
+	Armament@VOLKOV:
+		Weapon: 105mm.Singular
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle2
+		PauseOnCondition: empdisable
+		RequiresCondition: volkturr
+	Armament@Repair:
+		Weapon: Repair
+		LocalOffset: 0,0,213
+		Cursor: repair
+		OutsideRangeCursor: repair
+		TargetStances: Ally
+		ForceTargetStances: None
+		PauseOnCondition: empdisable
+		RequiresCondition: engturr
+	WithIdleOverlay@SPINNER:
+		Sequence: spinner
+		PauseOnCondition: empdisable
+		RequiresCondition: spyturr
+		Offset: 0,0,200
+	DetectCloaked@SPY:
+		Range: 3c0
+		RequiresCondition: !empdisable && spyturr
+	RenderDetectionCircle:
+		RequiresCondition: !empdisable && spyturr
+	Armament@Railgun:
+		Weapon: Railgun
+		MuzzleSequence: muzzle
+		LocalOffset: 150,0,100
+		PauseOnCondition: empdisable
+		RequiresCondition: railturr
+	Armament@Laser:
+		Weapon: LaserGun
+		MuzzleSequence: muzzle
+		LocalOffset: 150,0,100
+		PauseOnCondition: empdisable
+		RequiresCondition: lasturr
+	AttackTurreted:
+		PauseOnCondition: empdisable
+		RequiresCondition: !spyturr && !medturr && !flagturr && !thfturr
+	WithMuzzleOverlay:
+	WithSpriteTurret@smolgun:
+		RequiresCondition: tecnturr
+		Sequence: turret6
+	WithSpriteTurret@gun:
+		RequiresCondition: gunturr || commturr
+		Sequence: turret
+	WithSpriteTurret@default:
+		RequiresCondition: !(gunturr || commturr || psamturr || spyturr || testurr || medturr || engturr || tecnturr || flamturr || chemturr || flakturr || thfturr || snipturr || volkturr || flagturr || fragturr || railturr || lasturr)
+		Sequence: turret3
+	WithIdleOverlay@tes:
+		Sequence: turret4
+		RequiresCondition: testurr
+	WithSpriteTurret@rep:
+		Sequence: turret5
+		RequiresCondition: engturr
+	WithSpriteTurret@flame:
+		Sequence: turret7
+		RequiresCondition: flamturr
+	WithSpriteTurret@chem:
+		Sequence: turret12
+		RequiresCondition: chemturr
+	WithSpriteTurret@flak:
+		Sequence: turret8
+		RequiresCondition: flakturr
+	WithSpriteTurret@samonly:
+		RequiresCondition: psamturr
+		Sequence: turret9
+		Offset: 0,0,-4
+	WithSpriteTurret@snipers:
+		RequiresCondition: snipturr
+		Sequence: turret10
+	WithSpriteTurret@volkov:
+		RequiresCondition: volkturr
+		Sequence: turret11
+	WithSpriteTurret@grenadiers:
+		Sequence: turret2
+		RequiresCondition: fragturr
+	WithSpriteTurret@railgun:
+		Sequence: turret13
+		RequiresCondition: railturr
+	WithSpriteTurret@laser:
+		Sequence: turret14
+		RequiresCondition: lasturr
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		PipCount: 1
+		LoadingCondition: notmobile
+		PassengerConditions:
+			e1: gunturr
+			e1r1: gunturr
+			e1.england: gunturr
+			e1.kyrgiz: gunturr
+			e1.cnc: gunturr
+			e1.grenadier: gunturr
+			e1.grenadier.swim: gunturr
+			e2: fragturr
+			e2r1: fragturr
+			e2.turkey: fragturr
+			e2.turkmen: fragturr
+			e2.cnc: fragturr
+			gren: fragturr
+			e3: boostrocket
+			e3r1: boostrocket
+			e3.spain: boostrocket
+			e3.moldova: boostrocket
+			e3.cnc: boostrocket
+			terr: fragturr
+			e4: flamturr
+			e4.italy: flamturr
+			e4.nod: flamturr
+			e5: chemturr
+			e5.soviet: chemturr
+			mort: chemturr
+			e6: flagturr
+			e6.uzbek: flagturr
+			e7: commturr
+			e7.usa: commturr
+			e7.nod: commturr
+			volk: volkturr
+			gdirmbo: commturr
+			nodrmbo: volkturr
+			medi: medturr
+			medi.cnc: medturr
+			mech: engturr
+			spy: spyturr
+			spy.cnc: spyturr
+			thf: thfturr
+			thf.holland: thfturr
+			infl: lasturr
+			infl.blackhand: lasturr
+			cybr: commturr
+			cybr.vet: commturr
+			shok: testurr
+			mgi: gunturr
+			atgm: prockturr
+			stng: psamturr
+			dshk: gunturr
+			rpg: flamturr
+			shot: tecnturr
+			tecn: tecnturr
+			mort.turkey: flamturr
+			mort.kyrgiz: flamturr
+			gnrl.nod: flamturr
+			snip: snipturr
+			snip.gdi: snipturr
+			exo: railturr
+			lcg: lasturr
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	WithIdleOverlay@MEDIC:
+		Sequence: medic
+		PauseOnCondition: empdisable || leaflet
+		RequiresCondition: medturr
+		Offset: 0,0,40
+	ProximityExternalCondition@MEDIC:
+		RequiresCondition: medturr
+		EnableSound: heal2.aud
+		Condition: barracks
+		Range: 3c0
+	CaptureManager:
+	Captures@1:
+		CaptureDelay: 375
+		CaptureTypes: building
+		PlayerExperience: 50
+		ConsumedByCapture: False
+		RequiresCondition: flagturr
+	Captures@2:
+		CaptureDelay: 375
+		CaptureTypes: building-external
+		PlayerExperience: 50
+		ConsumedByCapture: False
+		RequiresCondition: flagturr
+	WithIdleOverlay@ENGINEER:
+		Sequence: flag
+		RequiresCondition: flagturr
+	AutoTarget:
+		AttackAnythingCondition: stance-attackanything
+		ScanRadius: 6
+	AutoTargetPriority@DEFAULTAA:
+		ValidTargets: Infantry, Vehicle, Water, Underwater, Air, Defense
+		RequiresCondition: (!stance-attackanything && !assault-move) && (psamturr || flakturr)
+	AutoTargetPriority@ATTACKANYTHINGAA:
+		ValidTargets: Infantry, Vehicle, Water, Underwater, Air, Structure, Defense
+		RequiresCondition: (stance-attackanything || assault-move) && (psamturr || flakturr)
+	AutoTargetPriority@DEFAULTG:
+		RequiresCondition: (!stance-attackanything && !assault-move) && (fragturr || gunturr || flamturr || chemturr || testurr || commturr)
+		ValidTargets: Infantry, Vehicle, Water, Underwater, Defense
+	AutoTargetPriority@ATTACKANYTHINGG:
+		RequiresCondition: (stance-attackanything || assault-move) && (fragturr || gunturr || flamturr || chemturr || testurr || commturr)
+		ValidTargets: Infantry, Vehicle, Water, Underwater, Structure, Defense, Mine
+	AttackMove:
+		AssaultMoveCondition: assault-move
+	AutoTargetPriority@DEFAULTREPAIR:
+		ValidTargets: Vehicle, Ship
+		RequiresCondition: engturr
+	Cloak:
+		InitialDelay: 125
+		CloakDelay: 175
+		CloakSound: appear1.aud
+		UncloakSound: appear1.aud
+		UncloakOn: Attack, Unload, Heal, Dock, SelfHeal
+		IsPlayerPalette: true
+		PauseOnCondition: cloak-force-disabled && empdisable
+		RequiresCondition: thfturr
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+
+#	Britain unique unit
+TNKD:
+	Inherits: ^TrackedVehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: atek, ~vehicles.allies, ~allies.or.england, ~techlevel.high
+		Description: Self-propelled anti-tank Gun.\n  Strong vs Tanks, Structures\n  Weak vs Infantry, Aircraft
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Tank Destroyer
+	Health:
+		HP: 32000
+	Armor:
+		Type: Heavy
+	Mobile:
+		TurnSpeed: 2
+		Speed: 85
+	RevealsShroud:
+		MinRange: 3c0
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 3c0
+	Armament:
+		Weapon: TurretGun.tnkd
+		LocalOffset: 720,0,90
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+	AttackFrontal:
+		PauseOnCondition: empdisable
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: TNKD.Husk
+		OwnerType: InternalName
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	Passenger:
+		PipType: Red
+
+#	Netherlands unique Infantry
+SHOT:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 225
+	Tooltip:
+		Name: Shotgunner
+	Buildable:
+		BuildPaletteOrder: 7
+		Prerequisites: ~tent, ~player.holland, ~techlevel.infonly
+		Queue: Infantry
+		BuildAtProductionType: Soldier
+		Description: Fast infantry armed with shotgun.\n  Strong vs Infantry\n  Weak vs anything Else
+	Mobile:
+		Speed: 71
+	Health:
+		HP: 5000
+	Armament@PRIMARY:
+		Weapon: Shotgun
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: Shotgun
+		FireDelay: 1
+		MuzzleSequence: garrison-muzzle
+	TakeCover:
+	AttackFrontal:
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+		DefaultAttackSequence: shoot
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	DeliversCash:
+		Payload: 56
+		Type: InfantryRefund
+
+#	Netherlands unique Vehicle
+2TNK.Stealth:
+	Inherits: 2TNK
+	-Armament@PRIMARY:
+	-Armament@SECONDARY:
+	-MustBeDestroyed:
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: atek, ~vehicles.allies, ~player.holland, ~techlevel.high
+		Description: Tank that is capable of cloaking even on the move.\n  Strong vs Light Vehicles, Basic Defenses\n  Weak vs massed Infantry, Tanks
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Phase Tank
+	Armament@PRIMARY:
+		Weapon: 70mm
+		Recoil: 85
+		RecoilRecovery: 17
+		LocalOffset: 720,0,80
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+	AttackTurreted:
+		Armaments: primary
+		PauseOnCondition: empdisable
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: ReturnFire
+	Cloak:
+		InitialDelay: 125
+		CloakDelay: 175
+		CloakSound: appear1.aud
+		UncloakSound: appear1.aud
+		UncloakOn: Attack, Unload, Heal, Dock, SelfHeal
+		IsPlayerPalette: true
+		PauseOnCondition: cloak-force-disabled && empdisable
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Passenger:
+		PipType: Red
+	SpawnActorOnDeath:
+		Actor: 2TNK.Stealth.Husk
+	RenderSprites:
+		Image: 2tnks
+
+#	Sweden unique Infantry
+STNG:
+	Inherits@ROT: ^RottingInfantry
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Anti-Air Soldier
+	Buildable:
+		BuildPaletteOrder: 7
+		Prerequisites: ~tent, dome, ~player.sweden, ~techlevel.medium
+		Queue: Infantry
+		BuildAtProductionType: Soldier
+		Description: Anti-aircraft rocket infantry.\nCannot attack Ground units.\nCannot fire out of Pillboxes.\n  Strong vs Aircraft\n  Weak vs everything Else
+	Selectable:
+		Class: STNG
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 6000
+	AutoTarget:
+		ScanRadius: 6
+	Armament@PRIMARY:
+		Weapon: StingerAA.singular
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	TakeCover:
+		ProneOffset: 180,0,-200
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	Passenger:
+		PipType: Yellow
+	DeliversCash:
+		Payload: 125
+		Type: InfantryRefund
+
+#	Sweden unique unit
+ATNK:
+	Inherits: ^TrackedVehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 9
+		Prerequisites: dome, ~vehicles.allies, ~player.sweden, ~techlevel.medium
+		Description: Amphibian anti-air unit with Flak Cannons.\n  Strong vs Infantry, Aircraft\n  Weak vs Tanks
+		Icon: flak-icon
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Flak Tank
+	Health:
+		HP: 22000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 128
+	RevealsShroud:
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Turreted:
+		TurnSpeed: 5
+		Offset: -45,0,0
+	Armament@PRIMARY
+		Name: primary
+		Weapon: FLAK-23-AA-Dual
+		LocalOffset: 262,160,160, 262,-160,160
+		MuzzleSequence: muzzle-flak
+		PauseOnCondition: !(!reload-air && !empdisable)
+		ReloadingCondition: reload-ground
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: FLAK-23-AG-Dual
+		LocalOffset: 262,160,160, 262,-160,160
+		MuzzleSequence: muzzle-flak
+		PauseOnCondition: !(!reload-ground && !empdisable)
+		ReloadingCondition: reload-air
+	AttackTurreted:
+		Armaments: primary, secondary
+		PauseOnCondition: empdisable
+	WithSpriteTurret:
+		Sequence: turret-flak-ag
+		RequiresCondition: attack-ground
+	WithSpriteTurret@AIR:
+		Sequence: turret-flak-aa
+		RequiresCondition: !attack-ground
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	WithMuzzleOverlay:
+	DetectCloaked:
+		Range: 3c768
+	Carryable:
+		LocalOffset: 0,0,100
+	RenderRangeCircle:
+	Passenger:
+		PipType: Yellow
+	Mobile:
+		Locomotor: tracked-amphibious
+	GrantConditionOnTerrain@SEA:
+		TerrainTypes: Water, River
+		Condition: floating
+	GrantConditionOnTerrain@SEAMALUS:
+		TerrainTypes: Water
+		Condition: atsea
+	Targetable:
+		RequiresCondition: !floating
+	Targetable@SEA:
+		TargetTypes: Ground, Water, Ship, C4, Tank
+		RequiresCondition: floating
+	WithFacingSpriteBody:
+		RequiresCondition: !floating
+	WithFacingSpriteBody@SEA:
+		Name: floating
+		Sequence: idle-float
+		RequiresCondition: floating
+	DamageMultiplier:
+		Modifier: 120
+		RequiresCondition: atsea
+	SpawnActorOnDeath:
+		Actor: ATNK.Husk
+		RequiresCondition: !floating
+	RenderSprites:
+		Image: 1tnk
+
+#	Germany unique Infantry
+MGI:
+	Inherits@ROT: ^RottingInfantry
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Tooltip:
+		Name: Machine Gunner
+	Valued:
+		Cost: 450
+	Health:
+		HP: 6000
+	Buildable:
+		Queue: Infantry
+		BuildAtProductionType: Soldier
+		BuildPaletteOrder: 7
+		Prerequisites: ~tent, fix, ~infantry.allies, ~player.germany, ~techlevel.medium
+		Description: Infantry equipped with a rapid firing Machine Gun.\n  Strong vs Infantry\n  Weak vs Vehicles, Defenses
+	Armament@PRIMARY:
+		Weapon: M60mg.Inf
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: M60mg.Inf
+		MuzzleSequence: garrison-muzzle
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	Passenger:
+		PipType: Red
+	DeliversCash:
+		Payload: 100
+		Type: InfantryRefund
+	RenderSprites:
+		Image: e1lmg
+
+#	Spain unique unit
+MNLY.Mole:
+	Inherits: MNLY
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	-Tooltip:
+	-Minelayer:
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: atek, ~vehicles.allies, ~player.spain, ~techlevel.high
+		Description: Advanced minelayer that fires subterranean tunneling mines.\nThe Mole mines can hit an Target when ordered to,\notherwise they tunnel under Structures and Units,\ndetonating only when ran out of fuel.\n  Strong vs Defenses\n  Weak vs Aircraft, Ships
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Mole Minelayer
+	Turreted:
+		TurnSpeed: 255
+		Offset: -82,0,330
+	Armament@VISUAL:
+		Name: primary
+		Weapon: MoleMine.decoy
+		LocalOffset: 0,0,0
+		FireDelay: 2
+		MuzzleSequence: muzzle
+		MuzzlePalette: player
+		PauseOnCondition: empdisable || !ammo
+	Armament@ACTUAL:
+		Name: secondary
+		Weapon: MoleMine
+		LocalOffset: -82,0,-330
+		FireDelay: 2
+		PauseOnCondition: empdisable || !ammo
+	AttackTurreted:
+		PersistentTargeting: false
+		PauseOnCondition: empdisable
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	AmmoPool:
+		Armaments: secondary
+		AmmoCondition: ammo
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: ReturnFire
+	RenderSprites:
+		Image: mnly.mole
+
+#   Disguise Tank
+DTNK:
+	Inherits: ^TrackedVehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: atek, ~vehicles.allies, ~player.italy, ~techlevel.high
+		Description: Experimental vehicle with hi-tech projectors.\n  Special ability: Vehicle Disguise\nCan change apperance to any Vehicle to fool the opponent.\nLoses disguise when attacking.\n  Strong vs Vehicles\n  Weak vs Aircraft
+	Selectable:
+		Class: VehicleDisguise
+	Valued:
+		Cost: 1350
+	-Tooltip:
+	DisguiseTooltip@default:
+		Name: Mirage Tank
+		GenericName: Tank
+		RequiresCondition: !mcv && !harv && !truk && !jeep && !apc && !tnk1 && !tnk2 && !arty && !mnly && !msam && !mgg && !mrj && !tnkd && !papc && !ctnk && !prsm && !harvsvyt && !dtrk && !ftrk && !apcsvyt && !tnk31b && !tnk3 && !v2rl && !tnk4 && !ttnk && !qtnk && !tnk5 && !mcvcnc && !harvcnc && !trukcnc && !dtrkcnc && !hmmv && !hmmvtow && !gapc && !gapcvulc && !smch && !aav && !mrpg && !tnk2gdi && !tnk2rail && !tnk2rpod && !mrls && !mrlshvr && !mnlyrep && !tnk4gdi && !tnk4rail && !tnk4ion && !mhq && !mhqciv && !disr && !icbm && !memp && !lmch && !jugg && !mwf && !bggy && !bike && !attbggy && !napc && !napcarmd && !sapc && !mtnk && !ftnk && !ctnkchem && !howi && !srty && !hvrc && !htnk && !mrep && !ssm && !ssmnuke && !ssmhvr && !mwav && !ltnk && !ptnk && !stnk 
+	DisguiseTooltip@MCV:
+		Name: Mobile Construction Vehicle
+		GenericName: Vehicle
+		RequiresCondition: mcv || mcvcnc
+	DisguiseTooltip@Harvester:
+		Name: Harvester
+		GenericName: Vehicle
+		RequiresCondition: harv || harvcnc
+	DisguiseTooltip@SupplyTruck:
+		Name: Supply Truck
+		GenericName: Vehicle
+		RequiresCondition: truk || trukcnc
+	DisguiseTooltip@Jeep:
+		Name: Jeep
+		GenericName: Vehicle
+		RequiresCondition: jeep
+	DisguiseTooltip@Apc:
+		Name: APC
+		GenericName: Vehicle
+		RequiresCondition: apc
+	DisguiseTooltip@LightTank:
+		Name: Light Tank
+		GenericName: Tank
+		RequiresCondition: tnk1 || tnk1nod
+	DisguiseTooltip@MediumTank:
+		Name: Medium Tank
+		GenericName: Tank
+		RequiresCondition: tnk2
+	DisguiseTooltip@Artillery:
+		Name: Artillery
+		GenericName: Vehicle
+		RequiresCondition: arty
+	DisguiseTooltip@Minelayer:
+		Name: Minelayer
+		GenericName: Vehicle
+		RequiresCondition: mnly
+	DisguiseTooltip@MobileSAM:
+		Name: Mobile SAM
+		GenericName: Vehicle
+		RequiresCondition: msam || mrlsnod
+	DisguiseTooltip@MGG:
+		Name: MGG
+		GenericName: Vehicle
+		RequiresCondition: mgg
+	DisguiseTooltip@Jammer:
+		Name: MRJ
+		GenericName: Vehicle
+		RequiresCondition: mrj
+	DisguiseTooltip@TankDestroyer:
+		Name: Tank Destroyer
+		GenericName: Tank
+		RequiresCondition: tnkd
+	DisguiseTooltip@PhaseAPC:
+		Name: Phase APC
+		GenericName: Vehicle
+		RequiresCondition: papc
+	DisguiseTooltip@ChronoTank:
+		Name: Chrono Tank
+		GenericName: Tank
+		RequiresCondition: ctnk
+	DisguiseTooltip@PrismTank:
+		Name: Prism Tank
+		GenericName: Tank
+		RequiresCondition: prsm
+	DisguiseTooltip@SovietHarvester:
+		Name: Armed Harvester
+		GenericName: Harvester
+		RequiresCondition: harvsvyt
+	DisguiseTooltip@DemolitionTruck:
+		Name: Demolition Truck
+		GenericName: Vehicle
+		RequiresCondition: dtrk || dtrkcnc
+	DisguiseTooltip@FlakTruck:
+		Name: Flak Truck
+		GenericName: Vehicle
+		RequiresCondition: ftrk
+	DisguiseTooltip@ScoutCar:
+		Name: Scout Car
+		GenericName: Vehicle
+		RequiresCondition: ftrkscout
+	DisguiseTooltip@SovietAPC:
+		Name: Heavy APC
+		GenericName: Vehicle
+		RequiresCondition: apcsvyt
+	DisguiseTooltip@HeavyTank1B:
+		Name: Heavy Tank 1-B
+		GenericName: Tank
+		RequiresCondition: tnk31b
+	DisguiseTooltip@HeavyTank:
+		Name: Heavy Tank
+		GenericName: Tank
+		RequiresCondition: tnk3
+	DisguiseTooltip@V2Launcher:
+		Name: V2 Launcher
+		GenericName: Vehicle
+		RequiresCondition: v2rl
+	DisguiseTooltip@MammothTank:
+		Name: Mammoth Tank
+		GenericName: Tank
+		RequiresCondition: tnk4
+	DisguiseTooltip@TeslaTank:
+		Name: Tesla Tank
+		GenericName: Tank
+		RequiresCondition: ttnk
+	DisguiseTooltip@QuakeTank:
+		Name: MAD Tank
+		GenericName: Tank
+		RequiresCondition: qtnk
+	DisguiseTooltip@BehemothTank:
+		Name: Behemoth Tank
+		GenericName: Super Tank
+		RequiresCondition: tnk5
+	DisguiseTooltip@Humvee:
+		Name: Humvee
+		GenericName: Vehicle
+		RequiresCondition: hmmv
+	DisguiseTooltip@HumveeTOW:
+		Name: TOW Humvee
+		GenericName: Vehicle
+		RequiresCondition: hmmvtow
+	DisguiseTooltip@FlakAPC:
+		Name: Flak APC
+		GenericName: Vehicle
+		RequiresCondition: gapc
+	DisguiseTooltip@GattAPC:
+		Name: Gattling APC
+		GenericName: Vehicle
+		RequiresCondition: gapcvulc
+	DisguiseTooltip@AAV:
+		Name: AAV
+		GenericName: Vehicle
+		RequiresCondition: aav
+	DisguiseTooltip@Mrpg:
+		Name: Disc Launcher
+		GenericName: Vehicle
+		RequiresCondition: mrpg
+	DisguiseTooltip@Smch:
+		Name: Robot Tank
+		GenericName: Vehicle
+		RequiresCondition: smch
+	DisguiseTooltip@MediumTankGDI:
+		Name: GDI Medium
+		GenericName: Tank
+		RequiresCondition: tnk2gdi
+	DisguiseTooltip@MediumTankRailgun:
+		Name: Railgun Medium
+		GenericName: Tank
+		RequiresCondition: tnk2rail
+	DisguiseTooltip@MediumTankRocketpod:
+		Name: Rocketpod Medium
+		GenericName: Tank
+		RequiresCondition: tnk2rpod
+	DisguiseTooltip@MRLS:
+		Name: MRLS
+		GenericName: Vehicle
+		RequiresCondition: mrls
+	DisguiseTooltip@HoverMRLS:
+		Name: Hover MRLS
+		GenericName: Vehicle
+		RequiresCondition: mrlshvr
+	DisguiseTooltip@MinelayerSupport:
+		Name: Support Minelayer
+		GenericName: Vehicle
+		RequiresCondition: mnlyrep
+	DisguiseTooltip@MammothTankGDI:
+		Name: GDI Mammoth
+		GenericName: Tank
+		RequiresCondition: tnk4gdi
+	DisguiseTooltip@MammothTankRailgun:
+		Name: Railgun Mammoth
+		GenericName: Tank
+		RequiresCondition: tnk4rail
+	DisguiseTooltip@MammothTankIon:
+		Name: Ion Mammoth
+		GenericName: Tank
+		RequiresCondition: tnk4ion
+	DisguiseTooltip@MobileDetector:
+		Name: Mobile Detector
+		GenericName: Vehicle
+		RequiresCondition: mhq
+	DisguiseTooltip@MHQ:
+		Name: Mobile HQ
+		GenericName: Vehicle
+		RequiresCondition: mhqciv
+	DisguiseTooltip@SonicTank:
+		Name: Sonic Tank
+		GenericName: Tank
+		RequiresCondition: disr
+	DisguiseTooltip@ICBM:
+		Name: ICBM Launcher
+		GenericName: Vehicle
+		RequiresCondition: icbm
+	DisguiseTooltip@MobileEMP:
+		Name: Mobile EMP
+		GenericName: Tank
+		RequiresCondition: memp
+	DisguiseTooltip@Titan:
+		Name: Titan
+		GenericName: Mech
+		RequiresCondition: lmch
+	DisguiseTooltip@Juggernaut:
+		Name: Juggernaut
+		GenericName: Mech
+		RequiresCondition: jugg
+	DisguiseTooltip@MobileFactory:
+		Name: Mobile War Factory
+		GenericName: Vehicle
+		RequiresCondition: mwf
+	DisguiseTooltip@Buggy:
+		Name: Buggy
+		GenericName: Vehicle
+		RequiresCondition: bggy
+	DisguiseTooltip@Bike:
+		Name: Recon Bike
+		GenericName: Vehicle
+		RequiresCondition: bike
+	DisguiseTooltip@AttackBuggy:
+		Name: Attack Buggy
+		GenericName: Vehicle
+		RequiresCondition: attbggy		
+	DisguiseTooltip@NodAPC:
+		Name: Light APC
+		GenericName: Vehicle
+		RequiresCondition: napc
+	DisguiseTooltip@NodAPCArmed:
+		Name: Armed L. APC
+		GenericName: Vehicle
+		RequiresCondition: napcarmd
+	DisguiseTooltip@StealthAPC:
+		Name: Stealth APC
+		GenericName: Vehicle
+		RequiresCondition: sapc
+	DisguiseTooltip@MicroTank:
+		Name: Micro Tank
+		GenericName: Mini Tank
+		RequiresCondition: mtnk
+	DisguiseTooltip@FlameTank:
+		Name: Flame Tank
+		GenericName: Tank
+		RequiresCondition: ftnk
+	DisguiseTooltip@ChemTank:
+		Name: Chemical Tank
+		GenericName: Tank
+		RequiresCondition: ctnkchem
+	DisguiseTooltip@Howitzer:
+		Name: Howitzer
+		GenericName: Vehicle
+		RequiresCondition: howi
+	DisguiseTooltip@StealthArtillery:
+		Name: Stealth Artillery
+		GenericName: Vehicle
+		RequiresCondition: srty
+	DisguiseTooltip@Hovercraft:
+		Name: Hovercraft
+		GenericName: Vehicle
+		RequiresCondition: hvrc
+	DisguiseTooltip@Hovertank:
+		Name: Hovertank
+		GenericName: Tank
+		RequiresCondition: htnk
+	DisguiseTooltip@MobileRepairBot:
+		Name: Mobile Repair Bot
+		GenericName: Vehicle
+		RequiresCondition: mrep
+	DisguiseTooltip@SSM:
+		Name: SSM Launcher
+		GenericName: Vehicle
+		RequiresCondition: ssm
+	DisguiseTooltip@NuclearSSM:
+		Name: Nuclear SSM
+		GenericName: Vehicle
+		RequiresCondition: ssmnuke
+	DisguiseTooltip@HoverSSM:
+		Name: Hover SSM
+		GenericName: Vehicle
+		RequiresCondition: ssmhvr	
+	DisguiseTooltip@Microwave:
+		Name: Microwave Tank
+		GenericName: Tank
+		RequiresCondition: mwav	
+	DisguiseTooltip@LaserTank:
+		Name: Laser Tank
+		GenericName: Tank
+		RequiresCondition: ltnk
+	DisguiseTooltip@PlasmaTank:
+		Name: Plasma Tank
+		GenericName: Tank
+		RequiresCondition: ptnk
+	Health:
+		HP: 45000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 128
+		PauseOnCondition: !(!empdisable && !being-captured)
+	RevealsShroud:
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	WithDecoration@disguise:
+		Image: pips
+		Sequence: pip-disguise
+		Palette: effect
+		ReferencePoint: Top, Right
+		ZOffset: 256
+		RequiresCondition: disguise
+	IgnoresDisguise:
+	Armament@default:
+		Name: defaultarm
+		Weapon: 90mm
+		Recoil: 85
+		RecoilRecovery: 25
+		Turret: default-turret
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+		RequiresCondition: !mcv && !harv && !truk && !jeep && !apc && !tnk1 && !tnk2 && !arty && !mnly && !msam && !mgg && !mrj && !tnkd && !papc && !ctnk && !prsm && !harvsvyt && !dtrk && !ftrk && !apcsvyt && !tnk31b && !tnk3 && !v2rl && !tnk4 && !ttnk && !qtnk && !tnk5 && !mcvcnc && !harvcnc && !trukcnc && !dtrkcnc && !hmmv && !hmmvtow && !gapc && !gapcvulc && !smch && !aav && !mrpg && !tnk2gdi && !tnk2rail && !tnk2rpod && !mrls && !mrlshvr && !mnlyrep && !tnk4gdi && !tnk4rail && !tnk4ion && !mhq && !mhqciv && !disr && !icbm && !memp && !lmch && !jugg && !mwf && !bggy && !bike && !attbggy && !napc && !napcarmd && !sapc && !tnk1nod && !mtnk && !ftnk && !ctnkchem && !howi && !srty && !hvrc && !htnk && !mrep && !ssm && !ssmnuke && !ssmhvr && !mwav && !ltnk && !ptnk && !stnk 
+	Armament@invis:
+		Name: invisarm
+		Weapon: 90mm.decoy.zero
+		Recoil: 0
+		Turret: primary, jeep-turret, msam-turret, mrj-turret, harvsvyt-turret, ftrk-turret, repair-turret, hmmv-turret, tnk2gdi-turret, mrls-turret, disr-turret, aav-turret, vulc-turret, hover-mrls, bggy-turret
+		LocalOffset: 768,0,90
+		PauseOnCondition: empdisable
+		RequiresCondition: !(!mcv && !harv && !truk && !jeep && !apc && !tnk1 && !tnk2 && !arty && !mnly && !msam && !mgg && !mrj && !tnkd && !papc && !ctnk && !prsm && !harvsvyt && !dtrk && !ftrk && !apcsvyt && !tnk31b && !tnk3 && !v2rl && !tnk4 && !ttnk && !qtnk && !tnk5 && !mcvcnc && !harvcnc && !trukcnc && !dtrkcnc && !hmmv && !hmmvtow && !gapc && !gapcvulc && !smch && !aav && !mrpg && !tnk2gdi && !tnk2rail && !tnk2rpod && !mrls && !mrlshvr && !mnlyrep && !tnk4gdi && !tnk4rail && !tnk4ion && !mhq && !mhqciv && !disr && !icbm && !memp && !lmch && !jugg && !mwf && !bggy && !bike && !attbggy && !napc && !napcarmd && !sapc && !tnk1nod && !mtnk && !ftnk && !ctnkchem && !howi && !srty && !hvrc && !htnk && !mrep && !ssm && !ssmnuke && !ssmhvr && !mwav && !ltnk && !ptnk && !stnk  )
+	SpawnActorOnDeath:
+		Actor: dtnk.husk
+		OwnerType: InternalName
+		EffectiveOwnerFromOwner: true
+	#   this will be an long, messy section. it has to look and behave identical to whatever its mimicin als.
+	Disguise:
+		DisguisedCondition: disguise
+		ValidStances: Ally
+		TargetTypes: VehicleDisguise
+		DisguisedAsConditions:
+			#	Allied Vehicles
+			mcv: mcv
+			mcv.ai: mcv
+			mcvf: mcv
+			harv: harv
+			harv.crate: harv
+			truk: truk
+			truf: truk
+			jeep: jeep
+			jeep.england: jeep
+			jeep.england.r2: jeep
+			jeep.scout: jeep
+			apc: apc
+			apc.crate: apc
+			apc.germany: apc
+			apc.germany.r2: apc
+			1tnk: tnk1
+			1tnf: tnk1
+			1tnk.england: tnk1
+			1tnk.france: tnk1
+			1tnk.germany: tnk1
+			2tnk: tnk2
+			2tnf: tnk2
+			2tnk.england: tnk2
+			2tnk.france: tnk2
+			2tnk.germany: tnk2
+			arty: arty
+			artf: arty
+			arty.france: arty
+			arty.france.r2: arty
+			mnly: mnly
+			msam: msam
+			mgg: mgg
+			mggf: mgg
+			mrj: mrj
+			mrj.crate: mrj
+			tnkd: tnkd
+			papc: papc
+			ctnk: ctnk
+			prsm: prsm
+			#	Soviet Vehicles
+			harv.soviet: harvsvyt
+			harv.soviet.crate: harvsvyt
+			dtrk: dtrk
+			ftrk: ftrk
+			ftrk.kyrgiz: ftrk
+			ftrk.kyrgiz.r2: ftrk
+			ftrk.scout: ftrkscout
+			ftrk.repair: ftrkrep
+			apc.soviet: apcsvyt
+			3tnk.1b: tnk31b
+			3tnk.1b.russia: tnk31b
+			3tnk.1b.russia.r2: tnk31b
+			3tnk.1b.ukraine: tnk31b
+			3tnk.1b.belarus: tnk31b
+			3tnk: tnk3
+			3tnk.russia: tnk3
+			3tnk.russia.r2: tnk3
+			3tnk.ukraine: tnk3
+			3tnk.belarus: tnk3
+			v2rl: v2rl
+			v2rl.ukraine: v2rl
+			v2rl.ukraine.r2: v2rl
+			4tnk: tnk4
+			ttnk: ttnk
+			qtnk: qtnk
+			5tnk: tnk5
+			#	GDI Vehicles
+			mcv.cnc: mcvcnc
+			mcv.cnc.ai: mcvcnc
+			harv.cnc: harvcnc
+			harv.cnc.crate: harvcnc
+			harv.cnc.stealth: harvcnc
+			truk.cnc: trukcnc
+			dtrk.cnc: dtrkcnc
+			mwf: mwf
+			hmmv: hmmv
+			hmmv.scout: hmmv
+			hmmv.tow: hmmvtow
+			gapc: gapc
+			gapc.gatt: gapcvulc
+			smch: smch
+			aav: aav
+			mrpg: mrpg
+			2tnk.gdi: tnk2gdi
+			2tnk.gdi.rail: tnk2rail
+			2tnk.gdi.rpod: tnk2rpod
+			mrls: mrls
+			mrls.crate: mrls
+			mrls.hover: mrlshvr
+			mnly.support: mnlyrep
+			mnly.support.allies: mnlyrep
+			4tnk.gdi: tnk4gdi
+			4tnk.gdi.rail: tnk4rail
+			4tnk.gdi.ion: tnk4ion
+			mhq: mhq
+			mhq.start: mhqciv
+			disr: disr
+			icbm: icbm
+			memp: memp
+			lmch: lmch
+			jugg: jugg
+			#	Nod units
+			bggy: bggy
+			bggy.scout: bggy
+			bike: bike
+			attbbgy: attbggy
+			napc: napc
+			napc.armed: napcarmd
+			sapc: sapc
+			1tnk.nod: tnk1nod
+			mtnk: mtnk
+			ftnk: ftnk
+			ctnk.nod: ctnkchem
+			howi: howi
+			srty: srty
+			mnly.stealth: mnlycloak
+			mrep: mrep
+			stnk: stnk
+			hvrc: hvrc
+			htnk: htnk
+			ssm: ssm
+			ssm.nuke: ssmnuke
+			ssm.napalm: ssm
+			ssm.hover: ssmhvr
+			mwav: mwav
+			ltnk: ltnk
+			ptnk: ptnk
+			msam.nod: mrlsnod
+	Turreted@Default:
+		Turret: default-turret
+		TurnSpeed: 5
+		Offset: 0,0,128
+	Turreted@Jeep:
+		Turret: jeep-turret
+		TurnSpeed: 5
+		Offset: 0,0,128
+	Turreted@MobileSAM:
+		Turret: msam-turret
+		TurnSpeed: 5
+		Offset: -260,0,320
+	Turreted@MobileJammer:
+		Turret: mrj-turret
+		TurnSpeed: 5
+		Offset: 246,-60,118
+	Turreted@PrismTank:
+		Turret: prsm-turret
+		TurnSpeed: 5
+		Offset: 100,0,0
+	Turreted@SovietHarvester:
+		Turret: harvsvyt-turret
+		TurnSpeed: 5
+		Offset: 508,0,128
+	Turreted@FlakTruck:
+		Turret: ftrk-turret
+		TurnSpeed: 5
+		Offset: -298,0,298
+	Turreted@RepairTruck:
+		Turret: repair-turret
+		TurnSpeed: 5
+		Offset: 0,0,128
+	Turreted@Humvee:
+		Turret: hmmv-turret
+		TurnSpeed: 5
+		Offset: -85,0,94
+	Turreted@GDIMedium:
+		Turret: tnk2gdi-turret
+		TurnSpeed: 5
+		Offset: 0,0,20
+	Turreted@MRLS:
+		Turret: mrls-turret
+		TurnSpeed: 5
+		Offset: -256,0,128
+	Turreted@SonicTank:
+		Turret: disr-turret
+		TurnSpeed: 5
+		Offset: -256,0,0
+	Turreted@AAV:
+		Turret: aav-turret
+		TurnSpeed: 5
+		Offset: 90,90,90
+	Turreted@VulcanAPC:
+		Turret: vulc-turret
+		TurnSpeed: 5
+		Offset: 0,0,150
+	Turreted@HoverMRLS:
+		Turret: hover-mrls
+		TurnSpeed: 5
+		Offset: -200,0,0
+	Turreted@Juggernaut:
+		Turret: jugg-turret
+		TurnSpeed: 5
+		Offset: -20,0,20
+	Turreted@Buggy:
+		Turret: bggy-turret
+		TurnSpeed: 5
+		Offset: -85,0,94
+	Turreted@Howitzer:
+		Turret: howi-turret
+		TurnSpeed: 5
+		Offset: -100,0,0
+	Turreted@SSM:
+		Turret: ssm-turret
+		TurnSpeed: 5
+		Offset: -128,0,128
+	Turreted@NodAPC:
+		Turret: napc-turret
+		TurnSpeed: 5
+		Offset: 176,0,16
+	Turreted@LaserTank:
+		Turret: ltnk-turret
+		TurnSpeed: 5
+		Offset: 20,0,86
+	Turreted@other:
+		Turret: primary
+		TurnSpeed: 5
+	AttackTurreted:
+		Armaments: defaultarm, invisarm
+		Turrets: default-turret, primary, jeep-turret, msam-turret, mrj-turret, harvsvyt-turret, ftrk-turret, repair-turret, hmmv-turret, tnk2gdi-turret, mrls-turret, disr-turret, aav-turret, vulc-turret, hover-mrls, jugg-turret, bggy-turret, howi-turret, ssm-turret, napc-turret, ltnk-turret, prsm-turret
+		PauseOnCondition: empdisable
+	WithMuzzleOverlay:
+	WithSpriteTurret@Default:
+		Sequence: turret-default
+		Turret: default-turret
+		RequiresCondition: !mcv && !harv && !truk && !jeep && !apc && !tnk1 && !tnk2 && !arty && !mnly && !msam && !mgg && !mrj && !tnkd && !papc && !ctnk && !prsm && !harvsvyt && !dtrk && !ftrk && !ftrkscout && !ftrkrep && !apcsvyt && !tnk31b && !tnk3 && !v2rl && !tnk4 && !ttnk && !qtnk && !tnk5 && !mcvcnc && !harvcnc && !trukcnc && !dtrkcnc && !hmmv && !hmmvtow && !gapc && !gapcvulc && !smch && !aav && !mrpg && !tnk2gdi && !tnk2rail && !tnk2rpod && !mrls && !mrlshvr && !mnlyrep && !tnk4gdi && !tnk4rail && !tnk4ion && !mhq && !mhqciv && !disr && !icbm && !memp && !lmch && !jugg && !mwf && !bggy && !bike && !attbggy && !napc && !napcarmd && !sapc && !stnk && !mtnk && !ftnk && !ctnkchem && !howi && !srty && !hvrc && !htnk && !mrep && !ssm && !ssmnuke && !ssmhvr && !mwav && !ltnk && !ptnk && !mrlsnod && !mnlycloak
+	WithSpriteTurret@Other:
+		Sequence: turret-invis
+		Turret: primary
+		RequiresCondition: mcv || harv || truk || apc || arty || mnly || mgg || tnkd || papc || ctnk || dtrk ||  v2rl || ttnk || qtnk || mcvcnc || harvcnc || trukcnc || dtrkcnc || mrpg || mhqciv || icbm || memp || mwf || bike || attbggy || napc || sapc || ftnk || ctnkchem || srty || mnlycloak || hvrc || htnk || ssmhvr
+	WithSpriteTurret@Jeep:
+		Sequence: turret-mg
+		Turret: jeep-turret
+		RequiresCondition: jeep
+	WithSpriteTurret@LightTank:
+		Sequence: turret-1tnk
+		Turret: primary
+		RequiresCondition: tnk1
+	WithSpriteTurret@MediumTank:
+		Sequence: turret-2tnk
+		Turret: primary
+		RequiresCondition: tnk2
+	WithSpriteTurret@MobileSAM:
+		Sequence: turret-msam
+		Turret: msam-turret
+		RequiresCondition: msam
+	WithSpriteTurret@MobileJammer:
+		Sequence: turret-mg
+		Turret: mrj-turret
+		RequiresCondition: mrj || mhq
+	WithSpriteTurret@PrismTank:
+		Sequence: turret-prsm
+		Turret: prsm-turret
+		RequiresCondition: prsm
+	WithSpriteTurret@SovietHarvester:
+		Sequence: turret-btr
+		Turret: harvsvyt-turret
+		RequiresCondition: harvsvyt
+	WithSpriteTurret@FlakTruck:
+		Sequence: turret-flak
+		Turret: ftrk-turret
+		RequiresCondition: ftrk
+	WithSpriteTurret@ScoutCar:
+		Sequence: turret-apc
+		Turret: repair-turret
+		RequiresCondition: ftrkscout
+	WithSpriteTurret@RepairTruck:
+		Sequence: turret-repair
+		Turret: repair-turret
+		RequiresCondition: ftrkrep
+	WithSpriteTurret@SovietAPC:
+		Sequence: turret-apc
+		Turret: primary
+		RequiresCondition: apcsvyt
+	WithSpriteTurret@HeavyTank1B:
+		Sequence: turret-3tnk1b
+		Turret: primary
+		RequiresCondition: tnk31b
+	WithSpriteTurret@HeavyTank:
+		Sequence: turret-3tnk
+		Turret: primary
+		RequiresCondition: tnk3
+	WithSpriteTurret@MammothTank:
+		Sequence: turret-4tnk
+		Turret: primary
+		RequiresCondition: tnk4
+	WithSpriteTurret@BehemothTank:
+		Sequence: turret-5tnk
+		Turret: primary
+		RequiresCondition: tnk5
+	WithSpriteTurret@Humvee:
+		Sequence: turret-btr
+		Turret: hmmv-turret
+		RequiresCondition: hmmv || hmmvtow
+	WithSpriteTurret@HumveeTow:
+		Sequence: turret-tow
+		Turret: hmmv-turret
+		RequiresCondition: hmmvtow
+	WithSpriteTurret@RobotTank:
+		Sequence: turret-smch
+		Turret: jeep-turret
+		RequiresCondition: smch
+	WithSpriteTurret@GDIAPC:
+		Sequence: turret-flak-aa
+		Turret: primary
+		RequiresCondition: gapc
+	WithSpriteTurret@VulcanAPC:
+		Sequence: turret-gatt-aa
+		Turret: vulc-turret
+		RequiresCondition: gapcvulc
+	WithSpriteTurret@AAV:
+		Sequence: turret-aav
+		Turret: aav-turret
+		RequiresCondition: aav
+	WithSpriteTurret@GDIMedium:
+		Sequence: turret-2tnkgdi
+		Turret: tnk2gdi-turret
+		RequiresCondition: tnk2gdi
+	WithSpriteTurret@RailgunMedium:
+		Sequence: turret-2tnkrail
+		Turret: tnk2gdi-turret
+		RequiresCondition: tnk2rail
+	WithSpriteTurret@RocketpodMedium:
+		Sequence: turret-2tnkrpod
+		Turret: tnk2gdi-turret
+		RequiresCondition: tnk2rpod
+	WithSpriteTurret@MRLS:
+		Sequence: turret-mrls
+		Turret: mrls-turret
+		RequiresCondition: mrls || mrlsnod
+	WithSpriteTurret@HoverMRLS:
+		Sequence: turret-hmrls
+		Turret: hover-mrls
+		RequiresCondition: mrlshvr
+	WithSpriteTurret@SupportMinelayer:
+		Sequence: turret-repair
+		Turret: primary
+		RequiresCondition: mnlyrep
+	WithSpriteTurret@GDIMammothTank:
+		Sequence: turret-4tnkgdi
+		Turret: primary
+		RequiresCondition: tnk4gdi
+	WithSpriteTurret@RailgunMammoth:
+		Sequence: turret-4tnkrail
+		Turret: primary
+		RequiresCondition: tnk4rail
+	WithSpriteTurret@IonMammoth:
+		Sequence: turret-4tnkion
+		Turret: primary
+		RequiresCondition: tnk4ion
+	WithSpriteTurret@SonicTank:
+		Sequence: turret-disr
+		Turret: primary
+		RequiresCondition: disr
+	WithSpriteTurret@Titan:
+		Sequence: turret-titan
+		Turret: primary
+		RequiresCondition: lmch
+	WithSpriteTurret@Jugg:
+		Sequence: turret-jugg
+		Turret: jugg-turret
+		RequiresCondition: jugg
+	WithSpriteTurret@Buggy:
+		Sequence: turret-mg
+		Turret: bggy-turret
+		RequiresCondition: bggy
+	WithSpriteTurret@NodAPCArmed:
+		Sequence: turret-apc
+		Turret: napc-turret
+		RequiresCondition: napcarmd
+	WithSpriteTurret@NodLightTank:
+		Sequence: turret-1tnk-nod
+		Turret: primary
+		RequiresCondition: tnk1nod
+	WithSpriteTurret@MicroTank:
+		Sequence: turret-aav
+		Turret: jeep-turret
+		RequiresCondition: mtnk
+	WithSpriteTurret@Howitzer:
+		Sequence: turret-howi
+		Turret: howi-turret
+		RequiresCondition: howi
+	WithSpriteTurret@StealthTank:
+		Sequence: turret-stnk
+		Turret: primary
+		RequiresCondition: stnk
+	WithSpriteTurret@SSMLauncher:
+		Sequence: turret-ssm
+		Turret: ssm-turret
+		RequiresCondition: ssm || ssmnuke
+	WithSpriteTurret@MicrowaveTank:
+		Sequence: turret-mwav
+		Turret: primary
+		RequiresCondition: mwav
+	WithSpriteTurret@LaserTank:
+		Sequence: turret-ltnk
+		Turret: ltnk-turret
+		RequiresCondition: ltnk
+	WithSpriteTurret@PlasmaTank:
+		Sequence: turret-ptnk
+		Turret: primary
+		RequiresCondition: ptnk
+	-WithFacingSpriteBody:
+	WithFacingSpriteBody@Default:
+		PauseOnCondition: mcv && harv && truk && jeep && apc && tnk1 && tnk2 && arty && mnly && msam && mgg && mrj && tnkd && papc && ctnk && prsm && harvsvyt && dtrk && ftrk && apcsvyt && tnk31b && tnk3 && v2rl && tnk4 && ttnk && qtnk && tnk5 && mcvcnc && harvcnc && trukcnc && dtrkcnc && hmmv && hmmvtow && gapc && gapcvulc && smch && aav && mrpg && tnk2gdi && tnk2rail && tnk2rpod && mrls && mrlshvr && mnlyrep && tnk4gdi && tnk4rail && tnk4ion && mhq && mhqciv && disr && icbm && memp && lmch && jugg && mwf && bggy && bike && attbggy && napc && napcarmd && sapc && mtnk && ftnk && ctnkchem && howi && srty && hvrc && htnk && stnk && mrep && ssm && ssmnuke && ssmhvr && mwav && ltnk && ptnk && mrlsnod && mnlycloak
+		RequiresCondition: !mcv && !harv && !truk && !jeep && !apc && !tnk1 && !tnk2 && !arty && !mnly && !msam && !mgg && !mrj && !tnkd && !papc && !ctnk && !prsm && !harvsvyt && !dtrk && !ftrk && !apcsvyt && !tnk31b && !tnk3 && !v2rl && !tnk4 && !ttnk && !qtnk && !tnk5 && !mcvcnc && !harvcnc && !trukcnc && !dtrkcnc && !hmmv && !hmmvtow && !gapc && !gapcvulc && !smch && !aav && !mrpg && !tnk2gdi && !tnk2rail && !tnk2rpod && !mrls && !mrlshvr && !mnlyrep && !tnk4gdi && !tnk4rail && !tnk4ion && !mhq && !mhqciv && !disr && !icbm && !memp && !lmch && !jugg && !mwf && !bggy && !bike && !attbggy && !napc && !napcarmd && !sapc && !mtnk && !ftnk && !ctnkchem && !howi && !srty && !hvrc && !htnk && !stnk && !mrep && !ssm && !ssmnuke && !ssmhvr && !mwav && !ltnk && !ptnk && !mrlsnod && !mnlycloak
+	WithFacingSpriteBody@MCV:
+		Name: mcv
+		Sequence: mcv-body
+		RequiresCondition: mcv
+	WithFacingSpriteBody@OreHarvester:
+		Name: harv
+		Sequence: harv-body
+		RequiresCondition: harv || harvsvyt
+	WithFacingSpriteBody@Truck:
+		Name: truk
+		Sequence: truk-body
+		RequiresCondition: truk
+	WithFacingSpriteBody@DemolitionTruck:
+		Name: dtrk
+		Sequence: dtrk-body
+		RequiresCondition: dtrk
+	WithFacingSpriteBody@Jeep:
+		Name: jeep
+		Sequence: jeep-body
+		RequiresCondition: jeep
+	WithFacingSpriteBody@Apc:
+		Name: apc
+		Sequence: apc-body
+		RequiresCondition: apc || apcsvyt || gapc || gapcvulc
+	WithFacingSpriteBody@LightTank:
+		Name: 1tnk
+		Sequence: 1tnk-body
+		RequiresCondition: tnk1
+	WithFacingSpriteBody@MediumTank:
+		Name: 2tnk
+		Sequence: 2tnk-body
+		RequiresCondition: tnk2 || tnk2gdi || tnk2rail || tnk2rpod
+	WithFacingSpriteBody@Artillery:
+		Name: arty
+		Sequence: arty-body
+		RequiresCondition: arty
+	WithFacingSpriteBody@Minelayer:
+		Name: mnly
+		Sequence: mnly-body
+		RequiresCondition: mnly || mnlyrep || mnlycloak
+	WithFacingSpriteBody@MobileGAP:
+		Name: mgg
+		Sequence: mgg-body
+		RequiresCondition: mgg || msam
+	WithIdleOverlay@MobileGAP:
+		Offset: -299,0,171
+		Sequence: spinner-mgg
+		RequiresCondition: mgg
+	WithFacingSpriteBody@MobileJammer:
+		Name: mrj
+		Sequence: mrj-body
+		RequiresCondition: mrj || mhq
+	WithIdleOverlay@MobileJammer:
+		Sequence: spinner-mrj
+		Offset: -256,0,256
+		RequiresCondition: mrj || mhq || mhqciv
+	WithFacingSpriteBody@TankDestroyer:
+		Name: tnkd
+		Sequence: tnkd-body
+		RequiresCondition: tnkd
+	WithFacingSpriteBody@PhaseAPC:
+		Name: papc
+		Sequence: papc-body
+		RequiresCondition: papc
+	WithFacingSpriteBody@ChronoTank:
+		Name: ctnk
+		Sequence: ctnk-body
+		RequiresCondition: ctnk
+	WithFacingSpriteBody@PrismTank:
+		Name: prsm
+		Sequence: prsm-body
+		RequiresCondition: prsm
+	WithFacingSpriteBody@FlakTruck:
+		Name: ftrk
+		Sequence: ftrk-body
+		RequiresCondition: ftrk || ftrkscout || ftrkrep
+	WithFacingSpriteBody@HeavyTank:
+		Name: 3tnk
+		Sequence: 3tnk-body
+		RequiresCondition: tnk31b || tnk3
+	WithFacingSpriteBody@V2Launcher:
+		Name: v2rl
+		Sequence: v2rl-body
+		RequiresCondition: v2rl
+	WithFacingSpriteBody@MammothTank:
+		Name: 4tnk
+		Sequence: 4tnk-body
+		RequiresCondition: tnk4
+	WithFacingSpriteBody@TeslaTank:
+		Name: ttnk
+		Sequence: ttnk-body
+		RequiresCondition: ttnk
+	WithIdleOverlay@TeslaTank:
+		Sequence: spinner-tesla
+		RequiresCondition: ttnk
+	WithFacingSpriteBody@MADTank:
+		Name: qtnk
+		Sequence: qtnk-body
+		RequiresCondition: qtnk
+	WithFacingSpriteBody@BehemothTank:
+		Name: 5tnk
+		Sequence: 5tnk-body
+		RequiresCondition: tnk5
+	WithFacingSpriteBody@TDMCV:
+		Name: mcvcnc
+		Sequence: mcvcnc-body
+		RequiresCondition: mcvcnc
+	WithFacingSpriteBody@TDHarvester:
+		Name: harvcnc
+		Sequence: harvcnc-body
+		RequiresCondition: harvcnc
+	WithFacingSpriteBody@TDTruck:
+		Name: trukcnc
+		Sequence: trukcnc-body
+		RequiresCondition: trukcnc
+	WithFacingSpriteBody@TDDemoTruck:
+		Name: dtrkcnc
+		Sequence: dtrkcnc-body
+		RequiresCondition: dtrkcnc
+	WithFacingSpriteBody@MobileFactory:
+		Name: mwf
+		Sequence: mwf-body
+		RequiresCondition: mwf
+	WithFacingSpriteBody@Humvee:
+		Name: hmmv
+		Sequence: hmmv-body
+		RequiresCondition: hmmv || hmmvtow
+	WithFacingSpriteBody@AAV:
+		Name: aav
+		Sequence: aav-body
+		RequiresCondition: aav
+	WithFacingSpriteBody@RobotTank:
+		Name: smch
+		Sequence: smch-body
+		RequiresCondition: smch || mtnk
+	WithFacingSpriteBody@MRPG:
+		Name: mrpg
+		Sequence: mrpg-body
+		RequiresCondition: mrpg
+	WithFacingSpriteBody@MRLS:
+		Name: mrls
+		Sequence: mrls-body
+		RequiresCondition: mrls || mrlsnod
+	WithFacingSpriteBody@HoverMRLS:
+		Name: mrlshvr
+		Sequence: hmrls-body
+		RequiresCondition: mrlshvr
+	WithFacingSpriteBody@GDIMammoth:
+		Name: 4tnkgdi
+		Sequence: 4tnkgdi-body
+		RequiresCondition: tnk4gdi || tnk4rail || tnk4ion
+	WithFacingSpriteBody@SonicTank:
+		Name: disr
+		Sequence: disr-body
+		RequiresCondition: disr
+	WithFacingSpriteBody@ICBM:
+		Name: icbm
+		Sequence: icbm-body
+		RequiresCondition: icbm
+	WithFacingSpriteBody@MobileEMP:
+		Name: memp
+		Sequence: memp-body
+		RequiresCondition: memp
+	Hovers@RepulsorGrav:
+		BobDistance: -35
+		RequiresCondition: mrlshvr || htnk
+	WithShadow@ThosethatneedIt:
+		Offset: 43, 128, 0
+		ZOffset: -129
+		RequiresCondition: smch || mtnk || mrlshvr || htnk
+	#	QuantizeFacingsFromSequence:
+	#	RequiresCondition: !lmch || !jugg
+	#	QuantizeFacingsFromSequence@GDIMechs:
+	#	Sequence: stand-legs
+	#	RequiresCondition: lmch || jugg
+	WithFacingSpriteBody@GDIMechs:
+		Name: gdimechs
+		Sequence: stand-legs
+		RequiresCondition: lmch || jugg
+	WithMoveAnimation@GDIMechs:
+		Body: body
+		MoveSequence: run-legs
+		RequiresCondition: lmch || jugg
+	WithFacingSpriteBody@Buggy:
+		Name: bggy
+		Sequence: bggy-body
+		RequiresCondition: bggy
+	WithFacingSpriteBody@Bike:
+		Name: bike
+		Sequence: bike-body
+		RequiresCondition: bike
+	WithFacingSpriteBody@AttackBuggy:
+		Name: attbggy
+		Sequence: attbggy-body
+		RequiresCondition: attbggy
+	WithFacingSpriteBody@NodAPC:
+		Name: napc
+		Sequence: napc-body
+		RequiresCondition: napc || napcarmd
+	WithIdleOverlay@NodAPC:
+		Sequence: napc-spinner
+		Offset: 0,0,70
+		RequiresCondition: napc
+	WithFacingSpriteBody@StealthAPC:
+		Name: sapc
+		Sequence: sapc-body
+		RequiresCondition: sapc
+	WithFacingSpriteBody@FlameTank:
+		Name: ftnk
+		Sequence: ftnk-body
+		RequiresCondition: ftnk
+	WithFacingSpriteBody@ChemicalTank:
+		Name: ctnkchem
+		Sequence: ctnkchem-body
+		RequiresCondition: ctnkchem
+	WithFacingSpriteBody@Howitzer:
+		Name: howi
+		Sequence: howi-body
+		RequiresCondition: howi
+	WithFacingSpriteBody@StealthArtillery:
+		Name: srty
+		Sequence: srty-body
+		RequiresCondition: srty
+	WithIdleOverlay@StealthMinelayer:
+		Sequence: mnlycloak-spinner
+		Offset: -30,0,156
+		RequiresCondition: mnlycloak
+	WithFacingSpriteBody@MobileRepair:
+		Name: mrep
+		Sequence: mrep-body
+		RequiresCondition: mrep
+	WithFacingSpriteBody@StealthTank:
+		Name: stnk
+		Sequence: stnk-body
+		RequiresCondition: stnk
+	WithFacingSpriteBody@Hovercraft:
+		Name: hvrc
+		Sequence: hvrc-body
+		RequiresCondition: hvrc
+	WithFacingSpriteBody@Hovertank:
+		Name: htnk
+		Sequence: htnk-body
+		RequiresCondition: htnk
+	WithFacingSpriteBody@SSM:
+		Name: ssm
+		Sequence: ssm-body
+		RequiresCondition: ssm || ssmnuke
+	WithFacingSpriteBody@HoverSSM:
+		Name: ssmhvr
+		Sequence: ssmhvr-body
+		RequiresCondition: ssmhvr
+	WithFacingSpriteBody@MicrowaveTank:
+		Name: mwav
+		Sequence: mwav-body
+		RequiresCondition: mwav || ltnk
+	WithFacingSpriteBody@PlasmaTank:
+		Name: ptnk
+		Sequence: ptnk-body
+		RequiresCondition: ptnk
+	Passenger:
+		PipType: Red
+	DeliversCash:
+		Payload: 675
+		Type: VehicleRefund
+
+#	Greece unique Infantry
+ATGM:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 550
+	Tooltip:
+		Name: ATGM Soldier
+	Buildable:
+		BuildPaletteOrder: 9
+		Prerequisites: ~tent, atek, ~infantry.allies, ~player.greece, ~techlevel.high
+		Queue: Infantry
+		BuildAtProductionType: Soldier
+		Description: Anti-armor rocket infantry.\nCannot attack Air units.\n Strong vs Tanks, Vehicles\n Weak vs everything Else
+	Mobile:
+		Speed: 42
+	Health:
+		HP: 4500
+	AutoTarget:
+		ScanRadius: 6
+	Armament@PRIMARY:
+		Weapon: Stinger.continous
+		LocalOffset: 226,43,245
+		FireDelay: 4
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: Stinger.continous
+	TakeCover:
+		ProneOffset: 180,0,-200
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: throw
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	Passenger:
+		PipType: Red
+	DeliversCash:
+		Payload: 137
+		Type: InfantryRefund
+
+#	Greece unique unit
+MBUN:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: atek, ~vehicles.allies, ~player.greece, ~techlevel.high
+		Description: Mobile Bunker Platform.\nGarrisoned infantry can shoot out of it.\nCan carry up to 5 Infantry into battle.\n  Strength and Weakness dependant on it's Passengers\n  Unarmed on its own
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Mobile Bunker
+	Health:
+		HP: 45000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 56
+		PauseOnCondition: !(!empdisable && !notmobile && !being-captured)
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: empdisable
+	Armament:
+		Weapon: ChainGun
+		MuzzleSequence: muzzle
+		LocalOffset: 712,0,196
+		RequiresCondition: !loaded
+		PauseOnCondition: empdisable
+		Turret:
+	RevealsShroud:
+		Range: 8c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Turreted:
+		TurnSpeed: 255
+		Offset: 0,0,210
+	AttackGarrisoned:
+		Armaments: garrisoned
+		PortOffsets: 568,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: empdisable
+		RequiresCondition: loaded
+	WithSpriteTurret:
+	WithMuzzleOverlay:
+	Cargo:
+		Types: Infantry
+		MaxWeight: 5
+		PipCount: 5
+		LoadingCondition: notmobile
+		LoadedCondition: loaded
+	Passenger:
+		Weight: 4
+		PipType: Red
+	Selectable:
+		DecorationBounds: 28,28
+
+#	Turkey unique Infantry
+MORT.Turkey:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 9
+		BuildAtProductionType: Soldier
+		Prerequisites: ~tent, dome, ~infantry.allies, ~player.turkey, ~techlevel.medium
+		Description: Infantry armed with a Mortar gun.\n  Strong vs Buildings, Infantry\n  Weak vs Vehicles, Aircraft
+	Valued:
+		Cost: 600
+	Mobile:
+		Speed: 50
+	Tooltip:
+		Name: Mortar Soldier
+	Health:
+		HP: 5250
+	Armament@PRIMARY:
+		Weapon: Mortar
+		LocalOffset: 0,0,155
+		FireDelay: 15
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: Mortar
+		FireDelay: 15
+	WithInfantryBody:
+		DefaultAttackSequence: throw
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+		Chance: 50
+	Passenger:
+		PipType: Yellow
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	RenderRangeCircle:
+	DeliversCash:
+		Payload: 150
+		Type: InfantryRefund
+	RenderSprites:
+		Image: mrtr
+
+#	Turkey unique unit
+GCAN:
+	Inherits: ^TrackedVehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: atek, dome, ~vehicles.allies, ~player.turkey, ~techlevel.high
+		Description: Heavy Artillery with extreme Range.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Grand Cannon
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 25000
+	Armor:
+		Type: Heavy
+	Mobile:
+		TurnSpeed: 2
+		Speed: 85
+	RevealsShroud:
+		Range: 5c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Armament:
+		Weapon: 8Inch.gcan
+		LocalOffset: 720,0,80
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+	WithMuzzleOverlay:
+	Explodes:
+		Weapon: ArtilleryExplode
+		EmptyWeapon: UnitExplodeSmall
+		LoadedChance: 75
+	SelectionDecorations:
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	Selectable:
+		DecorationBounds: 28,28
+	RenderRangeCircle:
+
+#	Soviet subfaction units
+
+#	Moldova MRLS
+MRLS.Soviet:
+	Inherits: ^TrackedVehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 1300
+	Buildable:
+		BuildPaletteOrder: 6
+		Prerequisites: dome, ~vehicles.soviet, ~player.moldova, ~techlevel.medium
+		Queue: Vehicle
+		Description: Long range rocket artillery.\nCan be toggled to fire in pairs or volleys.\nCannot attack Air units\n  Strong vs all Ground units\n  Weak vs Aircraft
+	-Tooltip:
+	Tooltip@sidebar:
+		Name: Multiple Rocket Launch System
+		RequiresCondition: !produced
+	Tooltip@ingame:
+		Name: MRLS
+		RequiresCondition: produced
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	Mobile:
+		Speed: 71
+		TurnSpeed: 2
+	Health:
+		HP: 25000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 5c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Turreted:
+		TurnSpeed: 3
+		Offset: 0,0,128
+	Armament@PRIMARY:
+		Weapon: 227mm
+		LocalOffset: 213,128,0, 213,-128,0
+		PauseOnCondition: empdisable
+		RequiresCondition: deployed
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: 227mm.2shot
+		LocalOffset: 213,-128,0, 213,128,0
+		PauseOnCondition: empdisable
+		RequiresCondition: !deployed
+	GrantConditionOnDeploy:
+		DeployedCondition: deployed
+		SkipMakeAnimation: true
+		PauseOnCondition: empdisable
+	AttackFrontal:
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+		PauseOnCondition: empdisable
+	WithSpriteTurret:
+	WithTurretAimAnimation:
+		Sequence: aim
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	RenderRangeCircle:
+	Explodes@UNITEXPLODES:
+		Weapon: ArtilleryExplode
+		EmptyWeapon: UnitExplodeSmall
+		LoadedChance: 75
+	Passenger:
+		PipType: Red
+	Targetable:
+		TargetTypes: Ground, Vehicle
+		RequiresCondition: !parachute
+	WithDecoration@VolleyOn:
+		RequiresSelection: true
+		Image: pip-ammored
+		Sequence: threeshot
+		ReferencePoint: Bottom, Left
+		ZOffset: 256
+		RequiresCondition: deployed
+	WithDecoration@VolleyOff:
+		RequiresSelection: true
+		Image: pip-ammored
+		Sequence: oneshot
+		ReferencePoint: Bottom, Left
+		ZOffset: 256
+		RequiresCondition: !deployed
+	RenderSprites:
+		Image: mrlssvyt
+
+#	Belarus Sniper
+SNIP:
+	Inherits@ROT: ^RottingInfantry
+	Inherits: ^Soldier
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Sniper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry
+		BuildAtProductionType: Soldier
+		BuildPaletteOrder: 7
+		Prerequisites: ~barr, dome, ~player.belarus, ~techlevel.medium
+		Description: Infantry armed with an Sniper rifle.\nNeeds to reload after every 5 shots.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+	Health:
+		HP: 5000
+	Passenger:
+		PipType: Yellow
+	RevealsShroud:
+		Range: 6c0
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: ReturnFire
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry
+	Armament@PRIMARY:
+		Weapon: Sniper
+		PauseOnCondition: !ammo
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: Sniper
+		MuzzleSequence: garrison-muzzle
+	AmmoPool:
+		Armaments: primary
+		Ammo: 5
+		PipCount: 0
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 125
+		Count: 5
+		RequiresCondition: !ammo
+	WithDecoration@ammoreplenish:
+		RequiresSelection: false
+		Image: pips
+		Sequence: tag-reload-small
+		ReferencePoint: Top
+		ZOffset: 256
+		RequiresCondition: !ammo
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	RenderSprites:
+		Image: e1sniper
+	RenderRangeCircle:
+	DeliversCash:
+		Payload: 175
+		Type: InfantryRefund
+	GpsDot:
+		String: Sniper
+
+4TNK.Flam:
+	Inherits: 4TNK
+	Tooltip:
+		Name: Flame Mammoth
+	Valued:
+		Cost: 1600
+	Mobile:
+		Speed: 64
+	Buildable:
+		BuildPaletteOrder: 8
+		Prerequisites: ftur, stek, ~vehicles.soviet, ~player.belarus, ~techlevel.high
+		Description: Heavy Flamethrower tank\nwith secondary rocketpods.\nCan crush concrete walls.\nSelf-repairs when below 50% of maximum Health.\n  Strong vs Buildings, Infantry, Light vehicles\n  Weak vs Tanks, Artillery
+	Armament@PRIMARY:
+		Weapon: FireballLauncher
+		LocalOffset: 900,180,340, 900,-180,340
+		Recoil: 171
+		RecoilRecovery: 30
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+	SpawnActorOnDeath:
+		Actor: 4TNK.Flam.Husk
+
+#	kyrgiz Light Tank
+1TNK.Soviet:
+	Inherits: 1TNK
+	-Armament@PRIMARY:
+	-Armament@SECONDARY:
+	Buildable:
+		BuildPaletteOrder: 4
+		Prerequisites: proc, ~vehicles.soviet, ~player.kyrgiz, ~techlevel.low
+		Description: Fast tank, good for scouting.\n  Special ability: Amphibian\nCan swim through sea and river.\n  Strong vs Light armor\n  Weak vs Infantry, Tanks, Aircraft
+		Icon: svyt-icon
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Scout Tank
+	Armament@PRIMARY:
+		Weapon: 70mm
+		Recoil: 42
+		RecoilRecovery: 17
+		LocalOffset: 720,0,90
+		MuzzleSequence: muzzle
+	WithSpriteTurret:
+		Sequence: svyt-tur
+	Mobile:
+		Locomotor: tracked-amphibious
+	GrantConditionOnTerrain@SEA:
+		TerrainTypes: Water, River
+		Condition: floating
+	GrantConditionOnTerrain@SEAMALUS:
+		TerrainTypes: Water
+		Condition: atsea
+	Targetable:
+		RequiresCondition: !floating
+	Targetable@SEA:
+		TargetTypes: Ground, Water, Ship, C4, Tank
+		RequiresCondition: floating
+	WithFacingSpriteBody:
+		RequiresCondition: !floating
+	WithFacingSpriteBody@SEA:
+		Name: floating
+		Sequence: idle-float
+		RequiresCondition: floating
+	SpawnActorOnDeath:
+		Actor: 1TNK.Soviet.Husk
+		RequiresCondition: !floating
+		OwnerType: InternalName
+	RenderSprites:
+		Image: 1tnk
+	DamageMultiplier:
+		Modifier: 120
+		RequiresCondition: atsea
+	Carryable:
+		LocalOffset: 0,0,100
+		RequiresCondition: !atsea
+
+#	Karelia RPG
+RPG:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: RPG Trooper
+	Buildable:
+		BuildPaletteOrder: 7
+		Prerequisites: ~barr, ftur, ~player.karelia, ~techlevel.medium
+		Queue: Infantry
+		BuildAtProductionType: Soldier
+		Description: Soldier shooting balls of Fire.\nCannot attack Air units.\n  Strong vs clustered Infantry, Structures\n  Weak vs Anti-Infantry measures
+	Selectable:
+		Class: E3
+	Health:
+		HP: 5500
+	AutoTarget:
+		ScanRadius: 6
+	Armament@PRIMARY:
+		Weapon: FireballLauncher.Single
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: FireballLauncher.Single
+	TakeCover:
+		ProneOffset: 180,0,-200
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	Passenger:
+		PipType: Red
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+		DamageSource: Killer
+	DeliversCash:
+		Payload: 150
+		Type: InfantryRefund
+
+#	Karelia SAM Launcher
+SAML:
+	Inherits: ^TrackedVehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 1200
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: stek, ~vehicles.soviet, ~player.karelia, ~techlevel.high
+		Description: Powerful anti-air unit.\nCannot attack Ground units.\n  Strong vs Aircraft\n  Weak vs everything Else
+	Tooltip:
+		Name: SAM Launcher
+	Mobile:
+		Speed: 85
+		TurnSpeed: 3
+	Health:
+		HP: 7500
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 5c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Turreted:
+		TurnSpeed: 3
+		Offset: 0,0,128
+		RealignDelay: 0
+	Armament:
+		Weapon: Patriot.hjm
+		LocalOffset: 0,-171,0, 0,171,0
+		PauseOnCondition: !ammo || empdisable
+	AmmoPool:
+		Ammo: 2
+		PipCount: 0
+		AmmoCondition: ammo
+	AttackFrontal:
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+		PauseOnCondition: empdisable
+	WithSpriteTurret:
+		RequiresCondition: ammo > 1
+		Sequence: turret2
+	WithSpriteTurret@OneMissile:
+		RequiresCondition: ammo == 1
+		Sequence: turret1
+	WithSpriteTurret@NoMissiles:
+		RequiresCondition: !ammo
+		Sequence: turret0
+	AutoTarget:
+	Explodes@UNITEXPLODES:
+		Weapon: BarrelExplode
+	ReloadAmmoPool@1:
+		Delay: 120
+		Count: 2
+		RequiresCondition: !ammo
+	ReloadArmamentsBar:
+		Color: FFFF00
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	Selectable:
+		DecorationBounds: 28,28
+	RenderRangeCircle:
+	Passenger:
+		PipType: Red
+	RenderSprites:
+		Image: ttnk
+
+# Kazakh BRDM
+BRDM:
+	Inherits: ^Vehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: stek, ~vehicles.soviet, ~player.kazakh, ~techlevel.high
+		Description: Fast armored car with anti-armor rockets.\nCannot attack Air units.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry, Aircraft
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Tank Hunter
+	Health:
+		HP: 15000
+	Armor:
+		Type: Light
+	Mobile:
+		TurnSpeed: 10
+		Speed: 170
+		PauseOnCondition: !(!empdisable && !being-captured)
+	RevealsShroud:
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Turreted:
+		TurnSpeed: 5
+	Armament:
+		Weapon: Dragon
+		LocalOffset: 213,0,120
+		PauseOnCondition: empdisable
+	AttackTurreted:
+		PauseOnCondition: empdisable
+	WithSpriteTurret:
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	Passenger:
+		PipType: Red
+	Carryable:
+		LocalOffset: 0,0,100
+
+#	Kyrgiz Mortar 
+MORT.Kyrgiz:
+	Inherits: MORT.Turkey
+	Buildable:
+		BuildPaletteOrder: 7
+		Prerequisites: ~barr, dome, ~infantry.soviet, ~player.kyrgiz, ~techlevel.medium
+	RenderSprites:
+		Image: mrtr
+
+#	Uzbek Mobile Repair
+FTRK.Repair:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: fix, stek, ~vehicles.soviet, ~player.uzbek, ~techlevel.high
+		Description: Mechanized Engineers.\nRepairs friendly vehicles.\nCan externally capture structures.\n  Unarmed
+		Icon: repicon
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Mobile Repair Truck
+	Selectable:
+		Priority: 6
+	Health:
+		HP: 10000
+	Armor:
+		Type: Light
+	Voiced:
+		VoiceSet: EngineerVoice
+	Mobile:
+		Speed: 110
+	RevealsShroud:
+		Range: 3c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 2c0
+	Turreted:
+		TurnSpeed: 255
+		Offset: 0,0,120
+	AttackFrontal:
+		PauseOnCondition: empdisable
+	Armament:
+		Weapon: Repair
+		Cursor: repair
+		OutsideRangeCursor: repair
+		TargetStances: Ally
+		ForceTargetStances: None
+		PauseOnCondition: empdisable
+	WithSpriteTurret:
+		Sequence: turret-rep
+	CaptureManager:
+	Captures@EnemyBuilding:
+		CaptureDelay: 375
+		CaptureTypes: building
+		PlayerExperience: 50
+		ConsumedByCapture: False
+	Captures@NeutralBuilding:
+		CaptureDelay: 375
+		CaptureTypes: building-external
+		PlayerExperience: 50
+		ConsumedByCapture: False
+	AutoTarget:
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Vehicle, Ship
+	Carryable:
+		LocalOffset: 0,0,100
+	Passenger:
+		PipType: Red
+	RenderSprites:
+		Image: ftrk
+
+#	Turkmen GI
+DSHK:
+	Inherits: E1
+	-DeliversCash:
+	Buildable:
+		Queue: Infantry
+		BuildAtProductionType: Soldier
+		BuildPaletteOrder: 7
+		Prerequisites: ~barr, stek, ~player.turkmen, ~techlevel.high
+		Description: Infantry that can deploy into an MG-Nest.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+		Icon: dshkicon
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Dushka Infantry
+	Mobile:
+		Speed: 50
+	Transforms:
+		IntoActor: mgnst
+		Offset: 0,0
+		Facing: 0
+		TransformSounds: mgnstdeploy.aud
+		NoTransformSounds: mgnstdeploy.aud
+		DeployCursor: deploy
+		DeployBlockedCursor: deploy-blocked
+		Voice: Action
+	Passenger:
+		PipType: Red
+	RenderSprites:
+		Image: e1
+	DeliversCash:
+		Payload: 175
+		Type: InfantryRefund
+
+MGNST:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	-EngineerRepairable:
+	-CaptureManager:
+	-Capturable:
+	-Capturable@2:
+	-CapturableProgressBar:
+	-CapturableProgressBlink:
+	-Sellable:
+	-WithColoredOverlay@EMPDISABLE:
+	-TimedConditionBar@EMPDISABLE:
+	-WithIdleOverlay@EMPDISABLE:
+	-ExternalCondition@EMPDISABLE:
+	-PowerMultiplier@EMPDISABLE:
+	-GrantCondition@EMPDISABLE:
+	-RepairableBuilding:
+	-WithBuildingRepairDecoration:
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 999
+		Prerequisites: ~disabled
+		Description: Machine gun Nest.
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: MG Nest
+	Building:
+		BuildSounds:
+		UndeploySounds:
+	Health:
+		HP: 20000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 5c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Turreted:
+		TurnSpeed: 5
+		InitialFacing: 0
+	WithSpriteBody:
+	WithIdleOverlay@GROUND:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-ground
+		Palette: effect
+	Armament:
+		Weapon: Vulcan
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 1c0
+	BodyOrientation:
+		QuantizedFacings: 28
+	Transforms:
+		IntoActor: dshk
+		Offset: 0,0
+		Facing: 0
+		TransformSounds: mgnstdeploy.aud
+		NoTransformSounds: mgnstdeploy.aud
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: being-demolished
+		Voice: Action
+	Voiced:
+		VoiceSet: GenericVoice
+	Targetable@DontEMP:
+		TargetTypes: EMPInvalid
+
+#	Ekranoplan
+EKRA:
+	Inherits: ^Ship
+	Buildable:
+		Queue: Ship
+		BuildAtProductionType: Submarine
+		BuildPaletteOrder: 8
+		Prerequisites: spen, afld, stek, ~navy.soviet, ~techlevel.medium
+		Description: Aeronautical Attack vessel.\nArmed with 6 long-range missiles.\nCan carry up to 12 Units.\nIs immune to Mines.\n  Strong vs Buildings, Vehicles\n  Weak vs Ships, Aircraft
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Ekranoplan
+	Health:
+		HP: 32500
+	Armor:
+		Type: Heavy
+	Mobile:
+		TurnSpeed: 7
+		Speed: 85
+		PauseOnCondition: !(!notmobile && !empdisable)
+	RevealsShroud:
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Armament:
+		Weapon: LunMissile
+		LocalOffset: 200,75,0, 200,-75,0, 0,75,0, 0,-75,0, -200,75,0, -200,-75,0
+		PauseOnCondition: empdisable
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		PauseOnCondition: empdisable
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 48,48
+	WithMoveAnimation:
+		MoveSequence: move
+	RevealOnFire:
+		ArmamentNames: primary
+	RenderRangeCircle:
+	MineImmune:
+	Cargo:
+		Types: Infantry, Vehicle
+		MaxWeight: 12
+		PipCount: 12
+		LoadingCondition: notmobile
+	RenderSprites:
+		Image: lun
+	GpsDot:
+		String: Hovercraft
+	ReloadArmamentsBar:
+		Color: FFFF00
+
+#	Afghan Mobile HQ
+MHQ.Soviet:
+	Inherits: ^TrackedVehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@selection: ^SelectableSupportUnit
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: dome, stek, ~vehicles.soviet, ~player.afghan, ~techlevel.high
+		Description: Mobile base of operations, armed with a token mg.\nDetects cloaked units within sight-radius.\nIncreases damage and rate of fire on nearby\nground units and allows them to self-heal.\n  Strong vs Infantry\n  Weak vs Everything else
+		Icon: mhqsvyticon
+	Valued:
+		Cost: 1000
+	-Tooltip:
+	Tooltip@sidebar:
+		Name: Mobile Headquarters
+		RequiresCondition: !produced
+	Tooltip@ingame:
+		Name: Mobile HQ
+		RequiresCondition: produced
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	Health:
+		HP: 20000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 85
+	RevealsShroud:
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: 225,0,167
+	Armament:
+		Weapon: M60mg
+		MuzzleSequence: muzzle
+		LocalOffset: 128,0,41
+		PauseOnCondition: empdisable
+	AttackTurreted:
+		PauseOnCondition: empdisable
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	WithIdleOverlay@SPINNER:
+		Sequence: spinner
+		Offset: -128,0,256
+	ProximityExternalCondition@leadershipboost:
+		Condition: leader_boost
+		Range: 4c256
+		RequiresCondition: !empdisable
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !empdisable
+	Passenger:
+		PipType: Red
+	RenderDetectionCircle:
+	RenderSprites:
+		Image: mrj
+
+# GDI subfaction units
+
+#	Rifleman - Grenadier hybrid
 E1.Grenadier:
 	Inherits: E1
 	-Cloneable:
@@ -74,6 +2744,7 @@ E1.Grenadier:
 	Voiced:
 		VoiceSet: gdisoldier
 
+#	Jumpjetter
 JUMP:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -160,29 +2831,730 @@ JUMP:
 		ValidStances: Ally
 	AnnounceOnKill:
 
-E4.Nod:
-	Inherits: E4
+#	differences to normal JEEP
+#	has 2x weapon, cost more
+#	slower moves and turns
+SMCH:
+	Inherits: JEEP
+	-Cargo:
+	-Armament:
 	Buildable:
-		Prerequisites: ~barracks, dome, ~infantry.nod, ~!player.nod, ~!player.cabal, ~techlevel.medium
-		BuildPaletteOrder: 6
+		Prerequisites: ~vehicles.gdi, ~player.futurecorps, ~techlevel.low
+		Description: Durable scout Vehicle.\nDetects cloaked units in close radius.\n  Immune to Mind-control\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+	Tooltip:
+		Name: Robot Tank
+	Valued:
+		Cost: 600
+	Mobile:
+		Locomotor: lighttracked
+		PauseOnCondition: !(!empdisable && !being-captured)
+	Health:
+		HP: 15000
+	Mobile:
+		Speed: 96
+		TurnSpeed: 5
+	Turreted:
+		TurnSpeed: 7
+	AttackTurreted:
+	Armament@1:
+		Weapon: M60mg
+		LocalOffset: 178,220,106
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+	Armament@2:
+		Weapon: M60mg
+		LocalOffset: 178,-220,106
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
 	RenderSprites:
-		Image: E4
-	-MapEditorData:
+		Image: smch
+	Voiced:
+		VoiceSet: RoboticVoice
+	WithShadow:
+		Offset: 43, 128, 0
+		ZOffset: -129
+	Targetable@MCIMMUNE:
+		TargetTypes: IsRobot
+	GpsDot:
+		String: SmallMech
 
-CYBR.Vet:
-	Inherits: CYBR
+#	Jeep with extra Rocket
+HMMV.tow:
+	Inherits: HMMV
 	Buildable:
-		Prerequisites: tmpl, ~infantry.nod, ~player.cabal, ~techlevel.high
-		BuildPaletteOrder: 6
-	ProducibleWithLevel:
-		Prerequisites: techlevel.infonly
-		InitialLevels: 1
+		Queue: Vehicle, MWFVehicle
+		BuildPaletteOrder: 2
+		Prerequisites: ~vehicles.gdi, ~player.socom, ~techlevel.low
+		Description: Fast scout & anti-infantry vehicle.\nCan carry one infantry.\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks, Aircraft
+	Tooltip:
+		Name: TOW Humvee
+	Valued:
+		Cost: 600
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: Dragon.Ltnk
+		LocalOffset: 100,90,90
+		LocalYaw: -100, 100
+		Recoil: 0
+		PauseOnCondition: empdisable
+	#	Turreted@TOW:
+	#	Turret: secondary
+	#	TurnSpeed: 10
+	#	Offset: -85,-55,94		
+	WithSpriteTurret@TOW:
+		Sequence: turret-tow
+	RenderSprites:
+		Image: hmmv
+
+#	differences to regular APC
+#	has ballistic weapon, turreted
+#	is amphibian, cost more
+AAV:
+	Inherits: APC
+	-Passenger:
+	-Carryable:
+	-AttackFrontal:
+	-Armament:
+	-Tooltip@sidebar:
+	-Tooltip@ingame:
+	Buildable:
+		Queue: Vehicle, MWFVehicle
+		BuildPaletteOrder: 3
+		Prerequisites: barracks, ~vehicles.gdi, ~player.futurecorps, ~techlevel.low
+		Description: Armored infantry transport.\nCan transport up to 3 Infantry.\n  Special ability: Amphibian\nCan swim through sea and river.\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks, Aircraft
+	Valued:
+		Cost: 750
+	Tooltip@sidebar:
+		Name: Amphibious Assault Vehicle
+		RequiresCondition: !produced
+	Tooltip@ingame:
+		Name: AAV
+		RequiresCondition: produced
+	ExternalCondition@PRODUCED:
+		Condition: produced
+	Mobile:
+		Speed: 128
+		Locomotor: tracked-amphibious
+		PauseOnCondition: !(!empdisable && !notmobile && !being-captured)
+	GrantConditionOnTerrain@SEA:
+		TerrainTypes: Water, River
+		Condition: floating
+	Targetable:
+		RequiresCondition: !floating
+	Targetable@SEA:
+		TargetTypes: Ground, Water, Ship, Repair, Tank, SeaDetonateAttack
+		RequiresCondition: floating
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 7
+		Offset: 90,90,90
+	Armament:
+		Weapon: APCGun
+		LocalOffset: 568,0,90
+		Recoil: 24
+		RecoilRecovery: 9
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+	AttackTurreted:
+		PauseOnCondition: empdisable
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Cargo:
+		Types: Infantry
+		MaxWeight: 3
+		PipCount: 3
+	WithFacingSpriteBody:
+		RequiresCondition: !floating
+	WithFacingSpriteBody@SEA:
+		Name: floating
+		Sequence: idle-float
+		RequiresCondition: floating
+
+#	GDI Apc variant with Gattling
+GAPC.gatt:
+	Inherits: GAPC
+	Buildable:
+		Prerequisites: barracks, ~vehicles.gdi, ~player.taskforce, ~techlevel.low
+		Icon: gatticon
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Gattling APC
+	Turreted:
+		Offset: 0,0,150
+	Armament@PRIMARY:
+		Weapon: Chaingun
+		LocalOffset: 321,0,85
+		Recoil: 0
+	Armament@SECONDARY:
+		Weapon: Chaingun.AA
+		LocalOffset: 220,0,350
+		Recoil: 0
+	WithSpriteTurret:
+		Sequence: turret-gatt-ag
+	WithSpriteTurret@AIR:
+		Sequence: turret-gatt-aa
+	RenderSprites:
+		Image: gapc
+
+#	Medium with Railgun
+2TNK.gdi.rail:
+	Inherits: 2TNK.gdi
+	-WithMuzzleOverlay:
+	Buildable:
+		Prerequisites: fix, ~vehicles.gdi, ~player.futurecorps, ~techlevel.medium
+		Description: Main Battle Tank, armed with Railgun.\n  Strong vs Vehicles, Infantry\n  Weak vs Ships, Aircraft
+	Tooltip:
+		Name: Railgun Medium
+	Valued:
+		Cost: 1000
+	Armament@PRIMARY:
+		Weapon: Railgun
+		LocalOffset: 768,0,90
+		Recoil: 170
+		RecoilRecovery: 42
+		PauseOnCondition: empdisable
+	SpawnActorOnDeath:
+		Actor: 2tnk.gdi.rail.husk
+		OwnerType: InternalName
+
+#	Medium with Rocketpod extra
+2tnk.gdi.rpod:
+	Inherits: 2TNK.gdi
+	Buildable:
+		Prerequisites: fix, ~vehicles.gdi, ~player.taskforce, ~techlevel.medium
+		Description: Main Battle Tank with rocket pod.\n  Strong vs Vehicles, Infantry\n  Weak vs Ships, Aircraft
+	Tooltip:
+		Name: Rocketpod Medium
+	Valued:
+		Cost: 1200
+	Armament@TERTIARY:
+		Name: tertiary
+		Weapon: Dragon.Ltnk
+		LocalOffset: 100,90,90
+		LocalYaw: -100, 100
+		Recoil: 10
+		PauseOnCondition: empdisable
+	AttackTurreted:
+		Armaments: primary, secondary, tertiary
+	SpawnActorOnDeath:
+		Actor: 2tnk.gdi.rpod.husk
+		OwnerType: InternalName
+
+#	Tiberian Sun MRLS
+MRLS.Hover:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTankandAir
+	RenderSprites:
+		Image: hvrmrls
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Hover MRLS
 	UpdatesPlayerStatistics:
-		OverrideActor: cybr
-	RenderSprites:
-		Image: cybr
-	-MapEditorData:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle, MWFVehicle
+		BuildPaletteOrder: 6
+		Prerequisites: dome, ~vehicles.gdi, ~player.futurecorps, ~techlevel.medium
+		Description: Anti-gravity Repulsor chassis outfitted\nwith multi-purpose rocketlaunchers.\n  Strong vs Buildings and Vehicles\n Weak vs Tanks and Ships
+	Mobile:
+		TurnSpeed: 5
+		Speed: 113
+		Locomotor: repulsor
+	LeavesTrails:
+		Image: twake
+		Palette: effect
+		TerrainTypes: Water
+		TrailWhileStationary: true
+		StationaryInterval: 18
+		MovingInterval: 6
+		RequiresCondition: !airborne
+	Health:
+		HP: 18000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		MinRange: 4c0
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -200,0,0
+	Hovers:
+		BobDistance: -35
+		RequiresCondition: !empdisable
+	GrantConditionOnTerrain:
+		TerrainTypes: Water
+		Condition: onwater
+	KillsSelf@SINK:
+		RequiresCondition: onwater && empdisable && !airborne
+	WithShadow:
+		Offset: 43, 128, 0
+		ZOffset: -129
+	Targetable:
+		RequiresCondition: !parachute && !airborne
+		TargetTypes: Ground, Vehicle, VehicleDisguise
+	Targetable@REPAIR:
+		RequiresCondition: !parachute && damaged && !airborne
+		TargetTypes: Repair
+	Targetable@AIRBORNE:
+		TargetTypes: Air, Helicopter
+		RequiresCondition: airborne
+	GrantConditionOnJumpjetLayer:
+		Condition: airborne
+	Armament@PRIMARY:
+		Weapon: 227mm.2shot
+		LocalOffset: 213,128,0, 213,-128,0
+		LocalYaw: 100, -100
+		PauseOnCondition: !ammo && empdisable
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: 227mm.2shot.aa
+		LocalOffset: 213,128,0, 213,-128,0
+		LocalYaw: 100, -100
+		PauseOnCondition: !ammo && empdisable
+	AmmoPool:
+		Armaments: primary, secondary
+		Ammo: 2
+		PipCount: 0
+		AmmoCondition: ammo	
+	ReloadAmmoPool:
+		Count: 2
+		Delay: 60
+		PauseOnCondition: ammo
+	AutoTarget:
+		ScanRadius: 10
+	AttackTurreted:
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: false
+		OpportunityFire: False
+		PauseOnCondition: empdisable
+	WithSpriteTurret:
+	Explodes:
+		Weapon: ArtilleryExplode
+		LoadedChance: 50
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	RenderRangeCircle:
+	GpsDot:
+		String: Repulsor
 
+4tnk.gdi.ion:
+	Inherits: 4TNK.gdi
+	-WithMuzzleOverlay:
+	Buildable:
+		Prerequisites: fix, eye, ~vehicles.gdi, ~player.socom, ~techlevel.high
+		BuildLimit: 3
+		Description: Big and slow tank, with anti-air capability.\nArmed with target designator for Ion cannon strikes.\nRequires Advanced Comm. Center to fire weapon.\nMaximum 3 can be built.\nCan crush concrete walls.\nSelf-repairs when below 50% of maximum Health.\n  Strong vs Vehicles, Infantry, Buildings\n  Weak vs Artillery
+		Icon: ionicon
+	Tooltip:
+		Name: Ion Mammoth
+	Valued:
+		Cost: 1800
+	Armament@PRIMARY:
+		Weapon: IonPainter
+		LocalOffset: 770,0,320
+		Recoil: 0
+		RecoilRecovery: 0
+		PauseOnCondition: !(!empdisable) && !haseye
+	GrantConditionOnPrerequisite@NOIONWITHOUTEYE:
+		Condition: haseye
+		Prerequisites: eye
+	SpawnActorOnDeath:
+		Actor: 4tnk.gdi.ion.husk
+		OwnerType: InternalName
+	WithSpriteTurret:
+		Sequence: ionturret
+	RenderSprites:
+		Image: 4tnk.gdi
+
+#	Tiberian Sun Titan
+LMCH:
+	Inherits: ^TrackedVehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTankandAir
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 8
+		Prerequisites: fix, techcenter, ~vehicles.gdi, ~player.futurecorps, ~techlevel.high
+		Description: Tough combat battle-mech.\nHas minimum firing radius of 1 cell.\n  Can attack Aircraft.\n  Strong vs Infantry, Tanks\n  Weak vs attacks at Close range
+	Valued:
+		Cost: 2600
+	Selectable:
+		Bounds: 30,40,0,0
+	Tooltip:
+		Name: Titan Mech
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 100000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Locomotor: heavytracked
+		Speed: 50
+	Passenger:
+		PipType: Red
+		Weight: 4
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: run
+	WithSpriteTurret:
+	RevealsShroud:
+		MinRange: 4c0
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	Armament@PRIMARY:
+		Weapon: TitanGun
+		LocalOffset: 830,260,100
+		Recoil: 171
+		RecoilRecovery: 30
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: TitanTusk
+		LocalOffset: -85,-384,340
+		LocalYaw: -100,100
+		Recoil: 43
+		MuzzleSequence: muzzle
+	Turreted:
+		TurnSpeed: 3
+		Offset: 0,0,0
+	AttackTurreted:
+		PauseOnCondition: empdisable
+		Armaments: primary, secondary, tertiary
+	WithMuzzleOverlay:
+	Explodes:
+		Weapon: ArtilleryExplode
+		LoadedChance: 100
+	SelfHealing@DEFAULT:
+		PercentageStep: 1
+		Delay: 25
+		HealIfBelow: 51
+		DamageCooldown: 150
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	GpsDot:
+		String: Mech
+	RenderSprites:
+		Image: titan
+
+#	Tiberian Sun Juggernaut
+JUGG:
+	Inherits: LMCH
+	Inherits@AUTOTARGET: ^AutoTargetGroundAntiStructure
+	-Armament@SECONDARY:
+	-SelfHealing@DEFAULT:
+	RenderSprites:
+		Image: jugg
+	Tooltip:
+		Name: Juggernaut
+	Buildable:
+		BuildPaletteOrder: 12
+		Prerequisites: techcenter, eye, ~vehicles.gdi, ~player.futurecorps, ~techlevel.high
+		Description: Tough artillery battle-mech.\n  Strong vs Infantry, Structures\n  Weak vs Aircraft
+	Valued:
+		Cost: 1800
+	Armament@PRIMARY:
+		Weapon: JuggernautGun
+		LocalOffset: 830,0,500, 830,100,500, 830,-100,500
+	AttackTurreted:
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+	Turreted:
+		Offset: -20,0,20
+	Health:
+		HP: 50000
+	RenderRangeCircle:
+
+#	Orca Bomber variant
+ORCB:
+	Inherits: ^Helicopter
+	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTank
+	Inherits@EXPERIENCE: ^GainsExperience
+	Buildable:
+		Queue: Aircraft
+		BuildAtProductionType: Helicopter
+		BuildPaletteOrder: 5
+		Prerequisites: ~hpad, tech, ~aircraft.gdi, ~player.futurecorps, ~techlevel.high
+		Description: VTOL bomber-craft armed with EMP bombs.\n  Strong vs Buildings, Vehicles\n  Weak vs Aircraft
+	Valued:
+		Cost: 1650
+	Tooltip:
+		Name: Orca Bomber
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 26000
+	RevealsShroud:
+		Range: 10c0
+		MinRange: 8c0
+		Type: GroundPosition
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 8c0
+		Type: GroundPosition
+	Armament:
+		Weapon: OrcaBomb
+		LocalOffset: 2,-256,-43, 2,256,-43
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 20
+		PersistentTargeting: false
+		OpportunityFire: false
+	Aircraft:
+		CruiseAltitude: 2560
+		AltitudeVelocity: 0c120
+		TurnSpeed: 4
+		Speed: 180
+		RepulsionSpeed: 40
+		MaximumPitch: 56
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		CanHover: False
+		CanSlide: False
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: HoldFire
+	AmmoPool:
+		Ammo: 16
+		PipCount: 4
+		AmmoCondition: ammo
+	Selectable:
+		Bounds: 36,28,0,2
+		DecorationBounds: 40,29,0,1
+	SmokeTrailWhenDamaged:
+		Offset: -853,0,171
+		Interval: 2
+	WithMoveAnimation:
+		MoveSequence: move
+	ProducibleWithLevel:
+		Prerequisites: aircraft.upgraded
+	Rearmable:
+		RearmActors: hpad, carr.deployed
+	RenderSprites:
+		Image: orcb
+	SpawnActorOnDeath:
+		Actor: ORCB.Husk
+		RequiresCondition: airborne && !empdisable
+	SpawnActorOnDeath@EMP:
+		Actor: ORCB.Husk.EMP
+		RequiresCondition: airborne && empdisable
+	GpsDot:
+		String: EMP
+
+#	Aurora Plane
+AURO:
+	Inherits: ^Plane
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTODAMAGE: ^KilledWithoutAirfield
+	Buildable:
+		Queue: Aircraft
+		BuildAtProductionType: Plane
+		BuildPaletteOrder: 5
+		Prerequisites: ~afld, ~aircraft.gdi, ~player.socom, ~techlevel.high
+		Description: Supersonic bomber armed with a Seismic bomb.\n  Special Ability: Afterburner\nSpeeds up 150% after dropping payload and takes 10% less damage.\n  Strong vs Buildings, Light Armor, Infantry\n  Weak vs Aircraft
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Aurora
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 14000
+	RevealsShroud:
+		Range: 11c0
+		MinRange: 9c0
+		Type: GroundPosition
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 9c0
+		Type: GroundPosition
+	Armament:
+		Weapon: JDAM
+		LocalOffset: 2,0,-43
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 128
+		PersistentTargeting: false
+		OpportunityFire: false
+		PauseOnCondition: empdisable
+		Voice: Attack
+	Aircraft:
+		CruiseAltitude: 2560
+		InitialFacing: 192
+		TurnSpeed: 4
+		Speed: 225
+		RepulsionSpeed: 40
+		MaximumPitch: 56
+		TakeoffSounds: cjetbana.aud
+		Voice: Move
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: AttackAnything
+	AmmoPool:
+		Ammo: 1
+		PipCount: 1
+		PipType: Gray
+		ReloadDelay: 240
+		AmmoCondition: ammo
+	#	GrantConditionOnAttack@AFTERBURNER:
+	#	Condition: afterburner
+	#	ActiveSound: cjetband.aud
+	SpeedMultiplier@AFTERBURNER:
+		Modifier: 150
+		RequiresCondition: !ammo
+	DamageMultiplier@AFTERBURNER:
+		Modifier: 90
+		RequiresCondition: !ammo
+	Selectable:
+		Bounds: 36,28,0,2
+		DecorationBounds: 40,29,0,1
+	Contrail@AB1:
+		Offset: -400,-70,-50
+		UsePlayerColor: false
+		ZOffset: -512
+		Color: cc550080
+		TrailLength: 10
+	Contrail@AB2:
+		Offset: -400,70,-50
+		UsePlayerColor: false
+		ZOffset: -512
+		Color: cc550080
+		TrailLength: 10
+	Contrail@1:
+		Offset: -300,-800,-50
+	Contrail@2:
+		Offset: -300,800,-50
+	SpawnActorOnDeath:
+		Actor: AURO.Husk
+		RequiresCondition: ammo && !empdisable
+	SpawnActorOnDeath@EMP:
+		Actor: AURO.Husk.EMP
+		RequiresCondition: ammo && empdisable
+	SmokeTrailWhenDamaged:
+		Offset: -853,0,171
+		Interval: 2
+	ProducibleWithLevel:
+		Prerequisites: aircraft.upgraded
+	Rearmable:
+		RearmActors: afld, afld.ukraine, carr.new.deployed
+	Voiced:
+		VoiceSet: AuroraVoice
+
+#	Railgun Turret
+RTUR:
+	Inherits: ^Defense
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTankDefense
+	-ActorPreviewPlaceBuildingPreview:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 36,36
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Railgun Turret
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 4
+		Prerequisites: weap, ~structures.gdi, ~player.socom, ~techlevel.medium
+		Description: Anti-tank defense with Railgun.\n Can detect cloaked units.\n  Strong vs Tanks, Vehicles\n  Weak vs Infantry
+	Health:
+		HP: 40000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		MinRange: 5c0
+		Range: 7c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 5c0
+	DetectCloaked:
+		Range: 3c768
+		RequiresCondition: !disabled && !lowpower && !build-incomplete
+	RenderDetectionCircle:
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 6
+		InitialFacing: 128
+		Offset: 400,0,-286
+	Armament:
+		Weapon: Railgun
+		LocalOffset: 1468,-32,256
+		PauseOnCondition: disabled || empdisable
+	AttackTurreted:
+		PauseOnCondition: disabled || empdisable
+		RequiresCondition: !build-incomplete
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	Power:
+		Amount: -40
+	BodyOrientation:
+	SequencePlaceBuildingPreview:
+		Sequence: place
+		SequencePalette: placebuilding	
+	RenderSprites:
+		Image: rtur
+
+#	GDI AA Gattling Gun
+AGUN.cnc:
+	Inherits: AGUN
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 6
+		Prerequisites: dome, ~structures.gdi, ~player.taskforce, ~techlevel.medium
+		Description: Anti-Air base defense.\n  Strong vs Aircraft\n  Weak vs Ground units
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Anti-Air Gun
+	-Armament:
+	Armament@GAT0:
+		Weapon: Gatt.0
+		LocalOffset: 520,0,450
+		MuzzleSequence: muzzle
+		RequiresCondition: gattling == 0
+	Armament@GAT1:
+		Weapon: Gatt.1
+		LocalOffset: 520,0,450
+		MuzzleSequence: muzzle
+		RequiresCondition: gattling == 1
+	Armament@GAT2:
+		Weapon: Gatt.2
+		LocalOffset: 520,0,450
+		MuzzleSequence: muzzle
+		RequiresCondition: gattling == 2
+	Armament@GAT3:
+		Weapon: Gatt.3
+		LocalOffset: 520,0,450
+		MuzzleSequence: muzzle
+		RequiresCondition: gattling == 3
+	GrantConditionOnAttack:
+		Condition: gattling
+		RequiredShotsPerInstance: 1,7,14
+		MaximumInstances: 3
+		RevokeDelay: 40
+		RevokeOnNewTarget: False
+		RevokeAll: True
+	RenderSprites:
+		Image: cncagun
+
+#	Nod subfaction units
+
+#	Laser Chain Gunner
 LCG:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -276,15 +3648,7 @@ LCG:
 		ValidStances: Ally 
 	AnnounceOnKill:
 
-INFL.Blackhand:
-	Inherits: INFL
-	Buildable:
-		Prerequisites: shrn, ~infantry.nod, ~player.blackhand, ~techlevel.high
-		Description: Agent of the Black Hand.\nCan detect cloaked units and spies.\n  Special Ability: Infiltration\nEnters enemy production structures to show Info. (NYI)\nEnters enemy Refineries to steal Credits.\nEnters enemy Power Plants to Demolish them.\nEnters enemy Radar to reset exploration.\nEnters enemy Tech Centers to unlock Inferno Bomb.\nSpecial ability: Phase Cloaking\nInvisible when out of combat.\n  Strong vs Infantry\n  Weak vs everything Else	
-	RenderSprites:
-		Image: infl
-	-MapEditorData:
-
+#	Rebels commando variant
 E7.Nod:
 	Inherits: E7
 	-GrantConditionOnTerrain:
@@ -328,6 +3692,7 @@ E7.Nod:
 		RequiresCondition: !parachute
 		TargetTypes: Ground, Infantry, Disguise
 
+#	Cabal Commando variant
 GNRL.Nod:
 	Inherits: VOLK
 	Buildable:
@@ -345,6 +3710,7 @@ GNRL.Nod:
 	RenderSprites:
 		Image: gnrlnod
 
+#	Cabal's cloaked Harvester
 HARV.cnc.stealth:
 	Inherits: HARV.cnc
 	-Tooltip@sidebar:
@@ -379,84 +3745,9 @@ HARV.cnc.stealth:
 		Image: gdiharv
 		FactionImages:
 			nod: nodharv
-			bossnod: nodharv
+			blackhand: nodharv
 			cabal: nodharv
 			rebels: nodharv
-
-#	differences to normal JEEP
-#	has 2x weapon, cost more
-#	slower moves and turns
-SMCH:
-	Inherits: JEEP
-	-Cargo:
-	-Armament:
-	Buildable:
-		Prerequisites: ~vehicles.gdi, ~player.futurecorps, ~techlevel.low
-		Description: Durable scout Vehicle.\nDetects cloaked units in close radius.\n  Immune to Mind-control\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
-	Tooltip:
-		Name: Robot Tank
-	Valued:
-		Cost: 600
-	Mobile:
-		Locomotor: lighttracked
-		PauseOnCondition: !(!empdisable && !being-captured)
-	Health:
-		HP: 15000
-	Mobile:
-		Speed: 96
-		TurnSpeed: 5
-	Turreted:
-		TurnSpeed: 7
-	AttackTurreted:
-		#	FacingTolerance: 128
-	Armament@1:
-		Weapon: M60mg
-		LocalOffset: 178,220,106
-		MuzzleSequence: muzzle
-		PauseOnCondition: empdisable
-	Armament@2:
-		Weapon: M60mg
-		LocalOffset: 178,-220,106
-		MuzzleSequence: muzzle
-		PauseOnCondition: empdisable
-	RenderSprites:
-		Image: smch
-	Voiced:
-		VoiceSet: RoboticVoice
-	WithShadow:
-		Offset: 43, 128, 0
-		ZOffset: -129
-	Targetable@MCIMMUNE:
-		TargetTypes: IsRobot
-	GpsDot:
-		String: SmallMech
-
-HMMV.tow:
-	Inherits: HMMV
-	Buildable:
-		Queue: Vehicle, MWFVehicle
-		BuildPaletteOrder: 2
-		Prerequisites: ~vehicles.gdi, ~player.socom, ~techlevel.low
-		Description: Fast scout & anti-infantry vehicle.\nCan carry one infantry.\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks, Aircraft
-	Tooltip:
-		Name: TOW Humvee
-	Valued:
-		Cost: 600
-	Armament@SECONDARY:
-		Name: secondary
-		Weapon: Dragon.Ltnk
-		LocalOffset: 100,90,90
-		LocalYaw: -100, 100
-		Recoil: 0
-		PauseOnCondition: empdisable
-	#	Turreted@TOW:
-	#	Turret: secondary
-	#	TurnSpeed: 10
-	#	Offset: -85,-55,94		
-	WithSpriteTurret@TOW:
-		Sequence: turret-tow
-	RenderSprites:
-		Image: hmmv
 
 #	differences to normal JEEP
 #	has 2x weapon, cost more
@@ -525,97 +3816,6 @@ ATTBGGY:
 		GrantsCondition: armingcoil
 
 #	differences to regular APC
-#	has ballistic weapon, turreted
-#	is amphibian, cost more
-AAV:
-	Inherits: APC
-	-Passenger:
-	-Carryable:
-	-AttackFrontal:
-	-Armament:
-	-Tooltip@sidebar:
-	-Tooltip@ingame:
-	Buildable:
-		Queue: Vehicle, MWFVehicle
-		BuildPaletteOrder: 3
-		Prerequisites: barracks, ~vehicles.gdi, ~player.futurecorps, ~techlevel.low
-		Description: Armored infantry transport.\nCan transport up to 3 Infantry.\n  Special ability: Amphibian\nCan swim through sea and river.\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks, Aircraft
-	Valued:
-		Cost: 750
-	Tooltip@sidebar:
-		Name: Amphibious Assault Vehicle
-		RequiresCondition: !produced
-	Tooltip@ingame:
-		Name: AAV
-		RequiresCondition: produced
-	ExternalCondition@PRODUCED:
-		Condition: produced
-	Mobile:
-		Speed: 128
-		Locomotor: tracked-amphibious
-		PauseOnCondition: !(!empdisable && !notmobile && !being-captured)
-	GrantConditionOnTerrain@SEA:
-		TerrainTypes: Water, River
-		Condition: floating
-	Targetable:
-		RequiresCondition: !floating
-	Targetable@SEA:
-		TargetTypes: Ground, Water, Ship, Repair, Tank, SeaDetonateAttack
-		RequiresCondition: floating
-	Armor:
-		Type: Heavy
-	Turreted:
-		TurnSpeed: 7
-		Offset: 90,90,90
-	Armament:
-		Weapon: APCGun
-		LocalOffset: 568,0,90
-		Recoil: 24
-		RecoilRecovery: 9
-		MuzzleSequence: muzzle
-		PauseOnCondition: empdisable
-	AttackTurreted:
-		PauseOnCondition: empdisable
-	WithMuzzleOverlay:
-	WithSpriteTurret:
-	Cargo:
-		Types: Infantry
-		MaxWeight: 3
-		PipCount: 3
-	WithFacingSpriteBody:
-		RequiresCondition: !floating
-	WithFacingSpriteBody@SEA:
-		Name: floating
-		Sequence: idle-float
-		RequiresCondition: floating
-
-GAPC.gatt:
-	Inherits: GAPC
-	Buildable:
-		Prerequisites: barracks, ~vehicles.gdi, ~player.taskforce, ~techlevel.low
-		Icon: gatticon
-	Valued:
-		Cost: 700
-	Tooltip:
-		Name: Gattling APC
-	Turreted:
-		Offset: 0,0,150
-	Armament@PRIMARY:
-		Weapon: Chaingun
-		LocalOffset: 321,0,85
-		Recoil: 0
-	Armament@SECONDARY:
-		Weapon: Chaingun.AA
-		LocalOffset: 220,0,350
-		Recoil: 0
-	WithSpriteTurret:
-		Sequence: turret-gatt-ag
-	WithSpriteTurret@AIR:
-		Sequence: turret-gatt-aa
-	RenderSprites:
-		Image: gapc
-
-#	differences to regular APC
 #	cloaked, moves slower
 #	cost more
 SAPC:
@@ -656,6 +3856,7 @@ SAPC:
 	Voiced:
 		VoiceSet: SAPCVoice
 
+#	Rebels Nod APC variant
 NAPC.Armed:
 	Inherits: NAPC
 	-ProximityExternalCondition@barracksheal:
@@ -686,7 +3887,7 @@ NAPC.Armed:
 	RenderSprites:
 		Image: napc
 
-#	Mini Tank
+#	Micro Tank
 MTNK:
 	Inherits: SMCH
 	-Armament@1:
@@ -700,6 +3901,11 @@ MTNK:
 		Prerequisites: proc, ~vehicles.nod, ~player.cabal, ~techlevel.low
 		Description: Drone battle tank.\n  Immune to Mind-control\n  Strong vs Vehicles\n  Weak vs Infantry, Defenses, Aircraft
 		Icon: tankicon
+	Valued:
+		Cost: 500
+	Mobile:
+		Speed: 118
+		TurnSpeed: 5
 	Health:
 		HP: 17500
 	RevealsShroud:
@@ -709,7 +3915,7 @@ MTNK:
 	RevealsShroud@GAPGEN:
 		Range: 3c0
 	Armament@Cannon:
-		Weapon: 70mm
+		Weapon: APCGun
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 768,0,90
@@ -719,48 +3925,7 @@ MTNK:
 	RenderSprites:
 		Image: smch
 
-2TNK.gdi.rail:
-	Inherits: 2TNK.gdi
-	-WithMuzzleOverlay:
-	Buildable:
-		Prerequisites: fix, ~vehicles.gdi, ~player.futurecorps, ~techlevel.medium
-		Description: Main Battle Tank, armed with Railgun.\n  Strong vs Vehicles, Infantry\n  Weak vs Ships, Aircraft
-	Tooltip:
-		Name: Railgun Medium
-	Valued:
-		Cost: 1000
-	Armament@PRIMARY:
-		Weapon: Railgun
-		LocalOffset: 768,0,90
-		Recoil: 170
-		RecoilRecovery: 42
-		PauseOnCondition: empdisable
-	SpawnActorOnDeath:
-		Actor: 2tnk.gdi.rail.husk
-		OwnerType: InternalName
-
-2tnk.gdi.rpod:
-	Inherits: 2TNK.gdi
-	Buildable:
-		Prerequisites: fix, ~vehicles.gdi, ~player.taskforce, ~techlevel.medium
-		Description: Main Battle Tank with rocket pod.\n  Strong vs Vehicles, Infantry\n  Weak vs Ships, Aircraft
-	Tooltip:
-		Name: Rocketpod Medium
-	Valued:
-		Cost: 1200
-	Armament@TERTIARY:
-		Name: tertiary
-		Weapon: Dragon.Ltnk
-		LocalOffset: 100,90,90
-		LocalYaw: -100, 100
-		Recoil: 10
-		PauseOnCondition: empdisable
-	AttackTurreted:
-		Armaments: primary, secondary, tertiary
-	SpawnActorOnDeath:
-		Actor: 2tnk.gdi.rpod.husk
-		OwnerType: InternalName
-
+#	Chemical Tank
 CTNK.Nod:
 	Inherits: FTNK
 	Valued:
@@ -788,107 +3953,6 @@ CTNK.Nod:
 	Passenger:
 		PipType: Red
 
-MRLS.Hover:
-	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTankandAir
-	RenderSprites:
-		Image: hvrmrls
-	Valued:
-		Cost: 1000
-	Tooltip:
-		Name: Hover MRLS
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		Queue: Vehicle, MWFVehicle
-		BuildPaletteOrder: 6
-		Prerequisites: dome, ~vehicles.gdi, ~player.futurecorps, ~techlevel.medium
-		Description: Anti-gravity Repulsor chassis outfitted\nwith multi-purpose rocketlaunchers.\n  Strong vs Buildings and Vehicles\n Weak vs Tanks and Ships
-	Mobile:
-		TurnSpeed: 5
-		Speed: 113
-		Locomotor: repulsor
-	LeavesTrails:
-		Image: twake
-		Palette: effect
-		TerrainTypes: Water
-		TrailWhileStationary: true
-		StationaryInterval: 18
-		MovingInterval: 6
-		RequiresCondition: !airborne
-	Health:
-		HP: 18000
-	Armor:
-		Type: Light
-	RevealsShroud:
-		MinRange: 4c0
-		Range: 6c0
-		RevealGeneratedShroud: False
-	RevealsShroud@GAPGEN:
-		Range: 4c0
-	Turreted:
-		TurnSpeed: 10
-		Offset: -200,0,0
-	Hovers:
-		BobDistance: -35
-		RequiresCondition: !empdisable
-	GrantConditionOnTerrain:
-		TerrainTypes: Water
-		Condition: onwater
-	KillsSelf@SINK:
-		RequiresCondition: onwater && empdisable && !airborne
-	WithShadow:
-		Offset: 43, 128, 0
-		ZOffset: -129
-	Targetable:
-		RequiresCondition: !parachute && !airborne
-		TargetTypes: Ground, Vehicle
-	Targetable@REPAIR:
-		RequiresCondition: !parachute && damaged && !airborne
-		TargetTypes: Repair
-	Targetable@AIRBORNE:
-		TargetTypes: Air, Helicopter
-		RequiresCondition: airborne
-	GrantConditionOnJumpjetLayer:
-		Condition: airborne
-	Armament@PRIMARY:
-		Weapon: 227mm.2shot
-		LocalOffset: 213,128,0, 213,-128,0
-		LocalYaw: 100, -100
-		PauseOnCondition: !ammo && empdisable
-	Armament@SECONDARY:
-		Name: secondary
-		Weapon: 227mm.2shot.aa
-		LocalOffset: 213,128,0, 213,-128,0
-		LocalYaw: 100, -100
-		PauseOnCondition: !ammo && empdisable
-	AmmoPool:
-		Armaments: primary, secondary
-		Ammo: 2
-		PipCount: 0
-		AmmoCondition: ammo	
-	ReloadAmmoPool:
-		Count: 2
-		Delay: 60
-		PauseOnCondition: ammo
-	AutoTarget:
-		ScanRadius: 10
-	AttackTurreted:
-		TargetFrozenActors: True
-		ForceFireIgnoresActors: false
-		OpportunityFire: False
-		PauseOnCondition: empdisable
-	WithSpriteTurret:
-	Explodes:
-		Weapon: ArtilleryExplode
-		LoadedChance: 50
-	ProducibleWithLevel:
-		Prerequisites: vehicles.upgraded
-	RenderRangeCircle:
-	GpsDot:
-		String: Repulsor
-		
 #	Hover Tank
 HTNK:
 	Inherits: ^Vehicle
@@ -946,7 +4010,7 @@ HTNK:
 		ZOffset: -129
 	Targetable:
 		RequiresCondition: !parachute && !airborne
-		TargetTypes: Ground, Vehicle
+		TargetTypes: Ground, Vehicle, VehicleDisguise
 	Targetable@REPAIR:
 		RequiresCondition: !parachute && damaged && !airborne
 		TargetTypes: Repair
@@ -1093,34 +4157,139 @@ SRTY:
 	Selectable:
 		DecorationBounds: 28,28
 
-4tnk.gdi.ion:
-	Inherits: 4TNK.gdi
-	-WithMuzzleOverlay:
+#	Speedboat with MG
+SCRB:
+	Inherits: ^Ship
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetNavalAssaultMove
+	-GpsDot:
 	Buildable:
-		Prerequisites: fix, eye, ~vehicles.gdi, ~player.socom, ~techlevel.high
-		BuildLimit: 3
-		Description: Big and slow tank, with anti-air capability.\nArmed with target designator for Ion cannon strikes.\nRequires Advanced Comm. Center to fire weapon.\nMaximum 3 can be built.\nCan crush concrete walls.\nSelf-repairs when below 50% of maximum Health.\n  Strong vs Vehicles, Infantry, Buildings\n  Weak vs Artillery
-		Icon: ionicon
-	Tooltip:
-		Name: Ion Mammoth
+		Queue: Ship
+		BuildAtProductionType: Boat
+		BuildPaletteOrder: 2
+		Prerequisites: ~spen, proc, ~navy.nod, ~player.blackhand, ~techlevel.low
+		Description: Fast scout ship armed with dual Machineguns.\nDoes not appear on enemy radar or GPS.\n  Strong vs Infantry\n  Weak vs Ships, Vehicles
 	Valued:
-		Cost: 1800
+		Cost: 450
+	Tooltip:
+		Name: Scarab Speedboat
+	Health:
+		HP: 18000
+	Armor:
+		Type: Light
+	Mobile:
+		TurnSpeed: 7
+		Speed: 128
+	RevealsShroud:
+		MinRange: 4c0
+		Range: 5c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
 	Armament@PRIMARY:
-		Weapon: IonPainter
-		LocalOffset: 770,0,320
-		Recoil: 0
-		RecoilRecovery: 0
-		PauseOnCondition: !(!empdisable) && !haseye
-	GrantConditionOnPrerequisite@NOIONWITHOUTEYE:
-		Condition: haseye
-		Prerequisites: eye
-	SpawnActorOnDeath:
-		Actor: 4tnk.gdi.ion.husk
-		OwnerType: InternalName
+		Weapon: M60mg
+		LocalOffset: 201,85,183
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+	Armament@SECONDARY:
+		Weapon: M60mg
+		LocalOffset: 201,-85,183
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable
+	AttackFrontal:
+		PauseOnCondition: empdisable
+	WithMuzzleOverlay:
+	WithMoveAnimation:
+		MoveSequence: move
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 36,36
+	AppearsOnRadar:
+		ValidStances: Ally
+
+#	Obelisk Ship
+LCRV:
+	Inherits: ^Ship
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetNavalAssaultMove
+	Buildable:
+		Queue: Ship
+		BuildAtProductionType: Boat
+		BuildPaletteOrder: 3
+		Prerequisites: ~spen, shrn, ~navy.nod, ~player.blackhand, ~techlevel.high
+		Description: Main battle ship of Nod armed with\nArtillery turret and obelisk Laser.\nNeeds to redirect all power to Laser\nin order to fire it, becoming immobile.\n  Strong vs anything on Ground\n  Weak vs Aircraft, Artillery
+	Valued:
+		Cost: 1850
+	Tooltip:
+		Name: Laser Corvette
+	Health:
+		HP: 35000
+	Armor:
+		Type: Heavy
+	Mobile:
+		TurnSpeed: 4
+		Speed: 68
+		RequiresCondition: !empdisable && !deployed
+	RevealsShroud:
+		MinRange: 5c0
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 5c0
+	Turreted:
+		TurnSpeed: 7
+		Offset: 746,0,278
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: 155mm.nod
+		LocalOffset: 600,0,128
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable && deployed
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: Laser
+		LocalOffset: -654,0,340
+		PauseOnCondition: empdisable && !deployed
+	AttackTurreted:
+		Armaments: primary
+		PauseOnCondition: empdisable || deployed
+		RequiresCondition: !deployed
+	AttackCharges:
+		Armaments: secondary
+		RequiresCondition: deployed
+		PauseOnCondition: empdisable || !deployed
+		ChargeLevel: 100
+		ChargingCondition: charging
+	AmbientSound:
+		RequiresCondition: charging
+		SoundFiles: obelpowr.aud
+		Interval: 30, 40
+	SelectionDecorations:
 	WithSpriteTurret:
-		Sequence: ionturret
-	RenderSprites:
-		Image: 4tnk.gdi
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 38,38
+	WithMoveAnimation:
+		MoveSequence: move
+	GrantConditionOnDeploy:
+		DeployedCondition: deployed
+		SkipMakeAnimation: true
+	WithChargeOverlay:
+	WithDecoration@deployed:
+		RequiresSelection: true
+		Image: pips
+		Sequence: tag-deployed
+		ReferencePoint: Top
+		ZOffset: 256
+		RequiresCondition: deployed
+	HitShape:
+		TargetableOffsets: 448,0,0, -448,0,0
+		Type: Capsule
+			Radius: 320
+			PointA: 0, -448
+			PointB: 0, 448
+	#	so this caused the crash on build...
+	#	RenderRangeCircle:
 
 LTNK:
 	Inherits: MWAV
@@ -1206,6 +4375,7 @@ PTNK:
 	GpsDot:
 		String: EMP
 
+#	Nod AA MRLS
 MSAM.Nod:
 	Inherits: MRLS
 	-Tooltip@sidebar:
@@ -1249,316 +4419,7 @@ MSAM.Nod:
 		Condition: enable-helper
 		Bots: normal
 
-#	todo, tweak further to become Mammoth equivelant
-LMCH:
-	Inherits: ^TrackedVehicle
-	Inherits@GAINSEXPERIENCE: ^GainsExperience
-	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTankandAir
-	Buildable:
-		Queue: Vehicle
-		BuildPaletteOrder: 8
-		Prerequisites: fix, techcenter, ~vehicles.gdi, ~player.futurecorps, ~techlevel.high
-		Description: Tough combat battle-mech.\nHas minimum firing radius of 1 cell.\n  Can attack Aircraft.\n  Strong vs Infantry, Tanks\n  Weak vs attacks at Close range
-	Valued:
-		Cost: 2600
-	Selectable:
-		Bounds: 30,40,0,0
-	Tooltip:
-		Name: Titan
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Health:
-		HP: 100000
-	Armor:
-		Type: Heavy
-	Mobile:
-		Locomotor: heavytracked
-		Speed: 50
-	Passenger:
-		PipType: Red
-		Weight: 4
-	QuantizeFacingsFromSequence:
-		Sequence: stand
-	WithFacingSpriteBody:
-		Sequence: stand
-	WithMoveAnimation:
-		MoveSequence: run
-	WithSpriteTurret:
-	RevealsShroud:
-		MinRange: 4c0
-		Range: 6c0
-		RevealGeneratedShroud: False
-	RevealsShroud@GAPGEN:
-		Range: 4c0
-	Armament@PRIMARY:
-		Weapon: TitanGun
-		LocalOffset: 830,260,100
-		Recoil: 171
-		RecoilRecovery: 30
-		MuzzleSequence: muzzle
-	Armament@SECONDARY:
-		Name: secondary
-		Weapon: TitanTusk
-		LocalOffset: -85,-384,340
-		LocalYaw: -100,100
-		Recoil: 43
-		MuzzleSequence: muzzle
-	Turreted:
-		TurnSpeed: 3
-		Offset: 0,0,0
-	AttackTurreted:
-		PauseOnCondition: empdisable
-		Armaments: primary, secondary, tertiary
-	WithMuzzleOverlay:
-	Explodes:
-		Weapon: ArtilleryExplode
-		LoadedChance: 100
-	SelfHealing@DEFAULT:
-		PercentageStep: 1
-		Delay: 25
-		HealIfBelow: 51
-		DamageCooldown: 150
-	ProducibleWithLevel:
-		Prerequisites: vehicles.upgraded
-	GpsDot:
-		String: Mech
-	RenderSprites:
-		Image: titan
-
-JUGG:
-	Inherits: LMCH
-	Inherits@AUTOTARGET: ^AutoTargetGroundAntiStructure
-	-Armament@SECONDARY:
-	-SelfHealing@DEFAULT:
-	RenderSprites:
-		Image: jugg
-	Tooltip:
-		Name: Juggernaut
-	Buildable:
-		BuildPaletteOrder: 12
-		Prerequisites: techcenter, eye, ~vehicles.gdi, ~player.futurecorps, ~techlevel.high
-		Description: Tough artillery battle-mech.\n  Strong vs Infantry, Structures\n  Weak vs Aircraft
-	Valued:
-		Cost: 1800
-	Armament@PRIMARY:
-		Weapon: JuggernautGun
-		LocalOffset: 830,0,500, 830,100,500, 830,-100,500
-	AttackTurreted:
-		TargetFrozenActors: True
-		ForceFireIgnoresActors: True
-	Turreted:
-		Offset: -20,0,20
-	Health:
-		HP: 50000
-	RenderRangeCircle:
-
-SCRB:
-	Inherits: ^Ship
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@AUTOTARGET: ^AutoTargetNavalAssaultMove
-	-GpsDot:
-	Buildable:
-		Queue: Ship
-		BuildAtProductionType: Boat
-		BuildPaletteOrder: 2
-		Prerequisites: ~spen, proc, ~ships.nod, ~player.blackhand, ~techlevel.low
-		Description: Fast scout ship armed with dual Machineguns.\nDoes not appear on enemy radar or GPS.\n  Strong vs Infantry\n  Weak vs Ships, Vehicles
-	Valued:
-		Cost: 450
-	Tooltip:
-		Name: Scarab Speedboat
-	Health:
-		HP: 18000
-	Armor:
-		Type: Light
-	Mobile:
-		TurnSpeed: 7
-		Speed: 128
-	RevealsShroud:
-		MinRange: 4c0
-		Range: 5c0
-		RevealGeneratedShroud: False
-	RevealsShroud@GAPGEN:
-		Range: 4c0
-	Armament@PRIMARY:
-		Weapon: M60mg
-		LocalOffset: 201,85,183
-		MuzzleSequence: muzzle
-		PauseOnCondition: empdisable
-	Armament@SECONDARY:
-		Weapon: M60mg
-		LocalOffset: 201,-85,183
-		MuzzleSequence: muzzle
-		PauseOnCondition: empdisable
-	AttackFrontal:
-		PauseOnCondition: empdisable
-	WithMuzzleOverlay:
-	WithMoveAnimation:
-		MoveSequence: move
-	SelectionDecorations:
-	Selectable:
-		DecorationBounds: 36,36
-	AppearsOnRadar:
-		ValidStances: Ally
-
-LCRV:
-	Inherits: ^Ship
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@AUTOTARGET: ^AutoTargetNavalAssaultMove
-	Buildable:
-		Queue: Ship
-		BuildAtProductionType: Boat
-		BuildPaletteOrder: 3
-		Prerequisites: ~spen, shrn, ~ships.nod, ~player.blackhand, ~techlevel.high
-		Description: Main battle ship of Nod armed with\nArtillery turret and obelisk Laser.\nNeeds to redirect all power to Laser\nin order to fire it, becoming immobile.\n  Strong vs anything on Ground\n  Weak vs Aircraft, Artillery
-	Valued:
-		Cost: 1850
-	Tooltip:
-		Name: Laser Corvette
-	Health:
-		HP: 35000
-	Armor:
-		Type: Heavy
-	Mobile:
-		TurnSpeed: 4
-		Speed: 68
-		RequiresCondition: !empdisable && !deployed
-	RevealsShroud:
-		MinRange: 5c0
-		Range: 6c0
-		RevealGeneratedShroud: False
-	RevealsShroud@GAPGEN:
-		Range: 5c0
-	Turreted:
-		TurnSpeed: 7
-		Offset: 746,0,278
-	Armament@PRIMARY:
-		Name: primary
-		Weapon: 155mm.nod
-		LocalOffset: 600,0,128
-		MuzzleSequence: muzzle
-		PauseOnCondition: empdisable && deployed
-	Armament@SECONDARY:
-		Name: secondary
-		Weapon: Laser
-		LocalOffset: -654,0,340
-		PauseOnCondition: empdisable && !deployed
-	AttackTurreted:
-		Armaments: primary
-		PauseOnCondition: empdisable || deployed
-		RequiresCondition: !deployed
-	AttackCharges:
-		Armaments: secondary
-		RequiresCondition: deployed
-		PauseOnCondition: empdisable || !deployed
-		ChargeLevel: 100
-		ChargingCondition: charging
-	AmbientSound:
-		RequiresCondition: charging
-		SoundFiles: obelpowr.aud
-		Interval: 30, 40
-	SelectionDecorations:
-	WithSpriteTurret:
-	WithMuzzleOverlay:
-	Selectable:
-		DecorationBounds: 38,38
-	WithMoveAnimation:
-		MoveSequence: move
-	GrantConditionOnDeploy:
-		DeployedCondition: deployed
-		SkipMakeAnimation: true
-	WithChargeOverlay:
-	WithDecoration@deployed:
-		RequiresSelection: true
-		Image: pips
-		Sequence: tag-deployed
-		ReferencePoint: Top
-		ZOffset: 256
-		RequiresCondition: deployed
-	HitShape:
-		TargetableOffsets: 448,0,0, -448,0,0
-		Type: Capsule
-			Radius: 320
-			PointA: 0, -448
-			PointB: 0, 448
-	#	so this caused the crash on build...
-	#	RenderRangeCircle:
-
-ORCB:
-	Inherits: ^Helicopter
-	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTank
-	Inherits@EXPERIENCE: ^GainsExperience
-	Buildable:
-		Queue: Aircraft
-		BuildAtProductionType: Helicopter
-		BuildPaletteOrder: 5
-		Prerequisites: ~hpad, tech, ~aircraft.gdi, ~player.futurecorps, ~techlevel.high
-		Description: VTOL bomber-craft armed with EMP bombs.\n  Strong vs Buildings, Vehicles\n  Weak vs Aircraft
-	Valued:
-		Cost: 1650
-	Tooltip:
-		Name: Orca Bomber
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Health:
-		HP: 26000
-	RevealsShroud:
-		Range: 10c0
-		MinRange: 8c0
-		Type: GroundPosition
-		RevealGeneratedShroud: False
-	RevealsShroud@GAPGEN:
-		Range: 8c0
-		Type: GroundPosition
-	Armament:
-		Weapon: OrcaBomb
-		LocalOffset: 2,-256,-43, 2,256,-43
-		PauseOnCondition: !ammo
-	AttackAircraft:
-		FacingTolerance: 20
-		PersistentTargeting: false
-		OpportunityFire: false
-	Aircraft:
-		CruiseAltitude: 2560
-		AltitudeVelocity: 0c120
-		TurnSpeed: 4
-		Speed: 180
-		RepulsionSpeed: 40
-		MaximumPitch: 56
-		TakeoffSounds: orcaup1.aud
-		LandingSounds: orcadwn1.aud
-		CanHover: False
-		CanSlide: False
-	AutoTarget:
-		InitialStance: HoldFire
-		InitialStanceAI: HoldFire
-	AmmoPool:
-		Ammo: 24
-		PipCount: 4
-		AmmoCondition: ammo
-	Selectable:
-		Bounds: 36,28,0,2
-		DecorationBounds: 40,29,0,1
-	SmokeTrailWhenDamaged:
-		Offset: -853,0,171
-		Interval: 2
-	WithMoveAnimation:
-		MoveSequence: move
-	ProducibleWithLevel:
-		Prerequisites: aircraft.upgraded
-	Rearmable:
-		RearmActors: hpad, carr.deployed
-	RenderSprites:
-		Image: orcb
-	SpawnActorOnDeath:
-		Actor: ORCB.Husk
-		RequiresCondition: airborne && !empdisable
-	SpawnActorOnDeath@EMP:
-		Actor: ORCB.Husk.EMP
-		RequiresCondition: airborne && empdisable
-	GpsDot:
-		String: EMP
-
+#	Banshee Craft
 SCRN:
 	Inherits: ^Helicopter
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1657,105 +4518,7 @@ SCRN:
 	GpsDot:
 		String: Spacecraft
 
-AURO:
-	Inherits: ^Plane
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@GAINSEXPERIENCE: ^GainsExperience
-	Inherits@AUTODAMAGE: ^KilledWithoutAirfield
-	Buildable:
-		Queue: Aircraft
-		BuildAtProductionType: Plane
-		BuildPaletteOrder: 5
-		Prerequisites: ~afld, ~aircraft.gdi, ~player.socom, ~techlevel.high
-		Description: Supersonic bomber armed with a Seismic bomb.\n  Special Ability: Afterburner\nSpeeds up 150% after dropping payload and takes 10% less damage.\n  Strong vs Buildings, Light Armor, Infantry\n  Weak vs Aircraft
-	Valued:
-		Cost: 2000
-	Tooltip:
-		Name: Aurora
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Health:
-		HP: 14000
-	RevealsShroud:
-		Range: 11c0
-		MinRange: 9c0
-		Type: GroundPosition
-		RevealGeneratedShroud: False
-	RevealsShroud@GAPGEN:
-		Range: 9c0
-		Type: GroundPosition
-	Armament:
-		Weapon: JDAM
-		LocalOffset: 2,0,-43
-		PauseOnCondition: !ammo
-	AttackAircraft:
-		FacingTolerance: 128
-		PersistentTargeting: false
-		OpportunityFire: false
-		PauseOnCondition: empdisable
-		Voice: Attack
-	Aircraft:
-		CruiseAltitude: 2560
-		InitialFacing: 192
-		TurnSpeed: 4
-		Speed: 225
-		RepulsionSpeed: 40
-		MaximumPitch: 56
-		TakeoffSounds: cjetbana.aud
-		Voice: Move
-	AutoTarget:
-		InitialStance: HoldFire
-		InitialStanceAI: AttackAnything
-	AmmoPool:
-		Ammo: 1
-		PipCount: 1
-		PipType: Gray
-		ReloadDelay: 240
-		AmmoCondition: ammo
-	#	GrantConditionOnAttack@AFTERBURNER:
-	#	Condition: afterburner
-	#	ActiveSound: cjetband.aud
-	SpeedMultiplier@AFTERBURNER:
-		Modifier: 150
-		RequiresCondition: !ammo
-	DamageMultiplier@AFTERBURNER:
-		Modifier: 90
-		RequiresCondition: !ammo
-	Selectable:
-		Bounds: 36,28,0,2
-		DecorationBounds: 40,29,0,1
-	Contrail@AB1:
-		Offset: -400,-70,-50
-		UsePlayerColor: false
-		ZOffset: -512
-		Color: cc550080
-		TrailLength: 10
-	Contrail@AB2:
-		Offset: -400,70,-50
-		UsePlayerColor: false
-		ZOffset: -512
-		Color: cc550080
-		TrailLength: 10
-	Contrail@1:
-		Offset: -300,-800,-50
-	Contrail@2:
-		Offset: -300,800,-50
-	SpawnActorOnDeath:
-		Actor: AURO.Husk
-		RequiresCondition: ammo && !empdisable
-	SpawnActorOnDeath@EMP:
-		Actor: AURO.Husk.EMP
-		RequiresCondition: ammo && empdisable
-	SmokeTrailWhenDamaged:
-		Offset: -853,0,171
-		Interval: 2
-	ProducibleWithLevel:
-		Prerequisites: aircraft.upgraded
-	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
-	Voiced:
-		VoiceSet: AuroraVoice
-
+#	Intelligence Center replacer of Blackhand
 SHRN:
 	Inherits: ^ScienceBuilding
 	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
@@ -1864,6 +4627,7 @@ SHRN:
 		Cursor: airstrike
 		SupportPowerPaletteOrder: 9
 
+#	War Factory replacer of Rebels
 STRP.Rebels:
 	Inherits: STRP
 	-ProductionAirdrop:
@@ -1885,13 +4649,13 @@ STRP.Rebels:
 	ProvidesPrerequisite@COPY:
 		Prerequisite: weap
 	ProvidesPrerequisite@gdi:
-		Factions: gdi, ubergdi, socom, taskforce
+		Factions: gdi, futurecorp, socom, taskforce
 		Prerequisite: vehicles.gdi
 	ProvidesPrerequisite@gdistructure:
 		RequiresPrerequisites: structures.gdi
 		Prerequisite: vehicles.gdi
 	ProvidesPrerequisite@nod:
-		Factions: nod, bossnod, cabal, rebels
+		Factions: nod, blackhand, cabal, rebels
 		Prerequisite: vehicles.nod
 	ProvidesPrerequisite@nodstructure:
 		RequiresPrerequisites: structures.nod
@@ -1899,6 +4663,7 @@ STRP.Rebels:
 	RenderSprites:
 		Image: strp
 
+#	Cabal's AA obelisk
 OBEL.Cabal:
 	Inherits: OBEL
 	Buildable:
@@ -1919,100 +4684,3 @@ OBEL.Cabal:
 		ReloadingCondition: reload-air
 	RenderSprites:
 		Image: obel
-
-RTUR:
-	Inherits: ^Defense
-	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
-	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTankDefense
-	-ActorPreviewPlaceBuildingPreview:
-	SelectionDecorations:
-	Selectable:
-		Bounds: 36,36
-	Valued:
-		Cost: 1000
-	Tooltip:
-		Name: Railgun Turret
-	Buildable:
-		Queue: Defense
-		BuildPaletteOrder: 4
-		Prerequisites: weap, ~structures.gdi, ~player.socom, ~techlevel.medium
-		Description: Anti-tank defense with Railgun.\n Can detect cloaked units.\n  Strong vs Tanks, Vehicles\n  Weak vs Infantry
-	Health:
-		HP: 40000
-	Armor:
-		Type: Heavy
-	RevealsShroud:
-		MinRange: 5c0
-		Range: 7c0
-		RevealGeneratedShroud: False
-	RevealsShroud@GAPGEN:
-		Range: 5c0
-	DetectCloaked:
-		Range: 3c768
-		RequiresCondition: !disabled && !lowpower && !build-incomplete
-	RenderDetectionCircle:
-	WithBuildingBib:
-		HasMinibib: true
-	Turreted:
-		TurnSpeed: 6
-		InitialFacing: 128
-		Offset: 400,0,-286
-	Armament:
-		Weapon: Railgun
-		LocalOffset: 1468,-32,256
-		PauseOnCondition: disabled || empdisable
-	AttackTurreted:
-		PauseOnCondition: disabled || empdisable
-		RequiresCondition: !build-incomplete
-	WithSpriteTurret:
-		RequiresCondition: !build-incomplete
-	Power:
-		Amount: -40
-	BodyOrientation:
-	SequencePlaceBuildingPreview:
-		Sequence: place
-		SequencePalette: placebuilding	
-	RenderSprites:
-		Image: rtur
-
-AGUN.cnc:
-	Inherits: AGUN
-	Buildable:
-		Queue: Defense
-		BuildPaletteOrder: 6
-		Prerequisites: dome, ~structures.gdi, ~player.taskforce, ~techlevel.medium
-		Description: Anti-Air base defense.\n  Strong vs Aircraft\n  Weak vs Ground units
-	Valued:
-		Cost: 800
-	Tooltip:
-		Name: Anti-Air Gun
-	-Armament:
-	Armament@GAT0:
-		Weapon: Gatt.0
-		LocalOffset: 520,0,450
-		MuzzleSequence: muzzle
-		RequiresCondition: gattling == 0
-	Armament@GAT1:
-		Weapon: Gatt.1
-		LocalOffset: 520,0,450
-		MuzzleSequence: muzzle
-		RequiresCondition: gattling == 1
-	Armament@GAT2:
-		Weapon: Gatt.2
-		LocalOffset: 520,0,450
-		MuzzleSequence: muzzle
-		RequiresCondition: gattling == 2
-	Armament@GAT3:
-		Weapon: Gatt.3
-		LocalOffset: 520,0,450
-		MuzzleSequence: muzzle
-		RequiresCondition: gattling == 3
-	GrantConditionOnAttack:
-		Condition: gattling
-		RequiredShotsPerInstance: 1,7,14
-		MaximumInstances: 3
-		RevokeDelay: 40
-		RevokeOnNewTarget: False
-		RevokeAll: True
-	RenderSprites:
-		Image: cncagun

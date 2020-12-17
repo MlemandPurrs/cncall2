@@ -18,7 +18,9 @@ MCV.cnc:
 		Image: gdimcv
 		FactionImages:
 			nod: nodmcv
-			bossnod: nodmcv
+			blackhand: nodmcv
+			cabal: nodmcv
+			rebels: nodmcv
 
 MCV.cnc.ai:
 	Inherits: MCV.cnc
@@ -29,7 +31,9 @@ MCV.cnc.ai:
 		Image: gdimcv
 		FactionImages:
 			nod: nodmcv
-			bossnod: nodmcv
+			blackhand: nodmcv
+			cabal: nodmcv
+			rebels: nodmcv
 	-MapEditorData:
 
 HARV.cnc:
@@ -74,7 +78,7 @@ HARV.cnc:
 		Image: gdiharv
 		FactionImages:
 			nod: nodharv
-			bossnod: nodharv
+			blackhand: nodharv
 			cabal: nodharv
 			rebels: nodharv
 	ProximityExternalCondition@REFANIM:
@@ -95,7 +99,7 @@ HARV.cnc.Crate:
 		Image: gdiharv
 		FactionImages:
 			nod: nodharv
-			bossnod: nodharv
+			blackhand: nodharv
 			cabal: nodharv
 			rebels: nodharv
 	-MapEditorData:
@@ -106,6 +110,20 @@ TRUK.cnc:
 		Prerequisites: proc, ~!vehicles.allies, ~!vehicles.soviet, ~techlevel.low
 	RenderSprites:
 		Image: cnctruk
+
+DTRK.cnc:
+	Inherits: DTRK
+	-Disguise:
+	Buildable:
+		Prerequisites: ~disabled
+	Disguise:
+		DisguisedCondition: disguise
+		ValidStances: Neutral, Enemy
+		TargetTypes: DemoDisguise
+		DisguisedAsConditions:
+			truk.cnc: truk
+	RenderSprites:
+		Image: cncdtrk
 
 #	differences to regular JEEP
 #	more health, infantry inside can fire out
@@ -148,22 +166,6 @@ HMMV:
 		LocalOffset: 171,0,85
 	AttackTurreted:
 		PauseOnCondition: empdisable
-	#	AttackTurreted + AttackGarrisoned causes a crash
-	#	for some reason it works paired with AttackFrontal
-	#	when it gets disabled while AttackGarrisoned active
-	#	in an older version of OpenRA was possible to have
-	#  AttackTurreted + AttackGarrisoned both active
-	#	AttackFrontal:
-	#	FacingTolerance: 20
-	#	PauseOnCondition: empdisable
-	#	this is a fukken mess, disabling it until gets tweaked
-	#	AttackGarrisoned:
-	#	Armaments: garrisoned
-	#	PortOffsets: 0,150,43, 0,-150,43
-	#	PortYaws: 0,0
-	#	PortCones: 1023,1023
-	#	PauseOnCondition: empdisable
-	#	RequiresCondition: loaded
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Cargo:
@@ -171,7 +173,6 @@ HMMV:
 		MaxWeight: 1
 		PipCount: 1
 		LoadingCondition: notmobile
-		#	LoadedCondition: loaded
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	RenderSprites:
@@ -186,8 +187,6 @@ HMMV.Scout:
 	-Buildable:
 	-Cargo:
 	-Armament:
-	#	-AttackFrontal:
-	#	-AttackGarrisoned:
 	-RevealsShroud:
 	-RevealsShroud@GAPGEN:
 	Tooltip:
@@ -224,7 +223,6 @@ BGGY:
 	Inherits: JEEP
 	-Cargo:
 	-GpsDot:
-	#	-AttackTurreted:
 	-DetectCloaked:
 	-RenderDetectionCircle:
 	Buildable:
@@ -238,9 +236,6 @@ BGGY:
 		PauseOnCondition: !(!empdisable && !being-captured)
 	Health:
 		HP: 12000
-	#	AttackFrontal:
-	#	FacingTolerance: 24
-	#	PauseOnCondition: empdisable
 	Turreted:
 		Offset: -43,0,128
 	Armament:
@@ -573,6 +568,8 @@ MRPG:
 		BuildPaletteOrder: 4
 		Prerequisites: fix, ~vehicles.gdi, ~!player.futurecorps, ~!player.taskforce, ~techlevel.medium
 		Description: Main Battle Tank.\n  Strong vs Vehicles, Infantry\n  Weak vs Ships, Aircraft
+	Tooltip:
+		Name: GDI Medium
 	Valued:
 		Cost: 900
 	Turreted:
@@ -880,7 +877,7 @@ ICBM:
 	GpsDot:
 		String: Nuke
 
-ARTY.nod:
+HOWI:
 	Inherits: ARTY
 	-AttackFrontal:
 	Buildable:
@@ -970,7 +967,6 @@ MNLY.Stealth:
 	Buildable:
 		Queue: Vehicle
 		BuildPaletteOrder: 8
-		#	Prerequisites: ~disabled
 		Prerequisites: fix, techcenter, ~vehicles.gdi, ~player.taskforce, ~techlevel.high
 	Tooltip:
 		Name: GDI Mammoth
@@ -1000,8 +996,8 @@ MNLY.Stealth:
 		Actor: 4tnk.gdi.rail.husk
 		OwnerType: InternalName
 
-STNK.Nod:
-	Inherits: STNK
+STNK:
+	Inherits: PAPC
 	-AttackFrontal:
 	-Armament@MG:
 	-WithMuzzleOverlay:
@@ -1129,7 +1125,7 @@ DISR:
 	WithSpriteTurret:
 	Targetable:
 		RequiresCondition: !parachute
-		TargetTypes: Ground, Vehicle, Disruptor
+		TargetTypes: Ground, Vehicle, VehicleDisguise, Disruptor
 	SpawnActorOnDeath:
 		Actor: DISR.Husk
 		OwnerType: InternalName
@@ -1149,7 +1145,7 @@ HVRC:
 		Queue: Vehicle
 		BuildPaletteOrder: 12
 		Prerequisites: dome, fix, ~vehicles.nod, ~!player.cabal, ~techlevel.medium
-		Description: Amphibian anti-air unit with\ntoken basic gun for self-defense.\nCan carry one Infantry.\n  Strong vs Infantry, Aircraft\n  Weak vs Tanks, Ships
+		Description: Amphibian anti-air unit.\nCan carry 2 Infantry.\n  Cannot attack Ground units\n  Strong vs Infantry, Aircraft\n  Weak vs Tanks, Ships
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -1176,32 +1172,20 @@ HVRC:
 		RevealGeneratedShroud: False
 	RevealsShroud@GAPGEN:
 		Range: 4c0
-	Turreted:
-		Turret: primary
-		TurnSpeed: 5
-		Offset: 0,0,128
 	Armament@PRIMARY:
 		Weapon: FLAK-23-AA-Dual
-		Turret:
 		LocalOffset: 86,160,220, 86,-160,220
 		MuzzleSequence: muzzle
 		PauseOnCondition: empdisable
-	Armament@SECONDARY:
-		Turret: primary
-		Weapon: M1Carbine.Vehicle
-		MuzzleSequence: muzzle
-		LocalOffset: 128,0,43
-		PauseOnCondition: empdisable
 	AttackFrontal:
-		Armaments: primary, secondary
+		Armaments: primary
 		PauseOnCondition: empdisable
-	WithSpriteTurret:
 	WithMuzzleOverlay:
 	RenderRangeCircle:
 	Cargo:
 		Types: Infantry
-		MaxWeight: 1
-		PipCount: 1
+		MaxWeight: 2
+		PipCount: 2
 		LoadingCondition: notmobile
 	GpsDot:
 		String: Hovercraft
@@ -1304,7 +1288,7 @@ MEMP:
 	Valued:
 		Cost: 1600
 	Tooltip:
-		Name: Mobile E.M.P
+		Name: Mobile EMP
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1390,13 +1374,9 @@ MWAV:
 	Passenger:
 		Weight: 4
 		PipType: Red
-	#	Armament:
-	#	Weapon: MicroLaser
-	#	LocalOffset: 500,-85,326
 	Armament:
 		Weapon: MicrowaveZap
 		FireDelay: 7
-		#	LocalOffset: 500,-85,326
 		LocalOffset: 560,0,264
 		MuzzleSequence: muzzle-emp
 	Armament@PRIMARYSOUND:

@@ -310,31 +310,6 @@ OCAR.Husk.EMP:
 	Inherits: OCAR.Husk
 	Inherits: ^EmpVisualEffect
 
-CNCV22.Husk:
-	Inherits: ^HelicopterHusk
-	Tooltip:
-		Name: V-22 Carryall
-	Aircraft:
-		TurnSpeed: 5
-		Speed: 140
-	RevealsShroud:
-		Range: 10c0
-		Type: CenterPosition
-	WithIdleOverlay@ROTOR1:
-		Offset: 0,847,50
-		Sequence: rotor
-	WithIdleOverlay@ROTOR2:
-		Offset: 0,-847,50
-		Sequence: rotor2
-	RenderSprites:
-		Image: cncv22
-	FallsToEarth:
-		Velocity: 0c100
-
-CNCV22.Husk.EMP:
-	Inherits: CNCV22.Husk
-	Inherits: ^EmpVisualEffect
-
 C17.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -358,7 +333,7 @@ C17.Husk.EMP:
 	Inherits: C17.Husk
 	Inherits: ^EmpVisualEffect
 
-B2.Husk:
+B2.Nod.Husk:
 	Inherits: ^PlaneHusk
 	-RevealOnDeath:
 	Tooltip:
@@ -375,10 +350,10 @@ B2.Husk:
 		Interval: 2
 		MinDamage: Undamaged
 	RenderSprites:
-		Image: b2
+		Image: b2nod
 
-B2.Husk.EMP:
-	Inherits: B2.Husk
+B2.Nod.Husk.EMP:
+	Inherits: B2.Nod.Husk
 	Inherits: ^EmpVisualEffect
 
 F18.Husk:
@@ -546,9 +521,13 @@ FACT.CNC.Husk:
 		Image: cncfact.husk
 		FactionImages:
 			gdi: gdifact.husk
-			ubergdi: gdifact.husk
+			futurecorp: gdifact.husk
+			socom: gdifact.husk
+			taskforce: gdifact.husk
 			nod: nodfact.husk
-			bossnod: nodfact.husk
+			blackhand: nodfact.husk
+			cabal: nodfact.husk
+			rebels: nodfact.husk
 
 POWR.CNC.Husk:
 	Inherits: ^BuildingHusk
@@ -564,7 +543,7 @@ POWR.CNC.Husk:
 		Image: gdipowr.husk
 		FactionImages:
 			nod: nodpowr.husk
-			bossnod: nodpowr.husk
+			blackhand: nodpowr.husk
 
 APWR.CNC.Husk:
 	Inherits: ^BuildingHusk
@@ -580,7 +559,7 @@ APWR.CNC.Husk:
 		Image: gdiapwr.husk
 		FactionImages:
 			nod: nodapwr.husk
-			bossnod: nodapwr.husk
+			blackhand: nodapwr.husk
 
 PROC.CNC.Husk:
 	Inherits: ^BuildingHusk
@@ -596,7 +575,7 @@ PROC.CNC.Husk:
 		Image: gdiproc.husk
 		FactionImages:
 			nod: nodproc.husk
-			bossnod: nodproc.husk
+			blackhand: nodproc.husk
 
 SILO.CNC.Husk:
 	Inherits: ^BuildingHusk
@@ -611,7 +590,7 @@ SILO.CNC.Husk:
 		Image: gdisilo.husk
 		FactionImages:
 			nod: nodsilo.husk
-			bossnod: nodsilo.husk
+			blackhand: nodsilo.husk
 
 PYLE.Husk:
 	Inherits: ^BuildingHusk

@@ -275,3 +275,14 @@ Cursors:
 		skull-target:
 			Start: 4
 			Length: 16
+	select.shp: cursor
+		generic-target:
+			Start: 1
+			Length: 1
+		wrench-target:
+			Start: 2
+			Length: 1
+	stealth2.shp: cursor
+		grid-target:
+			Start: 12
+			Length: 3

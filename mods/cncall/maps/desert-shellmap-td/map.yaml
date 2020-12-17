@@ -1254,13 +1254,13 @@ Actors:
 	Mig24: waypoint
 		Location: 1,28
 		Owner: Neutral
-	Actor400: arty.nod
+	Actor400: howi
 		Faction: allies
 		Location: 61,26
 		TurretFacing: 151
 		Facing: 151
 		Owner: Soviets
-	Actor401: arty.nod
+	Actor401: howi
 		Faction: allies
 		Location: 63,25
 		TurretFacing: 158

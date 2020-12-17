@@ -1,0 +1,39 @@
+
+#	those are only kept for map compatibility purposes
+
+SPY.England:
+	Inherits: SPY
+	Buildable:
+		Prerequisites: ~disabled
+	ProducibleWithLevel:
+		Prerequisites: techlevel.infonly
+		InitialLevels: 1
+	UpdatesPlayerStatistics:
+		OverrideActor: spy
+	RenderSprites:
+		Image: spy
+	-MapEditorData:
+
+AFLD.Ukraine:
+	Inherits: AFLD
+	Buildable:
+		Prerequisites: ~disabled
+	ProvidesPrerequisite@clone:
+		Prerequisite: afld
+	RenderSprites:
+		Image: afld
+	-MapEditorData:
+
+Sniper:
+	Inherits: SNIP
+	Buildable:
+		Prerequisites: ~disabled
+	RenderSprites:
+		Image: e1sniper
+	-MapEditorData:
+
+Zombie:
+	Inherits: TECN
+	RenderSprites:
+		Image: TECN
+	-MapEditorData:

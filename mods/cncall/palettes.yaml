@@ -219,3 +219,9 @@
 		G: 252
 		B: 84
 		A: 128
+	PaletteFromRGBA@sabotaged:
+		Name: ecosabot
+		R: 32
+		G: 192
+		B: 0
+		A: 128

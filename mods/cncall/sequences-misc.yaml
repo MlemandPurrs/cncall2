@@ -135,6 +135,23 @@ icon:
 	hunterseeker: huntseekicon
 	abombfake: atomfakeicon
 	warpfake: warpfakeicon
+	delphi: delphiicon
+	u2jamicon: u2jamicon
+	mincicon: mincicon
+	paranuke: paranukeicon
+	parajeepicon: parajeepicon
+	lpsummon: spmsticon
+	mainticon: mainticon
+	pboxicon: pboxicon
+	fturicon: fturicon
+	stlthbombs: uspbicon
+	rankcrate: rankcrateicon
+	healcrate: healcrateicon
+	parajeep: parajeepicon
+	scouts: 1tnksvyticon
+	oilburn: ecosabicon
+	v2bdgricon: v2bdgricon
+	empbomb: empbombicon
 
 clock:
 	idle:
@@ -186,6 +203,36 @@ beacon:
 		Length: *
 		Offset: 0,-42
 	paramines: mnlybcon
+		Length: *
+		Offset: 0,-42
+	dtrkbcon: dtrkbcon
+		Length: *
+		Offset: 0,-42
+	jeepbcon: jeepbcon
+		Length: *
+		Offset: 0,-42
+	sonrbcon: sonrbcon
+		Length: *
+		Offset: 0,-42
+	fturbcon: fturbcon
+		Length: *
+		Offset: 0,-42
+	pboxbcon: pboxbcon
+		Length: *
+		Offset: 0,-42
+	uspb: uspbcon
+		Length: *
+		Offset: 0,-42
+	healcrate: healcratebcon
+		Length: *
+		Offset: 0,-42
+	rankcrate: rankcratebcon
+		Length: *
+		Offset: 0,-42
+	v2bdgrbcon: v2bdgrbcon
+		Length: *
+		Offset: 0,-42
+	empbomb: empbombbcon
 		Length: *
 		Offset: 0,-42
 
@@ -678,6 +725,28 @@ scrate:
 		Length: 4
 		Tick: 500
 
+scrate-rankup:
+	Defaults:
+		ZOffset: -511
+	idle:
+	land:
+		Start: 1
+	water:
+		Start: 2
+		Length: 4
+		Tick: 500
+
+scrate-healup:
+	Defaults:
+		ZOffset: -511
+	idle:
+	land:
+		Start: 1
+	water:
+		Start: 2
+		Length: 4
+		Tick: 500
+
 wcrate:
 	Defaults:
 		ZOffset: -511
@@ -804,6 +873,15 @@ rank:
 iconchevrons:
 	veteran:
 		Offset: 2, 2
+
+rank-red:
+	rank-veteran-1:
+	rank-veteran-2:
+		Start: 1
+	rank-veteran-3:
+		Start: 2
+	rank-elite:
+		Start: 3
 
 atomic:
 	up: atomicup
@@ -1021,3 +1099,38 @@ moab_bomb:
 	idle: moab
 		Facings: 32
 		ZOffset: -1
+
+dummy.visual:
+	 idle: blank32
+		Facings: 32
+
+molemine:
+	idle: btr-tur
+		Facings: 32
+		ZOffset: -1023
+
+wake-infantry:
+	idle:
+		Length: *
+
+mgnst:
+	idle: blank32
+	damaged-idle: blank32
+		Start: 0
+	idle-ground: mgnst-base
+		ZOffset: -1c511
+	damaged-idle-ground: mgnst-base
+		Start: 0
+		ZOffset: -1c511
+	turret: mgnst
+		Facings: 32
+	make: mgnst-make
+		Length: *
+	muzzle: minigun
+		Length: 6
+		Facings: 8
+	icon: mgnsticon	
+
+moskito:
+	idle:
+		Facings: 32

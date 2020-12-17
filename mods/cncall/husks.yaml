@@ -53,6 +53,17 @@ MCV.Husk:
 	RenderSprites:
 		Image: mcvhusk
 
+MCV.Uzbek.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (MCV)
+	TransformOnCapture:
+		IntoActor: mcv.uzbek
+	InfiltrateForTransform:
+		IntoActor: mcv.uzbek
+	RenderSprites:
+		Image: mcvhusk
+
 1TNK.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -94,6 +105,20 @@ MCV.Husk:
 		Image: 1tnk.destroyed
 	-MapEditorData:
 
+1TNK.Sweden.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Light Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 1tnk.Sweden
+	InfiltrateForTransform:
+		IntoActor: 1tnk.Sweden
+	RenderSprites:
+		Image: 1tnk.destroyed
+	-MapEditorData:
+
 1TNK.Germany.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -107,6 +132,60 @@ MCV.Husk:
 	RenderSprites:
 		Image: 1tnk.destroyed
 	-MapEditorData:
+
+1TNK.Spain.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Light Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 1tnk.Spain
+	InfiltrateForTransform:
+		IntoActor: 1tnk.Spain
+	RenderSprites:
+		Image: 1tnk.destroyed
+	-MapEditorData:
+
+1TNK.Italy.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Light Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 1tnk.Italy
+	InfiltrateForTransform:
+		IntoActor: 1tnk.Italy
+	RenderSprites:
+		Image: 1tnk.destroyed
+	-MapEditorData:
+
+1TNK.Soviet.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Scout Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 1tnk.soviet
+	InfiltrateForTransform:
+		IntoActor: 1tnk.soviet
+	RenderSprites:
+		Image: 1tnk.destroyed
+
+ATNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Flak Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: atnk
+	InfiltrateForTransform:
+		IntoActor: atnk
+	RenderSprites:
+		Image: atnk.destroyed
 
 2TNK.Husk:
 	Inherits: ^Husk
@@ -135,6 +214,19 @@ MCV.Husk:
 		Image: 2tnk.destroyed
 	-MapEditorData:
 
+2TNK.Stealth.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Phase Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 2tnk.stealth
+	InfiltrateForTransform:
+		IntoActor: 2tnk.stealth
+	RenderSprites:
+		Image: 2tnks.destroyed
+
 2TNK.France.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -159,6 +251,34 @@ MCV.Husk:
 		IntoActor: 2tnk.Germany
 	InfiltrateForTransform:
 		IntoActor: 2tnk.Germany
+	RenderSprites:
+		Image: 2tnk.destroyed
+	-MapEditorData:
+
+2TNK.Spain.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Medium Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 2tnk.spain
+	InfiltrateForTransform:
+		IntoActor: 2tnk.spain
+	RenderSprites:
+		Image: 2tnk.destroyed
+	-MapEditorData:
+
+2TNK.Italy.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Medium Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 2tnk.italy
+	InfiltrateForTransform:
+		IntoActor: 2tnk.italy
 	RenderSprites:
 		Image: 2tnk.destroyed
 	-MapEditorData:
@@ -204,6 +324,71 @@ MCV.Husk:
 		Image: 3tnk.1b.destroyed
 	-MapEditorData:
 
+3TNK.1B.Karelia.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank 1-B)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk.1B.karelia
+	InfiltrateForTransform:
+		IntoActor: 3tnk.1B.karelia
+	RenderSprites:
+		Image: 3tnk.1b.destroyed
+
+3TNK.1B.Kazakh.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank 1-B)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk.1B.kazakh
+	InfiltrateForTransform:
+		IntoActor: 3tnk.1B.kazakh
+	RenderSprites:
+		Image: 3tnk.1b.destroyed
+
+3TNK.1B.Turkmen.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank 1-B)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk.1B.Turkmen
+	InfiltrateForTransform:
+		IntoActor: 3tnk.1B.Turkmen
+	RenderSprites:
+		Image: 3tnk.1b.destroyed
+
+3TNK.1B.Afghan.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank 1-B)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk.1B.afghan
+	InfiltrateForTransform:
+		IntoActor: 3tnk.1B.afghan
+	RenderSprites:
+		Image: 3tnk.1b.destroyed
+
+3TNK.1B.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank 1-B)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk.1B
+	InfiltrateForTransform:
+		IntoActor: 3tnk.1B
+	RenderSprites:
+		Image: 3tnk.1b.destroyed
+
 3TNK.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -245,6 +430,62 @@ MCV.Husk:
 		Image: 3tnk.destroyed
 	-MapEditorData:
 
+3TNK.Karelia.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk.Karelia
+	InfiltrateForTransform:
+		IntoActor: 3tnk.Karelia
+	RenderSprites:
+		Image: 3tnk.destroyed
+	-MapEditorData:
+
+3TNK.Kazakh.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk.Kazakh
+	InfiltrateForTransform:
+		IntoActor: 3tnk.Kazakh
+	RenderSprites:
+		Image: 3tnk.destroyed
+	-MapEditorData:
+
+3TNK.Turkmen.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk.Turkmen
+	InfiltrateForTransform:
+		IntoActor: 3tnk.Turkmen
+	RenderSprites:
+		Image: 3tnk.destroyed
+	-MapEditorData:
+
+3TNK.Afghan.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk.Afghan
+	InfiltrateForTransform:
+		IntoActor: 3tnk.Afghan
+	RenderSprites:
+		Image: 3tnk.destroyed
+	-MapEditorData:
+
 4TNK.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -257,6 +498,19 @@ MCV.Husk:
 		IntoActor: 4tnk
 	RenderSprites:
 		Image: 4tnk.destroyed
+
+4TNK.Flam.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Flame Mammoth)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 4tnk.flam
+	InfiltrateForTransform:
+		IntoActor: 4tnk.flam
+	RenderSprites:
+		Image: 4tnk.flam.destroyed
 
 5TNK.Husk:
 	Inherits: ^Husk
@@ -281,6 +535,19 @@ TNKD.Husk:
 		IntoActor: tnkd
 	RenderSprites:
 		Image: tnkd.destroyed
+
+DTNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Mirage Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: dtnk
+	InfiltrateForTransform:
+		IntoActor: dtnk
+	RenderSprites:
+		Image: dtnk.destroyed
 
 MGG.Husk:
 	Inherits: ^Husk
@@ -674,6 +941,20 @@ FCOM.Husk:
 	InfiltrateForTransform:
 		IntoActor: fcom
 
+FCOM.buildable.Husk:
+	Inherits: ^BuildingHusk
+	Inherits@shape: ^2x2Shape
+	Interactable:
+		Bounds: 48,48
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	Tooltip:
+		Name: Command Post (Destroyed)
+	RenderSprites:
+		Image: fcom.husk
+
 BADR.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -718,6 +999,29 @@ B52.Husk:
 
 B52.Husk.EMP:
 	Inherits: B52.Husk
+	Inherits: ^EmpVisualEffect
+
+B2.Husk:
+	Inherits: ^PlaneHusk
+	-RevealOnDeath:
+	Tooltip:
+		Name: B-2 (Destroyed)
+	Aircraft:
+		TurnSpeed: 5
+		Speed: 149
+	SmokeTrailWhenDamaged@0:
+		Offset: -432,560,0
+		Interval: 2
+		MinDamage: Undamaged
+	SmokeTrailWhenDamaged@1:
+		Offset: -432,-560,0
+		Interval: 2
+		MinDamage: Undamaged
+	RenderSprites:
+		Image: b2
+
+B2.Husk.EMP:
+	Inherits: B2.Husk
 	Inherits: ^EmpVisualEffect
 
 TRAN.Husk.EMP:
@@ -921,6 +1225,54 @@ NEBR.Husk:
 
 NEBR.Husk.EMP:
 	Inherits: NEBR.Husk
+	Inherits: ^EmpVisualEffect
+
+SMIG.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Husk (Special MiG)
+	Aircraft:
+		TurnSpeed: 7
+		Speed: 373
+	Contrail@1:
+		Offset: -725,683,0
+	Contrail@2:
+		Offset: -725,-683,0
+	SmokeTrailWhenDamaged:
+		Offset: -1c43,0,0
+		Interval: 2
+		MinDamage: Undamaged
+	RenderSprites:
+		Image: smig
+
+SMIG.Husk.EMP:
+	Inherits: SMIG.Husk
+	Inherits: ^EmpVisualEffect
+
+FROG.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Husk (Frogfoot)
+	Aircraft:
+		TurnSpeed: 4
+		Speed: 190
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+		UsePlayerColor: false
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+		UsePlayerColor: false
+	SmokeTrailWhenDamaged:
+		Offset: -853,0,171
+		Interval: 2
+		MinDamage: Undamaged
+	RenderSprites:
+		Image: frog
+
+FROG.Husk.EMP:
+	Inherits: FROG.Husk
 	Inherits: ^EmpVisualEffect
 
 TRAN.Husk:

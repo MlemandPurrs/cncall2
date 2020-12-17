@@ -53,6 +53,13 @@ CrateExplosion:
 		ValidTargets: Ground, Water, Air
 	-Warhead@3EffWater:
 
+CrateExplosionBeep:
+	Inherits: CrateExplosion
+	Warhead@4Eff: CreateEffect
+		Explosions: piff
+		ImpactSounds: gdembeep.aud
+		ValidTargets: Ground, Air, Ship, Trees
+
 UnitExplode:
 	Inherits: ^Explosion
 	Warhead@1Dam: SpreadDamage
@@ -199,6 +206,18 @@ ASMine:
 		Explosions: large_explosion
 		ImpactSounds: mineblo1.aud
 		ValidTargets: Underwater
+
+ASMineMagnetic:
+	Inherits: ASMine
+	Warhead@1Dam: SpreadDamage
+		Spread: 1c0
+		Damage: 15000
+	Warhead@UncloakSub: GrantExternalCondition
+		Range: 0c768
+		Duration: 50
+		Condition: minehit
+		ValidTargets: Submarine
+		#	InvalidTargets: 	
 
 OreExplosion:
 	Warhead@1Dam: SpreadDamage
@@ -530,3 +549,17 @@ IonCannonExplode:
 	Warhead@4Eff: CreateEffect
 		Explosions: ionsplosion
 		ImpactSounds: ion1.aud
+
+AAMine:
+	ValidTargets: Air
+	Warhead@1Dam: SpreadDamage
+		Spread: 1c0
+		Damage: 7500
+		AffectsParent: true
+		InvalidTargets: AirMine
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+		ValidTargets: Air
+	Warhead@2Eff: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: mineblo1.aud
+		ValidTargets: Ground, Water, Air

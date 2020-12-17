@@ -63,7 +63,7 @@ CRATE:
 		SelectionShares: 0
 		NoBaseSelectionShares: 100
 		Units: mcv.cnc
-		ValidFactions: gdi, ubergdi, socom, taskforce, nod, bossnod, cabal, rebels
+		ValidFactions: gdi, futurecorp, socom, taskforce, nod, blackhand, cabal, rebels
 	GiveUnitCrateAction@harv:
 		SelectionShares: 5
 		Units: harv.crate
@@ -77,7 +77,7 @@ CRATE:
 	GiveUnitCrateAction@harvcnc:
 		SelectionShares: 5
 		Units: harv.cnc.crate
-		ValidFactions: gdi, ubergdi, socom, taskforce, nod, bossnod, rebels
+		ValidFactions: gdi, futurecorp, socom, taskforce, nod, blackhand, rebels
 		TimeDelay: 7500
 	GiveUnitCrateAction@harvstealth:
 		SelectionShares: 5
@@ -97,12 +97,12 @@ CRATE:
 	GiveUnitCrateAction@hmmv:
 		SelectionShares: 6
 		Units: hmmv
-		ValidFactions: gdi, ubergdi, socom, taskforce
+		ValidFactions: gdi, futurecorp, socom, taskforce
 		Prerequisites: techlevel.low
 	GiveUnitCrateAction@bggy:
 		SelectionShares: 6
 		Units: bggy
-		ValidFactions: nod, bossnod, cabal, rebels
+		ValidFactions: nod, blackhand, cabal, rebels
 		Prerequisites: techlevel.low
 	GiveUnitCrateAction@1tnk:
 		SelectionShares: 6
@@ -117,12 +117,12 @@ CRATE:
 	GiveUnitCrateAction@mrpg:
 		SelectionShares: 6
 		Units: mrpg
-		ValidFactions: gdi, ubergdi, socom, taskforce
+		ValidFactions: gdi, futurecorp, socom, taskforce
 		Prerequisites: techlevel.low
 	GiveUnitCrateAction@ltnk:
 		SelectionShares: 6
 		Units: 1tnk.nod
-		ValidFactions: nod, bossnod, cabal, rebels
+		ValidFactions: nod, blackhand, cabal, rebels
 		Prerequisites: techlevel.low
 	GiveUnitCrateAction@apc:
 		SelectionShares: 6
@@ -137,12 +137,12 @@ CRATE:
 	GiveUnitCrateAction@gapc:
 		SelectionShares: 6
 		Units: gapc
-		ValidFactions: gdi, ubergdi, socom, taskforce
+		ValidFactions: gdi, futurecorp, socom, taskforce
 		Prerequisites: techlevel.low
 	GiveUnitCrateAction@napc:
 		SelectionShares: 6
 		Units: napc
-		ValidFactions: nod, bossnod, cabal, rebels
+		ValidFactions: nod, blackhand, cabal, rebels
 		Prerequisites: techlevel.low
 	GiveUnitCrateAction@arty:
 		SelectionShares: 5
@@ -157,12 +157,12 @@ CRATE:
 	GiveUnitCrateAction@mrls:
 		SelectionShares: 5
 		Units: mrls.crate
-		ValidFactions: gdi, ubergdi, socom, taskforce
+		ValidFactions: gdi, futurecorp, socom, taskforce
 		Prerequisites: techlevel.medium, dome
 	GiveUnitCrateAction@howi:
 		SelectionShares: 5
-		Units: arty.nod
-		ValidFactions: nod, bossnod, cabal, rebels
+		Units: howi
+		ValidFactions: nod, blackhand, cabal, rebels
 		Prerequisites: techlevel.medium, dome
 	GiveUnitCrateAction@2tnk:
 		SelectionShares: 4
@@ -177,12 +177,12 @@ CRATE:
 	GiveUnitCrateAction@2tnk.gdi:
 		SelectionShares: 4
 		Units: 2tnk.gdi
-		ValidFactions: gdi, ubergdi, socom, taskforce
+		ValidFactions: gdi, futurecorp, socom, taskforce
 		Prerequisites: techlevel.medium, fix
 	GiveUnitCrateAction@ftnk:
 		SelectionShares: 4
 		Units: ftnk
-		ValidFactions: nod, bossnod, cabal, rebels
+		ValidFactions: nod, blackhand, cabal, rebels
 		Prerequisites: techlevel.medium, fix
 	GiveUnitCrateAction@msam:
 		SelectionShares: 6
@@ -207,12 +207,12 @@ CRATE:
 	GiveUnitCrateAction@4tnk.gdi:
 		SelectionShares: 2
 		Units: 4tnk.gdi.rail
-		ValidFactions: gdi, ubergdi, socom, taskforce
+		ValidFactions: gdi, futurecorp, socom, taskforce
 		Prerequisites: techlevel.high, techcenter, fix
 	GiveUnitCrateAction@ssm:
 		SelectionShares: 2
 		Units: ssm.crate
-		ValidFactions: nod, bossnod, cabal, rebels
+		ValidFactions: nod, blackhand, cabal, rebels
 		Prerequisites: techlevel.high, techcenter, dome
 	GiveUnitCrateAction@mrj:
 		SelectionShares: 2
@@ -221,12 +221,12 @@ CRATE:
 	GiveUnitCrateAction@disr:
 		SelectionShares: 1
 		Units: disr
-		ValidFactions: gdi, ubergdi, socom, taskforce
+		ValidFactions: gdi, futurecorp, socom, taskforce
 		Prerequisites: techcenter, techlevel.high
 	GiveUnitCrateAction@mwav:
 		SelectionShares: 1
 		Units: mwav
-		ValidFactions: nod, bossnod, cabal, rebels
+		ValidFactions: nod, blackhand, cabal, rebels
 		Prerequisites: techcenter, techlevel.high
 	GiveUnitCrateAction@supertank:
 		SelectionShares: 1
@@ -239,7 +239,7 @@ CRATE:
 	GiveUnitCrateAction@squadlight:
 		SelectionShares: 10
 		Units: e1,e1,e1,e3,e3
-		ValidFactions: allies, england, france, germany, soviet, russia, ukraine, belarus, gdi, ubergdi, socom, taskforce, nod, bossnod, cabal, rebels
+		ValidFactions: allies, england, france, germany, soviet, russia, ukraine, belarus, gdi, futurecorp, socom, taskforce, nod, blackhand, cabal, rebels
 	GiveUnitCrateAction@squadlightallies:
 		SelectionShares: 8
 		Units: e1,e1,e1,e3,e3,medi,jeep
@@ -253,12 +253,12 @@ CRATE:
 	GiveUnitCrateAction@squadlightgdi:
 		SelectionShares: 9
 		Units: e1,e1,e2,e2,e3,medi,mrpg
-		ValidFactions: gdi,ubergdi,socom,taskforce
+		ValidFactions: gdi,futurecorp,socom,taskforce
 		TimeDelay: 2250
 	GiveUnitCrateAction@squadlightnod:
 		SelectionShares: 9
 		Units: e1,e1,e1,e3,e3,bggy,bggy
-		ValidFactions: nod,bossnod,cabal,rebels
+		ValidFactions: nod,blackhand,cabal,rebels
 		TimeDelay: 2250
 	GiveUnitCrateAction@squadheavyalliesa:
 		SelectionShares: 7
@@ -283,22 +283,22 @@ CRATE:
 	GiveUnitCrateAction@squadheavygdia:
 		SelectionShares: 7
 		Units: e1,e1,e1,e2,e3,e3,e2,e6,medi
-		ValidFactions: gdi,ubergdi,socom,taskforce
+		ValidFactions: gdi,futurecorp,socom,taskforce
 		TimeDelay: 4500
 	GiveUnitCrateAction@squadheavygdib:
 		SelectionShares: 6
 		Units: e1,e1,e1,medi,e3,e3,hmmv,hmmv,2tnk.gdi
-		ValidFactions: gdi,ubergdi,socom,taskforce
+		ValidFactions: gdi,futurecorp,socom,taskforce
 		TimeDelay: 4500
 	GiveUnitCrateAction@squadheavynoda:
 		SelectionShares: 7
 		Units: e1,e1,e1,e5,e5,e3,e3,e3,e6
-		ValidFactions: nod,bossnod,cabal,rebels
+		ValidFactions: nod,blackhand,cabal,rebels
 		TimeDelay: 4500
 	GiveUnitCrateAction@squadheavynodb:
 		SelectionShares: 6
 		Units: e1,e1,e1,e5,e3,e3,1tnk.nod,ftnk,1tnk.nod
-		ValidFactions: nod,bossnod,cabal,rebels
+		ValidFactions: nod,blackhand,cabal,rebels
 		TimeDelay: 4500
 	GiveUnitCrateAction@horde:
 		SelectionShares: 3
@@ -408,6 +408,48 @@ SCRATE:
 	Inherits: ^Crate
 	Tooltip:
 		Name: Steel Crate
+
+RANKUPCRATE:
+	Inherits: ^Crate
+	Tooltip:
+		Name: Rank-up Crate
+		GenericName: Rank-up Crate
+		ShowOwnerRow: false
+	LevelUpCrateAction:
+		Range: 1c512
+		SelectionShares: 1
+		MaxExtraCollectors: 9
+	WithCrateBody:
+		XmasImages: scrate-rankup
+	RenderSprites:
+		Image: scrate-rankup
+	-MapEditorData:
+
+HEALUPCRATE:
+	Inherits: ^Crate
+	Tooltip:
+		Name: Heal-up Crate
+		GenericName: Heal-up Crate
+		ShowOwnerRow: false
+	GrantExternalConditionCrateAction@1:
+		SelectionShares: 1
+		Sequence: heal
+		Sound: heal2.aud
+		Condition: barracks
+		Duration: 750
+		Range: 1c512
+		MaxExtraCollectors: 24
+	GrantExternalConditionCrateAction@2:
+		SelectionShares: 1
+		Sequence: heal
+		Sound: heal2.aud
+		Condition: instarepair
+		Duration: 2
+	WithCrateBody:
+		XmasImages: scrate-healup
+	RenderSprites:
+		Image: scrate-healup
+	-MapEditorData:
 
 crate.parabombs:
 	AlwaysVisible:
@@ -617,6 +659,12 @@ MINE:
 		Terrain: Ore
 	SeedsResource:
 		Interval: 63
+		RequiresCondition: !ecosabotage
+	ExternalCondition@ECOSABOTAGE:
+		Condition: ecosabotage
+	WithColoredOverlay@ECOSABOTAGE:
+		Palette: ecosabot
+		RequiresCondition: ecosabotage
 	MapEditorData:
 		Categories: Resource spawn
 	RequiresSpecificOwners:
@@ -644,6 +692,12 @@ GMINE:
 	SeedsResource:
 		ResourceType: Gems
 		Interval: 63
+		RequiresCondition: !ecosabotage
+	ExternalCondition@ECOSABOTAGE:
+		Condition: ecosabotage
+	WithColoredOverlay@ECOSABOTAGE:
+		Palette: ecosabot
+		RequiresCondition: ecosabotage
 	MapEditorData:
 		Categories: Resource spawn
 	RequiresSpecificOwners:
@@ -685,6 +739,12 @@ DRILLMINE:
 		Terrain: Ore
 	SeedsResource:
 		Interval: 50
+		RequiresCondition: !ecosabotage
+	ExternalCondition@ECOSABOTAGE:
+		Condition: ecosabotage
+	WithColoredOverlay@ECOSABOTAGE:
+		Palette: ecosabot
+		RequiresCondition: ecosabotage
 	WithIdleAnimation:
 		Interval: 175
 	RenderSprites:
@@ -895,3 +955,43 @@ dummy.firestorm:
 		RemoveInstead: true
 	Tooltip:
 		Name: Firestorm Internal Works
+
+BOMBCRATE:
+	Inherits: ^Crate
+	Tooltip:
+		Name: Bomb Crate
+		GenericName: Crate
+		ShowOwnerRow: false
+	ExplodeCrateAction@boom:
+		Weapon: CrateExplosionBeep
+		SelectionShares: 1
+	Health:
+		HP: 10000
+		NotifyAppliedDamage: false
+	Armor:
+		Type: Light
+	Targetable:
+		TargetTypes: Ground, Mine, NoAutoTarget
+	HitShape:
+	RenderSprites:
+		Palette: effect
+		Image: scrate
+	WithCrateBody:
+		XmasImages: xcratea, xcrateb, xcratec, xcrated
+		LandSequence: land
+		WaterSequence: water
+	KillsSelf:
+		Delay: 750
+		RemoveInstead: false
+	Explodes:
+		Weapon: CrateExplosionBeep
+		DamageSource: Killer
+	WithParachute:
+		ShadowImage: dummy.visual
+		ShadowSequence: idle
+		Image: dummy.visual
+		Sequence: idle
+		OpeningSequence: idle
+		Offset: 0,0,0
+		RequiresCondition: parachute
+	-MapEditorData:

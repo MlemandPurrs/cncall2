@@ -99,6 +99,14 @@ BADR.Bomber:
 	GpsDot:
 		String: BigPlane
 
+BADR.Cruiser:
+	Inherits: BADR.Bomber
+	Armament:
+		Weapon: SCUD.Badger
+		LocalOffset: 432,320,0, 432,0,0, 432,-320,0
+	RenderSprites:
+		Image: badr
+
 BADR.Crate:
 	Inherits: BADR
 	ParaDrop:
@@ -176,7 +184,7 @@ BADR.buildable:
 		AmmoCondition: ammo
 		ReloadDelay: 35
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	Contrail@1:
 		TrailLength: 8
 		TrailWidth: 48
@@ -240,6 +248,42 @@ B52.Bomber:
 	SpawnActorOnDeath@EMP:
 		Actor: B52.Husk.EMP
 
+B2.Bomber:
+	Inherits: B52.Bomber
+	-RenderSprites:
+	Tooltip:
+		Name: B-2 Stealth Bomber
+	Health:
+		HP: 15000
+	Cloak:
+		InitialDelay: 90
+		CloakDelay: 90
+		CloakSound: appear1.aud
+		UncloakSound: appear1.aud
+		IsPlayerPalette: true
+		PauseOnCondition: cloak-force-disabled || !airborne
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
+	SmokeTrailWhenDamaged@0:
+		Offset: -432,560,0
+		Interval: 2
+	SmokeTrailWhenDamaged@1:
+		Offset: -432,-560,0
+		Interval: 2
+	RenderSprites:
+		Image: b2
+	SpawnActorOnDeath:
+		Actor: B2.Husk
+		RequiresCondition: airborne && !empdisable
+	SpawnActorOnDeath@EMP:
+		Actor: B2.Husk.EMP
+		RequiresCondition: airborne && empdisable
+
 B52.buildable:
 	Inherits: ^Plane
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -249,7 +293,7 @@ B52.buildable:
 		BuildAtProductionType: Plane
 		BuildPaletteOrder: 6
 		BuildLimit: 1
-		Prerequisites: ~afld, atek, ~aircraft.allies, ~!aitoodumb, ~techlevel.high
+		Prerequisites: ~afld, atek, ~aircraft.allies, ~!aitoodumb, ~allies.or.usa, ~techlevel.high
 		Description: B-52 variant modified to function as Gunship.\nMaximum 1 can be built.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 	Tooltip:
 		Name: B-52 Gunship
@@ -334,7 +378,7 @@ B52.buildable:
 		AmmoCondition: ammo
 		ReloadDelay: 25
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	Contrail@1:
 		TrailLength: 8
 		TrailWidth: 48
@@ -483,7 +527,7 @@ IROQ:
 		Queue: Aircraft, MWFAir, MWFHeli
 		BuildAtProductionType: Helicopter
 		BuildPaletteOrder: 2
-		Prerequisites: ~hpad, ~aircraft.allies, ~!aitoodumb, ~techlevel.medium
+		Prerequisites: ~hpad, ~aircraft.allies, ~!aitoodumb, ~!player.greece, ~techlevel.medium
 		Description: Light helicopter armed with dual chainguns.\nCan use Depthcharges against Submarines.\n  Strong vs Infantry, Light vehicles\n  Weak vs Tanks, Aircraft
 	Tooltip:
 		Name: Iroquois
@@ -584,7 +628,7 @@ IROQ.AI:
 	-Armament@TERTIARY:
 	-AmmoPool@2:
 	Buildable:
-		Prerequisites: ~hpad, ~aircraft.allies, ~aitoodumb, ~techlevel.medium
+		Prerequisites: ~hpad, ~aircraft.allies, ~aitoodumb, ~!player.greece, ~techlevel.medium
 		Description: Light helicopter armed with dual chainguns.\n  Strong vs Infantry, Light vehicles\n  Weak vs Tanks, Aircraft
 	AttackAircraft:
 		Armaments: primary, secondary
@@ -602,7 +646,7 @@ HELI:
 		Queue: Aircraft, MWFAir, MWFHeli
 		BuildAtProductionType: Helicopter
 		BuildPaletteOrder: 3
-		Prerequisites: ~hpad, atek, ~aircraft.allies, ~techlevel.high
+		Prerequisites: ~hpad, atek, ~aircraft.allies, ~!player.usa, ~techlevel.high
 		Description: Helicopter gunship with multi-purpose\nChainguns and Missiles.\n  Strong vs Everything\n  Weak vs Anti-Air, Aircraft
 	Tooltip:
 		Name: Apache
@@ -695,7 +739,7 @@ HIND:
 		Queue: Aircraft, MWFAir, MWFHeli
 		BuildAtProductionType: Helicopter
 		BuildPaletteOrder: 6
-		Prerequisites: ~hpad, stek, ~aircraft.soviet, ~techlevel.high
+		Prerequisites: ~hpad, stek, ~aircraft.soviet, ~!player.afghan, ~techlevel.high
 		Description: Slow helicopter gunship armed with dual chainguns\nand anti-ground rockets.\n  Strong vs Infantry, Tanks\n  Weak vs fast Units, Aircraft
 	Tooltip:
 		Name: Hind
@@ -830,6 +874,87 @@ U2:
 		RequiresCondition: airborne && empdisable
 	-MapEditorData:
 
+U2.nuke:
+	Inherits: U2
+	Armament:
+		Weapon: ParaNuke
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 1
+		AmmoCondition: ammo
+	Tooltip:
+		Name: Nuclear Bomber
+	Contrail@1:
+		Offset: -598,-683,0
+	Contrail@2:
+		Offset: -598,683,0
+	SmokeTrailWhenDamaged:
+		Offset: -853,0,171
+		Interval: 2
+	SpawnActorOnDeath:
+		Actor: NEBR.Husk
+		RequiresCondition: airborne && !empdisable
+	SpawnActorOnDeath@EMP:
+		Actor: NEBR.Husk.EMP
+		RequiresCondition: airborne && empdisable
+	Targetable@AIRBORNE:
+		RequiresCondition: airborne
+		TargetTypes: Air
+	RenderSprites:
+		Image: nebr
+
+SMIG:
+	Inherits: U2
+	-EjectOnDeath:
+	Tooltip:
+		Name: Special MiG
+	Contrail@1:
+		Offset: -598,-683,0
+	Contrail@2:
+		Offset: -598,683,0
+	SmokeTrailWhenDamaged:
+		Offset: -853,0,171
+		Interval: 2
+	SpawnActorOnDeath:
+		Actor: SMIG.Husk
+		RequiresCondition: airborne && !empdisable
+	SpawnActorOnDeath@EMP:
+		Actor: SMIG.Husk.EMP
+		RequiresCondition: airborne && empdisable
+	Aircraft:
+		Speed: 223
+	Targetable@AIRBORNE:
+		RequiresCondition: airborne
+		TargetTypes: Air
+	RenderSprites:
+		Image: smig
+
+SMIG.JAM:
+	Inherits: SMIG
+	ProximityExternalCondition@JAMMER:
+		Range: 18c0
+		ValidStances: Enemy, Neutral
+		Condition: jammed
+	WithRangeCircle@JAMMER:
+		Type: jammer
+		Range: 18c0
+		Color: 0000FF80
+		Visible: always
+	RenderSprites:
+		Image: smig
+
+SMIG.EMP:
+	Inherits: SMIG
+	Armament:
+		Weapon: EmpBomb
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 1
+		AmmoCondition: ammo
+	RenderSprites:
+		Image: smig
+
 YAK:
 	Inherits: ^Plane
 	Inherits@AUTOTARGET: ^AutoTargetGroundAntiInf
@@ -919,7 +1044,7 @@ YAK:
 		ReloadDelay: 11
 		AmmoCondition: ammodc
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	Contrail:
 		Offset: -853,0,0
 		TrailLength: 10
@@ -963,7 +1088,7 @@ SPIT:
 		Queue: Aircraft, MWFAir
 		BuildAtProductionType: Plane
 		BuildPaletteOrder: 4
-		Prerequisites: ~afld, dome, ~aircraft.allies, ~techlevel.medium
+		Prerequisites: ~afld, dome, ~aircraft.allies, ~!player.turkey, ~techlevel.medium
 		Description: Ground attack bomber.\nCannot attack Air units.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
 		Cost: 900
@@ -1007,7 +1132,7 @@ SPIT:
 		ReloadDelay: 11
 		AmmoCondition: ammo
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	WithMuzzleOverlay:
 	Contrail:
 		Offset: -853,0,0
@@ -1036,7 +1161,7 @@ MIG:
 		Queue: Aircraft, MWFAir
 		BuildAtProductionType: Plane
 		BuildPaletteOrder: 2
-		Prerequisites: ~afld, stek, ~aircraft.soviet, ~techlevel.high
+		Prerequisites: ~afld, stek, ~aircraft.soviet, ~!player.kazakh, ~techlevel.high
 		Description: Fast Multi-Role Attack Plane.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 	Tooltip:
 		Name: MiG Attack Plane
@@ -1084,7 +1209,7 @@ MIG:
 		Ammo: 8
 		AmmoCondition: ammo
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	Contrail@1:
 		Offset: -598,-683,0
 		TrailLength: 6
@@ -1160,7 +1285,7 @@ TORN:
 		Ammo: 6
 		AmmoCondition: ammo
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	Contrail@1:
 		Offset: -598,-683,0
 		TrailLength: 8
@@ -1237,7 +1362,7 @@ NEBR:
 		AmmoCondition: ammo
 		ReloadDelay: 750
 	Rearmable:
-		RearmActors: afld, afld.ukraine, carr.new.deployed
+		RearmActors: afld, afld.ukraine, afld.usa, carr.new.deployed
 	Contrail@1:
 		TrailLength: 6
 		TrailWidth: 48
@@ -1259,3 +1384,132 @@ NEBR:
 	SpawnActorOnDeath@EMP:
 		Actor: NEBR.Husk.EMP
 		RequiresCondition: airborne && empdisable
+
+BMIN:
+	Inherits: ^Helicopter
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	-ActorLostNotification:
+	-Explodes:
+	-MustBeDestroyed:
+	-Repairable:
+	-SpawnActorOnDeath:
+	Buildable:
+		Queue: Aircraft
+		BuildAtProductionType: Helicopter
+		BuildPaletteOrder: 6
+		Prerequisites: ~hpad, fix, ~player.italy, ~techlevel.medium
+		Description: Dirigible, parachuted aerial Mine.\n  Strong vs Aircraft\n  Weak vs anything Else
+	Valued:
+		Cost: 450
+	Tooltip:
+		Name: Baloon Mine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 5000
+		NotifyAppliedDamage: false
+	RevealsShroud:
+		Range: 3c0
+		Type: GroundPosition
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 1c0
+		Type: GroundPosition
+	Aircraft:
+		CruiseAltitude: 1908
+		TurnSpeed: 255
+		Speed: 64
+		AltitudeVelocity: 0c58
+		LandableTerrainTypes: none
+		Repulsable: True
+		IdealSeparation: 0c256
+		InitialFacing: 192
+	Explodes@UNITEXPLODES:
+		Weapon: AAMine
+		DamageSource: Killer
+		Type: CenterPosition
+	AttackAircraft:
+		FacingTolerance: 128
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 24,24
+	Armament@PRIMARY:
+		Weapon: AirMineTargeting
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+	KillsSelf:
+		RequiresCondition: triggered
+	Voiced:
+		VoiceSet: RoboticVoice
+	WithIdleOverlay@CHUTE:
+		Offset: 0,0,85
+		Sequence: chute
+	Mine:
+		CrushClasses: airmine
+		DetonateClasses: airmine
+		AvoidFriendly: false
+		BlockFriendly: false
+	MineImmune:
+	Targetable@AIRBORNE:
+		RequiresCondition: airborne
+		TargetTypes: Air, AirMine
+	RenderSprites:
+		Image: mina
+
+FROG.Bomber:
+	Inherits: ^NeutralPlane
+	-Selectable:
+	-Voiced:
+	-EjectOnDeath:
+	-MapEditorData:
+	AttackBomber:
+		Armaments: gun, bombs
+	Armament@GUNS:
+		Name: gun
+		Weapon: Vulcan.bomber
+		LocalOffset: 1024,0,-85
+	WithMuzzleOverlay:
+	Armament@BOMBS:
+		Name: bombs
+		Weapon: Napalm.bomber
+		LocalOffset: 0,-256,-43, 0,256,-43
+	Health:
+		HP: 30000
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 5
+		Speed: 298
+		Repulsable: False
+		MaximumPitch: 56
+	SelectionDecorations:
+		RenderSelectionBars: False
+	Tooltip:
+		Name: Frogfoot Bomber
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+		UsePlayerColor: false
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+		UsePlayerColor: false
+	SpawnActorOnDeath:
+		Actor: FROG.Husk
+		RequiresCondition: airborne && !empdisable
+	SpawnActorOnDeath@EMP:
+		Actor: FROG.Husk.EMP
+		RequiresCondition: airborne && empdisable
+	SmokeTrailWhenDamaged@0:
+		Offset: -640,171,0
+		Interval: 2
+	SmokeTrailWhenDamaged@1:
+		Offset: -640,-171,0
+		Interval: 2
+	RejectsOrders:
+	RenderSprites:
+		Image: frog
+	GivesExperience:
+		Experience: 1000
+	Interactable:

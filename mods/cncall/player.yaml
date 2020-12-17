@@ -102,7 +102,7 @@ Player:
 		SpeechNotification: LowPower
 	AllyRepair:
 	PlayerResources:
-		SelectableCash: 5000, 10000, 25000
+		SelectableCash: 5000, 10000, 25000, 50000
 		DefaultCash: 10000
 		InsufficientFundsNotification: InsufficientFunds
 		CashTickUpNotification: CashTickUp
@@ -175,47 +175,137 @@ Player:
 	GrantConditionOnPrerequisite@Soviet:
 		Condition: player.soviet
 		Prerequisites: player.soviet
+	ProvidesPrerequisite@Usa:
+		Factions: usa
+		Prerequisite: player.usa
 	ProvidesPrerequisite@England:
 		Factions: england
 		Prerequisite: player.england
+	ProvidesPrerequisite@Holland:
+		Factions: holland
+		Prerequisite: player.holland
 	ProvidesPrerequisite@France:
 		Factions: france
 		Prerequisite: player.france
+	ProvidesPrerequisite@Sweden:
+		Factions: sweden
+		Prerequisite: player.sweden
 	ProvidesPrerequisite@Germany:
 		Factions: germany
 		Prerequisite: player.germany
+	ProvidesPrerequisite@Spain:
+		Factions: spain
+		Prerequisite: player.spain
+	ProvidesPrerequisite@Italy:
+		Factions: italy
+		Prerequisite: player.italy
+	ProvidesPrerequisite@Greece:
+		Factions: greece
+		Prerequisite: player.greece
+	ProvidesPrerequisite@Turkey:
+		Factions: turkey
+		Prerequisite: player.turkey
 	ProvidesPrerequisite@Russia:
 		Factions: russia
 		Prerequisite: player.russia
 	ProvidesPrerequisite@Ukraine:
 		Factions: ukraine
 		Prerequisite: player.ukraine
+	ProvidesPrerequisite@Moldova:
+		Factions: moldova
+		Prerequisite: player.moldova
 	ProvidesPrerequisite@Belarus:
 		Factions: belarus
 		Prerequisite: player.belarus
+	ProvidesPrerequisite@Karelia:
+		Factions: karelia
+		Prerequisite: player.karelia
+	ProvidesPrerequisite@Kazakh:
+		Factions: kazakh
+		Prerequisite: player.kazakh
+	ProvidesPrerequisite@Kyrgiz:
+		Factions: kyrgiz
+		Prerequisite: player.kyrgiz
+	ProvidesPrerequisite@Uzbek:
+		Factions: uzbek
+		Prerequisite: player.uzbek
+	ProvidesPrerequisite@Turkmen:
+		Factions: turkmen
+		Prerequisite: player.turkmen
+	ProvidesPrerequisite@Afghan:
+		Factions: afghan
+		Prerequisite: player.afghan
+	GrantConditionOnPrerequisite@Usa:
+		Condition: player.allies
+		Prerequisites: player.usa
 	GrantConditionOnPrerequisite@England:
 		Condition: player.allies
-		Prerequisites: player.england		
+		Prerequisites: player.england
+	GrantConditionOnPrerequisite@Holland:
+		Condition: player.allies
+		Prerequisites: player.holland
 	GrantConditionOnPrerequisite@France:
 		Condition: player.allies
 		Prerequisites: player.france
+	GrantConditionOnPrerequisite@Sweden:
+		Condition: player.allies
+		Prerequisites: player.sweden
 	GrantConditionOnPrerequisite@Germany:
 		Condition: player.allies
 		Prerequisites: player.germany
+	GrantConditionOnPrerequisite@Spain:
+		Condition: player.allies
+		Prerequisites: player.spain
+	GrantConditionOnPrerequisite@Italy:
+		Condition: player.allies
+		Prerequisites: player.italy
+	GrantConditionOnPrerequisite@Greece:
+		Condition: player.allies
+		Prerequisites: player.greece
+	GrantConditionOnPrerequisite@Turkey:
+		Condition: player.allies
+		Prerequisites: player.turkey
 	GrantConditionOnPrerequisite@Russia:
 		Condition: player.soviet
 		Prerequisites: player.russia
 	GrantConditionOnPrerequisite@Ukraine:
 		Condition: player.soviet
 		Prerequisites: player.ukraine
+	GrantConditionOnPrerequisite@Moldova:
+		Condition: player.soviet
+		Prerequisites: player.moldova
 	GrantConditionOnPrerequisite@Belarus:
 		Condition: player.soviet
 		Prerequisites: player.belarus
+	GrantConditionOnPrerequisite@Karelia:
+		Condition: player.soviet
+		Prerequisites: player.karelia
+	GrantConditionOnPrerequisite@Kazakh:
+		Condition: player.soviet
+		Prerequisites: player.kazakh
+	GrantConditionOnPrerequisite@kyrgiz:
+		Condition: player.soviet
+		Prerequisites: player.kyrgiz
+	GrantConditionOnPrerequisite@Uzbek:
+		Condition: player.soviet
+		Prerequisites: player.uzbek
+	GrantConditionOnPrerequisite@Turkmen:
+		Condition: player.soviet
+		Prerequisites: player.turkmen
+	GrantConditionOnPrerequisite@Afghan:
+		Condition: player.soviet
+		Prerequisites: player.afghan
+	ProvidesPrerequisite@EveryAllies:
+		Factions: allies, usa, england, holland, france, germany, spain, italy, greece, turkey
+		Prerequisite: every.allies
+	ProvidesPrerequisite@EverySoviet:
+		Factions: soviet, russia, ukraine, moldova, belarus, karelia, kazakh, kyrgiz, uzbek, turkmen
+		Prerequisite: every.soviet
 	ProvidesPrerequisite@GDI:
 		Factions: gdi
 		Prerequisite: player.gdi
 	ProvidesPrerequisite@FutureCorps:
-		Factions: ubergdi
+		Factions: futurecorp
 		Prerequisite: player.futurecorps
 	ProvidesPrerequisite@Socom:
 		Factions: socom
@@ -227,7 +317,7 @@ Player:
 		Factions: nod
 		Prerequisite: player.nod
 	ProvidesPrerequisite@BlackHand:
-		Factions: bossnod
+		Factions: blackhand
 		Prerequisite: player.blackhand
 	ProvidesPrerequisite@Cabal:
 		Factions: cabal
@@ -236,7 +326,7 @@ Player:
 		Factions: rebels
 		Prerequisite: player.rebels
 	ProvidesPrerequisite@CnC:
-		Factions: gdi, ubergdi, socom, taskforce, nod, bossnod, cabal, rebels
+		Factions: gdi, futurecorp, socom, taskforce, nod, blackhand, cabal, rebels
 		Prerequisite: player.cnc
 	GrantConditionOnPrerequisite@GDI:
 		Condition: player.gdi
@@ -262,27 +352,45 @@ Player:
 	GrantConditionOnPrerequisite@Rebels:
 		Condition: player.rebels
 		Prerequisites: player.rebels
+	ProvidesPrerequisite@alliesorusa:
+		Factions: allies, usa
+		Prerequisite: allies.or.usa
 	ProvidesPrerequisite@alliesorengland:
 		Factions: allies, england
 		Prerequisite: allies.or.england
 	ProvidesPrerequisite@alliesorfrance:
 		Factions: allies, france
 		Prerequisite: allies.or.france
+	ProvidesPrerequisite@alliesorsweden:
+		Factions: allies, sweden
+		Prerequisite: allies.or.sweden
 	ProvidesPrerequisite@alliesorgermany:
 		Factions: allies, germany
 		Prerequisite: allies.or.germany
+	ProvidesPrerequisite@alliesorspain:
+		Factions: allies, spain
+		Prerequisite: allies.or.spain
+	ProvidesPrerequisite@alliesorgreece:
+		Factions: allies, greece
+		Prerequisite: allies.or.greece
 	ProvidesPrerequisite@sovietorrussia:
 		Factions: soviet, russia
 		Prerequisite: soviet.or.russia
 	ProvidesPrerequisite@sovietorukraine:
 		Factions: soviet, ukraine
 		Prerequisite: soviet.or.ukraine
+	ProvidesPrerequisite@sovietormoldova:
+		Factions: soviet, moldova
+		Prerequisite: soviet.or.moldova
 	ProvidesPrerequisite@sovietorbelarus:
 		Factions: soviet, belarus
 		Prerequisite: soviet.or.belarus
-	ProvidesPrerequisite@englandorfrance:
-		Factions: england, france
-		Prerequisite: england.or.france
+	ProvidesPrerequisite@sovietorkarelia:
+		Factions: soviet, karelia
+		Prerequisite: soviet.or.karelia
+	ProvidesPrerequisite@sovietoruzbek:
+		Factions: soviet, uzbek
+		Prerequisite: soviet.or.uzbek
 	ProvidesPrerequisite@IsPlaying:
 		Prerequisite: player.online
 	ProvidesRadar@GLOBALRADAR:

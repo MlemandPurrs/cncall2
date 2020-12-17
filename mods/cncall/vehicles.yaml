@@ -223,7 +223,7 @@ FTRK:
 	Buildable:
 		Queue: Vehicle, MWFVehicle
 		BuildPaletteOrder: 2
-		Prerequisites: ~vehicles.soviet, ~!player.belarus,  ~techlevel.low
+		Prerequisites: ~vehicles.soviet, ~!player.kyrgiz, ~techlevel.low
 		Description: Mobile unit with mounted Flak cannon.\nCan carry one Infantry.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Tanks
 	Valued:
 		Cost: 550
@@ -281,12 +281,13 @@ FTRK:
 
 FTRK.Scout:
 	Inherits: FTRK
-	-Buildable:
 	-RevealsShroud:
 	-RevealsShroud@GAPGEN:
 	-Armament@AA:
 	-Armament@AG:
 	-Cargo:
+	Buildable:
+		Prerequisites: ~disabled
 	Tooltip:
 		Name: Scout Car
 	Valued:
@@ -398,7 +399,7 @@ APC.soviet:
 	Buildable:
 		Queue: Vehicle, MWFVehicle
 		BuildPaletteOrder: 3
-		Prerequisites: barr, ~vehicles.soviet, ~techlevel.low
+		Prerequisites: barr, ~vehicles.soviet, ~!player.ukraine, ~!player.kyrgiz, ~techlevel.low
 		Description: Tough and slow Infantry transport.\nCan transport up to 5 Infantry.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Defenses
 		Icon: hapcicon
 	Valued:
@@ -452,7 +453,7 @@ APC.soviet:
 	Buildable:
 		Queue: Vehicle, MWFVehicle
 		BuildPaletteOrder: 4
-		Prerequisites: proc, ~vehicles.allies, ~!player.england, ~!player.france, ~!player.germany, ~techlevel.low
+		Prerequisites: proc, ~vehicles.allies, ~!player.england, ~!player.holland, ~!player.france, ~!player.sweden, ~!player.germany, ~!player.spain, ~!player.italy, ~techlevel.low
 		Description: Fast tank, good for scouting.\n  Strong vs Light armor\n  Weak vs Infantry, Tanks, Aircraft
 	Valued:
 		Cost: 600
@@ -522,7 +523,7 @@ APC.soviet:
 	Buildable:
 		Queue: Vehicle, MWFVehicle
 		BuildPaletteOrder: 5
-		Prerequisites: fix, ~vehicles.allies, ~!player.england, ~!player.france, ~!player.germany, ~techlevel.medium
+		Prerequisites: fix, ~vehicles.allies, ~!player.england, ~!player.france, ~!player.holland, ~!player.sweden, ~!player.germany, ~!player.spain, ~!player.italy, ~techlevel.medium
 		Description: Allied Main Battle Tank.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Valued:
 		Cost: 700
@@ -593,7 +594,7 @@ APC.soviet:
 	-Armament:
 	Buildable:
 		BuildPaletteOrder: 4
-		Prerequisites: proc, ~vehicles.soviet, ~!player.russia, ~!player.ukraine, ~!player.belarus, ~techlevel.low
+		Prerequisites: proc, ~vehicles.soviet, ~!player.russia, ~!player.ukraine, ~!player.belarus, ~!player.karelia, ~!player.kazakh, ~!player.kyrgiz, ~!player.turkmen, ~!player.afghan, ~techlevel.low
 		Description: Soviet Main Battle Tank.\nEarly pattern that is weaker yet cheaper.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Tooltip:
 		Name: Heavy Tank 1-B
@@ -625,7 +626,7 @@ APC.soviet:
 	Buildable:
 		Queue: Vehicle, MWFVehicle
 		BuildPaletteOrder: 5
-		Prerequisites: fix, ~vehicles.soviet, ~!player.russia, ~!player.ukraine, ~!player.belarus, ~techlevel.medium
+		Prerequisites: fix, ~vehicles.soviet, ~!player.russia, ~!player.ukraine, ~!player.belarus, ~!player.karelia, ~!player.kazakh, ~!player.turkmen, ~!player.afghan, ~techlevel.medium
 		Description: Soviet Main Battle Tank, with dual cannons.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Valued:
 		Cost: 1150
@@ -713,7 +714,7 @@ APC.soviet:
 	RevealsShroud@GAPGEN:
 		Range: 4c0
 	Turreted:
-		TurnSpeed: 2
+		TurnSpeed: 3
 	Armament@PRIMARY:
 		Weapon: 120mm
 		LocalOffset: 900,180,340, 900,-180,340
@@ -756,7 +757,7 @@ ARTY:
 	Buildable:
 		Queue: Vehicle, MWFVehicle
 		BuildPaletteOrder: 6
-		Prerequisites: dome, ~vehicles.allies, ~!player.france, ~techlevel.medium
+		Prerequisites: dome, ~vehicles.allies, ~!player.france, ~!player.spain, ~techlevel.medium
 		Description: Long-range artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
 	Valued:
 		Cost: 850
@@ -812,7 +813,7 @@ V2RL:
 	Buildable:
 		Queue: Vehicle, MWFVehicle
 		BuildPaletteOrder: 6
-		Prerequisites: dome, ~vehicles.soviet, ~!player.ukraine, ~techlevel.medium
+		Prerequisites: dome, ~vehicles.soviet, ~!player.karelia, ~!player.moldova, ~techlevel.medium
 		Description: Long-range rocket artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
 	Valued:
 		Cost: 900
@@ -859,7 +860,7 @@ MNLY:
 	Buildable:
 		Queue: Vehicle
 		BuildPaletteOrder: 7
-		Prerequisites: fix, ~!player.germany, ~!vehicles.gdi, ~!vehicles.nod, ~techlevel.medium
+		Prerequisites: fix, ~!player.germany, ~!player.kyrgiz, ~!vehicles.gdi, ~!vehicles.nod, ~techlevel.medium
 		Description: Carries and lays up to 5 Land Mines\nto destroy unwary enemy units.\nCan detect mines.\n  Unarmed
 	Valued:
 		Cost: 700
@@ -874,7 +875,7 @@ MNLY:
 	Mobile:
 		Speed: 128
 	Targetable:
-		TargetTypes: Ground, Vehicle, Mine
+		TargetTypes: Ground, Vehicle, VehicleDisguise, Mine
 	RevealsShroud:
 		MinRange: 4c0
 		Range: 5c0
@@ -908,7 +909,7 @@ MSAM:
 	Buildable:
 		Queue: Vehicle
 		BuildPaletteOrder: 9
-		Prerequisites: dome, ~vehicles.allies, ~techlevel.medium
+		Prerequisites: dome, ~vehicles.allies, ~!player.sweden, ~techlevel.medium
 		Description: Mobile truck with mounted sam site.\nCan attack Aircraft only.\n  Strong vs Aircraft\n  Weak vs everything else
 		Icon: msam-icon
 	Valued:
@@ -1035,50 +1036,6 @@ MRJ.Crate:
 		Image: mrj
 	-MapEditorData:
 
-TNKD:
-	Inherits: ^TrackedVehicle
-	Inherits@GAINSEXPERIENCE: ^GainsExperience
-	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTank
-	Buildable:
-		Queue: Vehicle
-		BuildPaletteOrder: 8
-		Prerequisites: atek, ~vehicles.allies, ~england.or.france, ~techlevel.high
-		Description: Self-propelled anti-tank Gun.\n  Strong vs Tanks, Structures\n  Weak vs Infantry, Aircraft
-	Valued:
-		Cost: 950
-	Tooltip:
-		Name: Tank Destroyer
-	Health:
-		HP: 32000
-	Armor:
-		Type: Heavy
-	Mobile:
-		TurnSpeed: 2
-		Speed: 85
-	RevealsShroud:
-		MinRange: 3c0
-		Range: 6c0
-		RevealGeneratedShroud: False
-	RevealsShroud@GAPGEN:
-		Range: 3c0
-	Armament:
-		Weapon: TurretGun.tnkd
-		LocalOffset: 720,0,90
-		MuzzleSequence: muzzle
-		PauseOnCondition: empdisable
-	AttackFrontal:
-		PauseOnCondition: empdisable
-	WithMuzzleOverlay:
-	SpawnActorOnDeath:
-		Actor: TNKD.Husk
-		OwnerType: InternalName
-	ProducibleWithLevel:
-		Prerequisites: vehicles.upgraded
-	Passenger:
-		PipType: Red
-
-
-
 CTNK:
 	Inherits: ^Vehicle
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
@@ -1132,7 +1089,7 @@ CTNK:
 	Passenger:
 		PipType: Red
 
-STNK:
+PAPC:
 	Inherits: ^Vehicle
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAntiTank
@@ -1217,7 +1174,7 @@ MGG:
 	Buildable:
 		Queue: Vehicle
 		BuildPaletteOrder: 12
-		Prerequisites: techcenter, ~!vehicles.gdi, ~!vehicles.nod, ~techlevel.high
+		Prerequisites: techcenter, ~!vehicles.gdi, ~!vehicles.nod, ~!player.sweden, ~techlevel.high
 		Description: Regenerates the shroud nearby,\nobscuring the area.\n  Can be toggled on/off via deploy command.\n  Unarmed
 	Valued:
 		Cost: 800
@@ -1333,6 +1290,10 @@ DTRK:
 		Description: Truck with actively armed nuclear\nexplosives. Has very weak armor.\n  Detonates when Iron Curtained or Chronoshifted.\n Can disguise as enemy Supply Truck.
 	Valued:
 		Cost: 2400
+	Tooltip:
+		Name: Demolition Truck
+		GenericName: Vehicle
+	-Tooltip:
 	DisguiseTooltip@default:
 		Name: Demolition Truck
 		GenericName: Vehicle
@@ -1348,7 +1309,7 @@ DTRK:
 	Health:
 		HP: 5000
 	Targetable:
-		TargetTypes: Ground, Vehicle, DemoDisguise
+		TargetTypes: Ground, Vehicle, VehicleDisguise, DemoDisguise
 		RequiresCondition: !parachute
 	Armor:
 		Type: Light
@@ -1396,7 +1357,7 @@ QTNK:
 	Buildable:
 		Queue: Vehicle
 		BuildPaletteOrder: 13
-		Prerequisites: stek, ~vehicles.soviet, ~soviet.or.belarus, ~techlevel.high
+		Prerequisites: stek, ~vehicles.soviet, ~soviet.or.uzbek, ~techlevel.high
 		Description: Mutually assured Destruction vehicle that quakes the ground.\nIts delicate components require the effects of Iron Curtain be repelled in order to function.\nDeals disruptive seismic damage to nearby Structures and Infantry during buildup,\nand significant damage on moment of detonation to Structures,\nwhile its dealing negligible damage to Vehicles but slowing them down.\n  Strong vs Buildings\n  Weak vs Infantry, Aircraft, Vehicles
 	Valued:
 		Cost: 2000
@@ -1456,7 +1417,7 @@ QTNK:
 		Queue: Vehicle
 		BuildPaletteOrder: 15
 		BuildLimit: 1
-		Prerequisites: stek, ~vehicles.soviet, ~player.soviet, tech.stolen, ~techlevel.high
+		Prerequisites: stek, ~vehicles.soviet, ~every.soviet, tech.stolen, ~techlevel.high
 		Description: Tank of majestic proportions.\nMaximum one can be built.\nCan crush concrete walls.\nSelf-repairs when below 50% of maximum Health.\nNuclear powered, detonates violently on death!\n  Strong vs everything on Ground\n  Weak vs Aircraft, fast Units
 	Valued:
 		Cost: 3200
@@ -1538,7 +1499,7 @@ PRSM:
 	Buildable:
 		Queue: Vehicle
 		BuildPaletteOrder: 15
-		Prerequisites: atek, ~vehicles.allies, ~player.allies, tech.stolen, ~techlevel.high
+		Prerequisites: atek, ~vehicles.allies, ~every.allies, tech.stolen, ~techlevel.high
 		Description: Experimental vehicle armed with an Laser.\n  Strong vs Vehicles, Buildings\n  Weak vs Infantry, Aircraft
 	Valued:
 		Cost: 1700
@@ -1581,7 +1542,7 @@ MCV:
 	Buildable:
 		Queue: Vehicle
 		BuildPaletteOrder: 10
-		Prerequisites: fix, ~!vehicles.gdi, ~!vehicles.nod, ~!aitoodumb, ~techlevel.medium
+		Prerequisites: fix, ~!player.uzbek, ~!vehicles.gdi, ~!vehicles.nod, ~!aitoodumb, ~techlevel.medium
 		BuildDurationModifier: 60
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Valued:
@@ -1645,7 +1606,7 @@ TRUK:
 	Health:
 		HP: 11000
 	Targetable:
-		TargetTypes: Ground, Vehicle, DemoDisguise
+		TargetTypes: Ground, Vehicle, VehicleDisguise, DemoDisguise
 		RequiresCondition: !parachute
 	Armor:
 		Type: Light
